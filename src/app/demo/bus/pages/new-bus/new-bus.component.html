@@ -1,0 +1,92 @@
+<app-card cardTitle="Adicionar" cardClass="Frota cadastrada" blockClass="p-0" [@fadeInOnEnter]>
+  <form class="card-body" (ngSubmit)="submit()" [formGroup]="busForm" #formDir="ngForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="brand">Marca</label>
+          <input type="text" class="form-control" id="brand" placeholder="Digite a marca" maxlength="60" formControlName="brand">
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('brand')?.hasError('required')">Marca é um campo obrigatório</small>
+            <small class="attribute-error" *ngIf="busForm.get('brand')?.hasError('minLength')">Marca deve ter no mínimo 3 caracteres</small>
+            <small class="attribute-error" *ngIf="busForm.get('brand')?.hasError('maxlength')">Marca deve ter no máximo 60 caracteres</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name" placeholder="Digite o nome" maxlength="60" formControlName="name">
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('name')?.hasError('required')">Nome é um campo obrigatório</small>
+            <small class="attribute-error" *ngIf="busForm.get('name')?.hasError('minLength')">Nome deve ter no mínimo 3 caracteres</small>
+            <small class="attribute-error" *ngIf="busForm.get('name')?.hasError('maxlength')">Nome deve ter no máximo 60 caracteres</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="color">Cor</label>
+          <ng-select class="d-flex flex-grow-1 custom" [placeholder]="'Informe a cor do ônibus'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="colorId">
+            <ng-option *ngFor="let item of colors" [value]="item.id">{{item.color}}</ng-option>
+          </ng-select>
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('colorId')?.hasError('required')">Cor é um campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="manufactureDate">Data de Fabricação</label>
+          <input type="date" class="form-control" id="manufactureDate" formControlName="manufactureDate">
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('manufactureDate')?.hasError('required')">Data de fabricação é um campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="renavam">Renavam</label>
+          <input type="text" class="form-control" id="renavam" placeholder="Digite o Renavam" maxlength="11" formControlName="renavam">
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('renavam')?.hasError('required')">Renavam é um campo obrigatório</small>
+            <small class="attribute-error" *ngIf="busForm.get('renavam')?.hasError('minlength')">Renavam deve ter 11 caracteres</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="licensePlate">Placa</label>
+          <input type="text" class="form-control" id="licensePlate" placeholder="Digite a placa" maxlength="8" mask="AAA-0000" formControlName="licensePlate">
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('licensePlate')?.hasError('required')">Placa é um campo obrigatório</small>
+            <small class="attribute-error" *ngIf="busForm.get('licensePlate')?.hasError('minlength')">Placa deve ter 7 caracteres</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="chassi">Chassi</label>
+          <input type="text" class="form-control" id="chassi" placeholder="Digite o chassi" maxlength="17" formControlName="chassi">
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('chassi')?.hasError('required')">Chassi é um campo obrigatório</small>
+            <small class="attribute-error" *ngIf="busForm.get('chassi')?.hasError('minlength')">Chassi deve ter 17 caracteres</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="seatingCapacity">Capacidade de Assentos</label>
+          <input type="number" class="form-control" id="seatingCapacity" placeholder="Digite a capacidade de assentos" formControlName="seatingCapacity">
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="busForm.get('seatingCapacity')?.hasError('required')">Capacidade de assentos é um campo obrigatório</small>
+            <small class="attribute-error" *ngIf="busForm.get('seatingCapacity')?.hasError('max')">Capacidade não permitida</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-button">
+      <button type="submit" class="custom-button rounded shadow-3">Salvar</button>
+      <button type="button" class="custom-button-light rounded shadow-3" [routerLink]="['/bus']">Voltar</button>
+    </div>
+  </form>
+</app-card>

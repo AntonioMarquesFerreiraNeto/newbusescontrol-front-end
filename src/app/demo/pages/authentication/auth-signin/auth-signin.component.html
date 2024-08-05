@@ -1,0 +1,29 @@
+<div class="auth-wrapper" [@fadeInOnEnter]>
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card rounded">
+      <div class="card-body text-center">
+        <div class="mb-4">
+          <i class="feather icon-unlock auth-icon"></i>
+        </div>
+        <h3 class="mb-4">Buses Control - Login</h3>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email" />
+        </div>
+        <div class="input-group mb-4">
+          <input type="password" class="form-control" placeholder="Senha" />
+        </div>
+        <button class="btn btn-glow btn-primary mb-4" routerLink="/dashboard">Logar</button>
+        <p class="mb-2 text-muted">
+          Esqueceu sua senha?
+          <a [routerLink]="['/auth/signup']">Redefinir</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

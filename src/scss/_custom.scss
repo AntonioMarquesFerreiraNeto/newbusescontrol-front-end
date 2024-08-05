@@ -1,0 +1,143 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+body {
+  line-height: 1.5;
+
+  td,
+  th {
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+.attribute-container {
+  position: relative;
+}
+
+.attribute-error {
+  position: absolute;
+  top: -4px;
+  font-size: 9pt;
+  color: #f33131;
+}
+
+.cdk-overlay-container { 
+  z-index: 100000; 
+}
+
+.modal-header {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-title {
+  color: black;
+  font-weight: 400;
+  font-size: 12pt;
+}
+
+.link-closed {
+  font-size: 13pt;
+  color: #415d8e;
+}
+
+.link-closed:hover {
+  color: #364e77;
+}
+
+.modal-footer {
+  justify-content: space-between;
+}
+
+/* Barra de rolagem */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  gap: 2px;
+  background-color: #bbcbe8;
+  border-radius: 80px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(68, 68, 168, 0.479);
+}
+
+header {
+  width: 100%;
+}
+
+.modal-scroll {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.form-control {
+  height: auto;
+}
+
+.ng-select.custom {
+  height: 42.7px;
+  font-size: 0.86em;
+  font-weight: normal;
+}
+
+.ng-select.custom .ng-select-container {
+  height: 42.7px;
+}
+
+@media only screen and (max-width: 575px) {
+  .pcoded-header .dropdown .dropdown-menu {
+    left: 0 !important;
+  }
+
+  wizard.vertical .vertical a {
+    display: none;
+  }
+}
+
+.pcoded-header .dropdown.show:before {
+  left: -10px !important;
+}
+
+pre code {
+  width: auto;
+  min-width: 100%;
+  margin-left: -80px !important;
+}
+
+.btn.btn-sm {
+  padding: 3px 12px;
+  border-radius: 0.15rem;
+}
+
+.btn.btn-lg {
+  padding: 12px 25px;
+  border-radius: 0.35rem;
+}
+
+.fixed-button {
+  position: fixed;
+  bottom: -50px;
+  right: 30px;
+  -webkit-box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  z-index: 9;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+
+  .btn {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+}
+
+.fixed-button.active {
+  bottom: 50px;
+  opacity: 1;
+}

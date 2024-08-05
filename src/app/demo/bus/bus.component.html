@@ -1,0 +1,377 @@
+<div [@fadeInOnEnter]>
+  <div class="search-form-container rounded">
+    <div class="container-fluid">
+      <div>
+        <form class="input-group">
+          <span class="span-custom">
+            <i class="bi bi-search"></i>
+          </span>
+          <input type="text" class="form-control rounded" placeholder="Pesquisar por...">
+        </form>
+      </div>
+      <div>
+        <button class="custom-button rounded shadow-2" [routerLink]="['/bus/new']"><i
+            class="bi bi-plus"></i>Ônibus</button>
+      </div>
+    </div>
+  </div>
+  <app-card cardTitle="Frota" cardClass="bus" blockClass="p-0">
+    <div class="fleet-container">
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item" title="Editar"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item" title="Inativar" (click)="OpenDetails()"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row">
+        <div class="fleet-cell">
+          <p>Marcopolo</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Paradiso 1200</p>
+        </div>
+        <div class="fleet-cell">
+          <p>TXE-4045</p>
+        </div>
+        <div class="fleet-cell">
+          <p>13/07/2024</p>
+        </div>
+        <div class="fleet-cell">
+          <p>Azul</p>
+        </div>
+        <div class="fleet-cell">
+          <p>60</p>
+        </div>
+        <div class="fleet-cell actions rounded">
+          <a href="javascript:" class="label approve rounded shadow-1">Disponível</a>
+        </div>
+        <div class="fleet-cell actions">
+          <div class="action-menu">
+            <a href="javascript:" class="action-item"><i class="feather icon-edit"></i></a>
+            <a href="javascript:" class="action-item"><i class="feather icon-trash-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="fleet-row pagination">
+        <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+  </app-card>
+</div>

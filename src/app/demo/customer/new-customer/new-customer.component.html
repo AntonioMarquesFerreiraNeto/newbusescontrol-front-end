@@ -1,0 +1,120 @@
+<app-card cardTitle="Adicionar" blockClass="p-0" [@fadeInOnEnter]>
+  <form class="card-body" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <mat-tab-group>
+      <mat-tab label="Cliente">
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="color">Tipo</label>
+              <ng-select formControlName="type" class="d-flex flex-grow-1 custom" [placeholder]="'Informe o tipo da pessoa'" [notFoundText]="'Nenhum resultado encontrado'">
+                <ng-option *ngFor="let item of typeList" [value]="item.value">{{item.description}}</ng-option>
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite o nome"
+                maxlength="90">
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="NaturalPerson()">
+            <div class="form-group">
+              <label for="birthDate">Data de Nascimento</label>
+              <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="!NaturalPerson()">
+            <div class="form-group">
+              <label for="openDate">Data de Abertura</label>
+              <input type="date" class="form-control" id="openDate" formControlName="openDate">
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="NaturalPerson()">
+            <div class="form-group">
+              <label for="cpf">CPF</label>
+              <input type="text" class="form-control" id="cpf" formControlName="cpf" placeholder="Digite o CPF"
+                maxlength="14" mask="000.000.000-00">
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="!NaturalPerson()">
+            <div class="form-group">
+              <label for="cnpj">CNPJ</label>
+              <input type="text" class="form-control" id="cnpj" formControlName="cnpj" placeholder="Digite o CNPJ"
+                maxlength="18" mask="00.000.000/0000-00">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite o email"
+                maxlength="80">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="phoneNumber">Telefone</label>
+              <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                placeholder="Digite o telefone" maxlength="15" mask="(00) 00000-0000">
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab class="mat-tab" label="Endereço">
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="homeNumber">Número da Residência</label>
+              <input type="number" class="form-control" id="homeNumber" formControlName="homeNumber"
+                placeholder="Digite o número da residência" mask="00000">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="logradouro">Logradouro</label>
+              <input type="text" class="form-control" id="logradouro" formControlName="logradouro"
+                placeholder="Digite o logradouro" maxlength="60">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="complementResidential">Complemento Residencial</label>
+              <input type="text" class="form-control" id="complementResidential" formControlName="complementResidential"
+                placeholder="Digite o complemento residencial" maxlength="60">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="neighborhood">Bairro</label>
+              <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood"
+                placeholder="Digite o bairro" maxlength="60">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="city">Cidade</label>
+              <input type="text" class="form-control" id="city" formControlName="city" placeholder="Digite a cidade"
+                maxlength="60">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="color">Estado</label>
+              <ng-select formControlName="state" class="d-flex flex-grow-1 custom" [placeholder]="'Informe o estado'" [notFoundText]="'Nenhum resultado encontrado'">
+                <ng-option *ngFor="let item of stateList" [value]="item.id">{{item.description}}</ng-option>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="row">
+      <div class="section-button">
+        <button type="submit" class="custom-button rounded shadow-3">Salvar</button>
+        <button type="button" class="custom-button-light rounded shadow-3" [routerLink]="['/customer']">Voltar</button>
+      </div>
+    </div>
+  </form>
+</app-card>
