@@ -7,23 +7,29 @@
       <span class="r"></span>
     </div>
     <div class="card rounded">
-      <div class="card-body text-center">
+      <form class="card-body text-center" (ngSubmit)="submit()" [formGroup]="loginForm" #formDir="ngForm">
         <div class="mb-4">
           <i class="feather icon-unlock auth-icon"></i>
         </div>
         <h3 class="mb-4">Buses Control - Login</h3>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" />
+          <input type="email" class="form-control" placeholder="Email" formControlName="username" required/>
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="loginForm.get('username')?.hasError('required')">E-mail é um campo obrigatório</small>
+          </div>
         </div>
         <div class="input-group mb-4">
-          <input type="password" class="form-control" placeholder="Senha" />
+          <input type="password" class="form-control" placeholder="Senha" formControlName="password"/>
+          <div class="attribute-container" *ngIf="formDir.submitted">
+            <small class="attribute-error" *ngIf="loginForm.get('password')?.hasError('required')">Senha é um campo obrigatório</small>
+          </div>
         </div>
-        <button class="btn btn-glow btn-primary mb-4" routerLink="/dashboard">Logar</button>
+        <button class="btn btn-glow btn-primary mb-4" type="submit">Logar</button>
         <p class="mb-2 text-muted">
           Esqueceu sua senha?
-          <a [routerLink]="['/auth/signup']">Redefinir</a>
+          <a [routerLink]="['/auth/reset']">Redefinir</a>
         </p>
-      </div>
+      </form>
     </div>
   </div>
 </div>

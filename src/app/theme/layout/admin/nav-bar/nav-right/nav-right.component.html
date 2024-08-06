@@ -68,9 +68,9 @@
       </a>
       <div class="dropdown-menu dropdown-menu-end profile-notification" ngbDropdownMenu>
         <div class="pro-head">
-          <img src="assets/images/user/avatar-2.jpg" class="img-radius" alt="User-Profile-Image" />
-          <span>Antonio Neto</span>
-          <a [routerLink]="['/auth/signin']" class="dud-logout" title="Logout">
+          <img src="{{profileImg}}" class="img-radius" alt="User-Profile-Image" />
+          <span>{{profileName}}</span>
+          <a routerLink="#" (click)="Logout()" class="dud-logout" title="Logout">
             <i class="feather icon-log-out"></i>
           </a>
         </div>

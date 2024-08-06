@@ -24,7 +24,8 @@ import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-se
 import { NavigationItem } from './theme/layout/admin/navigation/navigation';
 import { ToggleFullScreenDirective } from './theme/shared/components/full-screen/toggle-full-screen';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors  } from '@angular/common/http';
+import { authInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,13 @@ import { provideHttpClient } from '@angular/common/http';
     ToggleFullScreenDirective
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, BrowserAnimationsModule],
-  providers: [NavigationItem, provideAnimationsAsync(), provideHttpClient()],
+  providers: [
+    NavigationItem, 
+    provideAnimationsAsync(), 
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
