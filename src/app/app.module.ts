@@ -26,6 +26,7 @@ import { ToggleFullScreenDirective } from './theme/shared/components/full-screen
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors  } from '@angular/common/http';
 import { authInterceptor } from './interceptor/auth.interceptor';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { authInterceptor } from './interceptor/auth.interceptor';
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, BrowserAnimationsModule],
   providers: [
+    DatePipe,
     NavigationItem, 
     provideAnimationsAsync(), 
     provideHttpClient(

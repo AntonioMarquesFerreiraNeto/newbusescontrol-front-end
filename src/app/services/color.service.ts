@@ -16,7 +16,13 @@ export class ColorService {
 
   }
 
-  GetAll(): Observable<Color[]>{
-    return this.httpClient.get<Color[]>(this.baseUrl);
+  GetPaginated(page: number, pageSize: number, search: string = ''): Observable<Color[]>{
+    var url = `${this.baseUrl}?page=${page}&pageSize=${pageSize}`;
+    if(search.length != 0)
+    {
+      url += `&search=${search}`;
+    }
+
+    return this.httpClient.get<Color[]>(url);
   }
 }

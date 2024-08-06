@@ -33,11 +33,11 @@ export class NewBusComponent implements OnInit {
     { value: 2, description: 'Indisponível' }
   ]
   
-  constructor(private busService: BusService, private colorService: ColorService, private snackBarService: SnackbarService, private router: Router) {
-    this.colorService.GetAll().subscribe(x => this.colors = x);
-  }
+  constructor(private busService: BusService, private colorService: ColorService, private snackBarService: SnackbarService, private router: Router) { }
 
   ngOnInit(): void {
+    this.colorService.GetPaginated(1, 100).subscribe(x => this.colors = x);
+
     this.busForm = new FormGroup({
       colorId: new FormControl(null, [Validators.required]),
       brand: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
@@ -87,7 +87,7 @@ export class NewBusComponent implements OnInit {
 
     const data: Bus = this.busForm.value;
 
-    this.busService.CreateAsync(data).subscribe({
+    this.busService.Create(data).subscribe({
       next: () => {
         this.snackBarService.Open("Ônibus adicionado com sucesso!");
         this.router.navigate(['/bus']);

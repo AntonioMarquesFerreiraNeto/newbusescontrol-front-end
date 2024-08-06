@@ -90,6 +90,19 @@ header {
   height: 42.7px;
 }
 
+
+@media(max-width: 550px) {
+  .section-button {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  
+  .submit {
+    width: 100% !important;
+  }
+}
+
 @media only screen and (max-width: 575px) {
   .pcoded-header .dropdown .dropdown-menu {
     left: 0 !important;

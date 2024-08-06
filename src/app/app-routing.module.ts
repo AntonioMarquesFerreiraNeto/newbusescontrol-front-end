@@ -6,6 +6,7 @@ import { BusComponent } from './demo/bus/bus.component';
 import { NewBusComponent } from './demo/bus/pages/new-bus/new-bus.component';
 import { CustomerComponent } from './demo/customer/customer.component';
 import { NewCustomerComponent } from './demo/customer/new-customer/new-customer.component';
+import { EditBusComponent } from './demo/bus/pages/edit-bus/edit-bus.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'bus/new',
         component: NewBusComponent
+      },
+      {
+        path: 'bus/edit/:id',
+        component: EditBusComponent
       },
       {
         path: 'customer',

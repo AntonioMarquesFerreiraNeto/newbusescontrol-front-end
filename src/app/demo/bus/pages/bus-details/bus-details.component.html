@@ -7,54 +7,66 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="brand">Marca</label>
-        <input type="text" class="form-control" id="brand" placeholder="Digite a marca" maxlength="60" value="Marcopolo" readonly>
+        <input type="text" class="form-control" id="brand" placeholder="Digite a marca" maxlength="60" value="{{busDetails.brand}}" readonly>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="name">Nome</label>
-        <input type="text" class="form-control" id="name" placeholder="Digite o nome" minlength="60" value="Paradiso 1200" readonly>
+        <input type="text" class="form-control" id="name" placeholder="Digite o nome" minlength="60" value="{{busDetails.name}}" readonly>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="manufactureDate">Cor</label>
-        <input type="text" class="form-control" id="manufactureDate" value="Azul" readonly>
+        <label for="status">Status</label>
+        <input type="text" class="form-control" id="status" placeholder="Digite a marca" maxlength="60" value="{{GetStatus()}}" readonly>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="availability">Disponibilidade</label>
+        <input type="text" class="form-control" id="availability" placeholder="Digite o nome" minlength="60" value="{{GetAvailability()}}" readonly>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="color">Cor</label>
+        <input type="text" class="form-control" id="color" value="{{busDetails.color.color}}" readonly>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="manufactureDate">Data de Fabricação</label>
-        <input type="date" class="form-control" id="manufactureDate" value="2024-04-20" readonly>
+        <input type="date" class="form-control" id="manufactureDate" value="{{busDetails.manufactureDate}}" readonly>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="renavam">Renavam</label>
-        <input type="text" class="form-control" id="renavam" placeholder="Digite o Renavam" maxlength="11" value="15976644565" readonly>
+        <input type="text" class="form-control" id="renavam" placeholder="Digite o Renavam" maxlength="11" value="{{busDetails.renavam}}" readonly>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="licensePlate">Placa</label>
-        <input type="text" class="form-control" id="licensePlate" placeholder="Digite a placa" maxlength="8" value="ABF-2013" readonly>
+        <input type="text" class="form-control" id="licensePlate" placeholder="Digite a placa" maxlength="8" value="{{busDetails.licensePlate}}" readonly>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="chassi">Chassi</label>
-        <input type="text" class="form-control" id="chassi" placeholder="Digite o chassi" maxlength="17" value="1HH76644561AE345G" readonly>
+        <input type="text" class="form-control" id="chassi" placeholder="Digite o chassi" maxlength="17" value="{{busDetails.chassi}}" readonly>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="seatingCapacity">Capacidade de Assentos</label>
-        <input type="number" class="form-control" id="seatingCapacity" placeholder="Digite a capacidade de assentos" value="55" readonly>
+        <input type="number" class="form-control" id="seatingCapacity" placeholder="Digite a capacidade de assentos" value="{{busDetails.seatingCapacity}}" readonly>
       </div>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="submit" class="custom-button rounded shadow-3" (click)="close()">Inativar</button>
+  <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">{{actionTxt}}</button>
   <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
 </div>

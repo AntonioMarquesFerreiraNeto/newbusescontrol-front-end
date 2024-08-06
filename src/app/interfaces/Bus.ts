@@ -8,7 +8,7 @@ export interface Bus
     brand: string,
     name: string,
     manufactureDate: string,
-    renava: string, 
+    renavam: string, 
     licensePlate: string,
     chassi: string,
     seatingCapacity: string,

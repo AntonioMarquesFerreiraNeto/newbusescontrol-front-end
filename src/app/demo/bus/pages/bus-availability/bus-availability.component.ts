@@ -1,24 +1,24 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
+import { RouterModule } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Bus } from 'src/app/interfaces/Bus';
 import { BusService } from 'src/app/services/bus.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
-  selector: 'app-bus-details',
+  selector: 'app-bus-availability',
   standalone: true,
   imports: [SharedModule, RouterModule, MatCardModule, MatGridListModule, MatFormFieldModule, MatInputModule],
-  templateUrl: './bus-details.component.html',
-  styleUrl: './bus-details.component.scss'
+  templateUrl: './bus-availability.component.html',
+  styleUrl: './bus-availability.component.scss'
 })
-export class BusDetailsComponent implements OnInit {
+export class BusAvailabilityComponent implements OnInit {
   @Input() headerClass: string;
   @Input() busId?: string;
   @Output() onSubmitted: EventEmitter<void> = new EventEmitter<void>();
@@ -31,7 +31,6 @@ export class BusDetailsComponent implements OnInit {
     this.busService.GetById(this.busId).subscribe({
       next: (response) => {
         this.busDetails = response;
-        this.actionTxt = this.busDetails?.status == 'Active' ? "Inativar" : "Ativar";
       },
       error: (error: HttpErrorResponse) => {
         this.snackbarService.Open(error.error.detail);
@@ -47,10 +46,9 @@ export class BusDetailsComponent implements OnInit {
   }
 
   submit() {
-    this.busService.ToggleActive(this.busId).subscribe({
+    this.busService.ToggleAvailability(this.busId).subscribe({
       next: () => {
-        var actionMessage = this.busDetails?.status == 'Active' ? 'Inativado' : 'Ativado';
-        this.snackbarService.Open(`Ônibus ${actionMessage} com sucesso!`);
+        this.snackbarService.Open(`Disponibilidade do ônibus para contrato atualizada com sucesso!`);
         this.onSubmitted.emit();
       },
       error: (error: HttpErrorResponse) => {
