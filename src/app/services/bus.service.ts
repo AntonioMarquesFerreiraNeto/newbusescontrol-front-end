@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Bus } from '../interfaces/Bus';
 import { environment } from 'src/environments/environment';
+import { Pagination } from '../class/Pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,10 @@ export class BusService {
 
   }
 
-  GetPaginated(page: number, pageSize: number, search: string = ''): Observable<any> {
-    var url = `${this.baseUrl}/find?page=${page}&pageSize=${pageSize}`;
-    if (search.length != 0) {
-      url += `&search=${search}`;
+  GetPaginated(pagination: Pagination): Observable<any> {
+    var url = `${this.baseUrl}/find?page=${pagination.page}&pageSize=${pagination.pageSize}`;
+    if (pagination.search.length != 0) {
+      url += `&search=${pagination.search}`;
     }
 
     return this.httpClient.get(url);

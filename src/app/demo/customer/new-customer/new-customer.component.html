@@ -1,5 +1,5 @@
 <app-card cardTitle="Adicionar" blockClass="p-0" [@fadeInOnEnter]>
-  <form class="card-body" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+  <form class="card-body" [formGroup]="customerForm" (ngSubmit)="Submit()" #formDir="ngForm">
     <mat-tab-group>
       <mat-tab label="Cliente">
         <br>
@@ -10,6 +10,9 @@
               <ng-select formControlName="type" class="d-flex flex-grow-1 custom" [placeholder]="'Informe o tipo da pessoa'" [notFoundText]="'Nenhum resultado encontrado'">
                 <ng-option *ngFor="let item of typeList" [value]="item.value">{{item.description}}</ng-option>
               </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('type')?.hasError('required')">Tipo é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -17,25 +20,51 @@
               <label for="name">Nome</label>
               <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite o nome"
                 maxlength="90">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('required')">Nome é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('minLength')">Nome deve ter no mínimo 3 caracteres</small>
+                <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('maxlength')">Nome deve ter no máximo 60 caracteres</small>
+              </div>
             </div>
           </div>
-          <div class="col-md-6" *ngIf="NaturalPerson()">
+          <div class="col-md-4" *ngIf="NaturalPerson()">
             <div class="form-group">
               <label for="birthDate">Data de Nascimento</label>
               <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('birthDate')?.hasError('required')">Tipo é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6" *ngIf="!NaturalPerson()">
             <div class="form-group">
               <label for="openDate">Data de Abertura</label>
               <input type="date" class="form-control" id="openDate" formControlName="openDate">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('openDate')?.hasError('required')">Tipo é um campo obrigatório</small>
+              </div>
             </div>
           </div>
-          <div class="col-md-6" *ngIf="NaturalPerson()">
+          <div class="col-md-4" *ngIf="NaturalPerson()">
             <div class="form-group">
               <label for="cpf">CPF</label>
               <input type="text" class="form-control" id="cpf" formControlName="cpf" placeholder="Digite o CPF"
                 maxlength="14" mask="000.000.000-00">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="customerForm.get('cpf')?.hasError('required')">CPF é um campo obrigatório</small>
+                  <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('minLength')">CPF deve ter no mínimo 11 caracteres</small>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="NaturalPerson()">
+            <div class="form-group">
+              <label for="gender">Sexo</label>
+              <ng-select formControlName="gender" class="d-flex flex-grow-1 custom" [placeholder]="'Informe o sexo da pessoa'" [notFoundText]="'Nenhum resultado encontrado'">
+                <ng-option *ngFor="let item of genderList" [value]="item.value">{{item.description}}</ng-option>
+              </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('gender')?.hasError('required')">Sexo é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6" *ngIf="!NaturalPerson()">
@@ -43,6 +72,10 @@
               <label for="cnpj">CNPJ</label>
               <input type="text" class="form-control" id="cnpj" formControlName="cnpj" placeholder="Digite o CNPJ"
                 maxlength="18" mask="00.000.000/0000-00">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="customerForm.get('cnpj')?.hasError('required')">Tipo é um campo obrigatório</small>
+                  <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('minLength')">Nome deve ter no mínimo 14 caracteres</small>
+                </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -50,6 +83,9 @@
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite o email"
                 maxlength="80">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('email')?.hasError('required')">E-mail é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -57,6 +93,9 @@
               <label for="phoneNumber">Telefone</label>
               <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber"
                 placeholder="Digite o telefone" maxlength="15" mask="(00) 00000-0000">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('phoneNumber')?.hasError('required')">Telefone é um campo obrigatório</small>
+              </div>
             </div>
           </div>
         </div>
@@ -68,7 +107,10 @@
             <div class="form-group">
               <label for="homeNumber">Número da Residência</label>
               <input type="number" class="form-control" id="homeNumber" formControlName="homeNumber"
-                placeholder="Digite o número da residência" mask="00000">
+                placeholder="Digite o número da residência">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('homeNumber')?.hasError('required')">Número residencial é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -76,6 +118,9 @@
               <label for="logradouro">Logradouro</label>
               <input type="text" class="form-control" id="logradouro" formControlName="logradouro"
                 placeholder="Digite o logradouro" maxlength="60">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('logradouro')?.hasError('required')">Logradouro é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -83,6 +128,9 @@
               <label for="complementResidential">Complemento Residencial</label>
               <input type="text" class="form-control" id="complementResidential" formControlName="complementResidential"
                 placeholder="Digite o complemento residencial" maxlength="60">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('complementResidential')?.hasError('required')">Complemento Residencial é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -90,13 +138,20 @@
               <label for="neighborhood">Bairro</label>
               <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood"
                 placeholder="Digite o bairro" maxlength="60">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('neighborhood')?.hasError('required')">Bairro é um campo obrigatório</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="city">Cidade</label>
               <input type="text" class="form-control" id="city" formControlName="city" placeholder="Digite a cidade"
-                maxlength="60">
+                maxlength="80">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('city')?.hasError('required')">Cidade é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('maxlength')">Cidade deve ter no máximo 80 caracteres</small>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
@@ -105,6 +160,9 @@
               <ng-select formControlName="state" class="d-flex flex-grow-1 custom" [placeholder]="'Informe o estado'" [notFoundText]="'Nenhum resultado encontrado'">
                 <ng-option *ngFor="let item of stateList" [value]="item.id">{{item.description}}</ng-option>
               </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="customerForm.get('state')?.hasError('required')">Estado é um campo obrigatório</small>
+              </div>
             </div>
           </div>
         </div>

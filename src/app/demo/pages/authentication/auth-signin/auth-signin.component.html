@@ -11,18 +11,16 @@
         <div class="mb-4">
           <i class="feather icon-unlock auth-icon"></i>
         </div>
-        <h3 class="mb-4">Buses Control - Login</h3>
+        <h5 class="mb-4">Buses Control - Login</h5>
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email" formControlName="username" required/>
-          <div class="attribute-container" *ngIf="formDir.submitted">
-            <small class="attribute-error" *ngIf="loginForm.get('username')?.hasError('required')">E-mail é um campo obrigatório</small>
-          </div>
         </div>
         <div class="input-group mb-4">
-          <input type="password" class="form-control" placeholder="Senha" formControlName="password"/>
-          <div class="attribute-container" *ngIf="formDir.submitted">
-            <small class="attribute-error" *ngIf="loginForm.get('password')?.hasError('required')">Senha é um campo obrigatório</small>
-          </div>
+          <input type="{{type}}" class="form-control" placeholder="Senha" formControlName="password"/>
+        </div>
+        <div class="display-check">
+          <input type="checkbox" class="check-password form-check-input" (click)="CheckPassword()"/>
+          <label class="check-label">Mostrar senha</label>
         </div>
         <button class="btn btn-glow btn-primary mb-4" type="submit">Logar</button>
         <p class="mb-2 text-muted">

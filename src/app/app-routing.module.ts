@@ -7,6 +7,7 @@ import { NewBusComponent } from './demo/bus/pages/new-bus/new-bus.component';
 import { CustomerComponent } from './demo/customer/customer.component';
 import { NewCustomerComponent } from './demo/customer/new-customer/new-customer.component';
 import { EditBusComponent } from './demo/bus/pages/edit-bus/edit-bus.component';
+import { EditCustomerComponent } from './demo/customer/edit-customer/edit-customer.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: 'customer/new',
         component: NewCustomerComponent
+      },
+      {
+        path: 'customer/edit/:id',
+        component: EditCustomerComponent
       },
       {
         path: 'basic',

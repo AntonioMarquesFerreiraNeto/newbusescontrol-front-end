@@ -3,5 +3,24 @@
 }
 
 .btn{
-    width: 150px;
+    width: 100%;
+}
+
+.display-check {
+    margin-top: -20px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+}
+
+.check-password {
+    font-size: 13pt;
+}
+
+.check-label {
+    margin-top: 2px;
+    font-size: 10pt;
 }

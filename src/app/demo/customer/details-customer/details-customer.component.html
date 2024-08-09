@@ -1,0 +1,108 @@
+<div class="modal-header">
+    <div class="modal-title">Detalhes</div>
+    <div class="closed"><a class="link-closed" href="javascript:" (click)="close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body modal-scroll">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="active">Status</label>
+                <input type="text" class="form-control" id="active" value="{{getActive()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="type">Tipo</label>
+                <input type="text" class="form-control" id="type" value="{{getType()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="brand">Nome</label>
+                <input type="text" class="form-control" id="brand" value="{{customer.name}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="customer.type == 'NaturalPerson'">
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" class="form-control" id="cpf" value="{{getCpfFormatted()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="customer.type == 'NaturalPerson'">
+            <div class="form-group">
+                <label for="birthDate">Data de nascimento</label>
+                <input type="date" class="form-control" id="birthDate" value="{{customer.birthDate}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="customer.type == 'NaturalPerson'">
+            <div class="form-group">
+                <label for="gender">Sexo</label>
+                <input type="text" class="form-control" id="gender" value="{{getGender()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="customer.type != 'NaturalPerson'">
+            <div class="form-group">
+                <label for="cnpj">CNPJ</label>
+                <input type="text" class="form-control" id="cnpj" value="{{getCnpjFormatted()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="customer.type != 'NaturalPerson'">
+            <div class="form-group">
+                <label for="openDate">Data de abertura</label>
+                <input type="date" class="form-control" id="openDate" value="{{customer.openDate}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="phoneNumber">Telefone</label>
+                <input type="text" class="form-control" id="phoneNumber" value="{{phoneNumberFormatted()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" id="email" value="{{customer.email}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="homeNumber">Número da Casa</label>
+                <input type="text" class="form-control" id="homeNumber" value="{{customer.homeNumber}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" class="form-control" id="logradouro" value="{{customer.logradouro}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="complementResidential">Complemento Residencial</label>
+                <input type="text" class="form-control" id="complementResidential" value="{{customer.complementResidential}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="neighborhood">Bairro</label>
+                <input type="text" class="form-control" id="neighborhood" value="{{customer.neighborhood}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" class="form-control" id="city" value="{{customer.city}}" readonly>
+            </div>
+        </div>
+        <div class="{{customer.type == 'NaturalPerson' ? 'col-md-6' : 'col-md-12'}}">
+            <div class="form-group">
+                <label for="state">Estado</label>
+                <input type="text" class="form-control" id="state" value="{{customer.state}}" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">{{actionTxt}}</button>
+    <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
+</div>

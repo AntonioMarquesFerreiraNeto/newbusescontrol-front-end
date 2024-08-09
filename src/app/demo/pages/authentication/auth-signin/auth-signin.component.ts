@@ -7,11 +7,12 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 import { Login } from 'src/app/interfaces/Login';
 import { AuthService } from 'src/app/services/auth.service';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-auth-signin',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MatCheckboxModule],
   templateUrl: './auth-signin.component.html',
   styleUrls: ['./auth-signin.component.scss'],
   animations: [
@@ -19,6 +20,7 @@ import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
   ]
 })
 export default class AuthSigninComponent implements OnInit {
+  type: string = 'password';
   loginForm!: FormGroup;
 
   constructor(private authService: AuthService, private snackbarService: SnackbarService) { }
@@ -38,8 +40,22 @@ export default class AuthSigninComponent implements OnInit {
     return this.loginForm.get("password").value!;
   }
 
+  CheckPassword() {
+    if (this.type == 'password') 
+    {
+      this.type = 'text';
+    }
+    else 
+    {
+      this.type = 'password'
+    }
+  }
+
   submit() {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.snackbarService.Open('E-mail ou senha inválido!');
+      return;
+    }
 
     const data: Login = this.loginForm.value;
 

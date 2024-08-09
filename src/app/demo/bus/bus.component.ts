@@ -5,13 +5,14 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { fadeInOnEnterAnimation } from 'angular-animations';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BusDetailsComponent } from './pages/bus-details/bus-details.component';
 import { Bus } from 'src/app/interfaces/Bus';
 import { BusService } from 'src/app/services/bus.service';
 import { DatePipe } from '@angular/common';
 import { BusAvailabilityComponent } from './pages/bus-availability/bus-availability.component';
+import { Pagination } from 'src/app/class/Pagination';
 
 @Component({
   selector: 'app-bus',
@@ -24,72 +25,89 @@ import { BusAvailabilityComponent } from './pages/bus-availability/bus-availabil
   ]
 })
 export class BusComponent implements OnInit {
-  status = [
-    { value: null, description: 'Todos' },
-    { value: 2, description: 'Ativos' },
-    { value: 3, description: 'Inativos' },
-  ]
-  tableMsg = '';
-  frota!: Bus[];
+  tableMsg: string = '';
+  frota: Bus[];
+  pagination = new Pagination;
 
   constructor(private modal: NgbModal, private busService: BusService, private datePipe: DatePipe) {
 
   }
-  
+
   ngOnInit(): void {
-    this.busService.GetPaginated(1, 20).subscribe(
-      response => this.frota = response
-    );
+    this.busService.GetPaginated(this.pagination).subscribe(response => {
+      this.frota = response.response;
+      this.pagination.totalSize = response.totalSize;
+    });
 
     this.tableMsg = this.frota?.length == 0 ? 'Nenhum registro encontrado' : '';
   }
 
-  RefreshFrota() {
-    this.busService.GetPaginated(1, 20).subscribe(
-      response => this.frota = response
-    );
+  search(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.pagination.search = input.value;
+
+    this.refreshFrota();
   }
 
-  OpenDetails(id: string) {
+  handlePageEvent(event: PageEvent) {
+    const previousPageSize = this.pagination.pageSize;
+    this.pagination.page = event.pageIndex + 1;
+    this.pagination.pageSize = event.pageSize;
+
+    if (event.pageSize !== previousPageSize) {
+      this.pagination.page = 1;
+    }
+
+    this.refreshFrota();
+  }
+
+  refreshFrota() {
+    this.busService.GetPaginated(this.pagination).subscribe(response => {
+      this.frota = response.response;
+      this.pagination.totalSize = response.totalSize;
+    });
+  }
+
+  openDetails(id: string) {
     const style = { size: 'lg' };
     var modal = this.modal.open(BusDetailsComponent, style);
     modal.componentInstance.busId = id;
     modal.componentInstance.onSubmitted.subscribe(() => {
-      this.RefreshFrota(); 
+      this.refreshFrota();
     });
   }
 
-  OpenAvailability(event: MouseEvent, id: string) {
+  openAvailability(event: MouseEvent, id: string) {
     event.stopImmediatePropagation();
     const style = { size: 'lg' };
     var modal = this.modal.open(BusAvailabilityComponent, style);
     modal.componentInstance.busId = id;
     modal.componentInstance.onSubmitted.subscribe(() => {
-      this.RefreshFrota(); 
+      this.refreshFrota();
     });
-  }  
+  }
 
-  DateFormated(date: string) {
+  dateFormated(date: string) {
     return this.datePipe.transform(date, 'dd/MM/yyyy');
   }
 
-  GetLabelStatus(status: string) {
+  getLabelStatus(status: string) {
     return status == 'Active' ? 'label-blue' : 'label-pink'
   }
 
-  GetDetailStatus(status: string) {
-    return status == 'Active' ? 'Ativo' : 'Inativo';
+  getDetailStatus(status: string) {
+    return status == 'Active' ? 'Ônibus Ativo' : 'Ônibus Inativo';
   }
 
-  GetLabelAvailability(availability: string) {
+  getLabelAvailability(availability: string) {
     return availability == 'Available' ? 'label-blue' : 'label-pink'
   }
 
-  GetDetailAvailability(availability: string) {
+  getDetailAvailability(availability: string) {
     return availability == 'Available' ? 'Disponível' : 'Indisponível'
   }
 
-  GetIconAvailability(availability: string){
+  getIconAvailability(availability: string) {
     return availability == 'Available' ? 'feather icon-unlock' : 'feather icon-lock'
   }
 }

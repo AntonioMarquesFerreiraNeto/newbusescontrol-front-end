@@ -19,7 +19,6 @@ import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
   styleUrl: './bus-details.component.scss'
 })
 export class BusDetailsComponent implements OnInit {
-  @Input() headerClass: string;
   @Input() busId?: string;
   @Output() onSubmitted: EventEmitter<void> = new EventEmitter<void>();
   busDetails?: Bus;
@@ -65,11 +64,11 @@ export class BusDetailsComponent implements OnInit {
     this.modal.close();
   }
 
-  GetStatus() {
+  getStatus() {
     return this.busDetails?.status == 'Active' ? 'Ativo' : 'Inativo';
   }
 
-  GetAvailability() {
+  getAvailability() {
     return this.busDetails?.availability == 'Available' ? 'Disponível' : 'Indisponível';
   }
 }

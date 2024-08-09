@@ -1,24 +1,26 @@
 <div [@fadeInOnEnter]>
-  <div class="search-form-container rounded">
+  <div cardTitle="Frota" class="search-form-container rounded">
     <div class="container-fluid">
       <div>
         <form class="input-group">
           <span class="span-custom">
             <i class="bi bi-search"></i>
           </span>
-          <input type="text" class="form-control rounded" placeholder="Pesquisar por...">
+          <input type="text" class="form-control rounded" placeholder="Pesquisar por..." (input)="search($event)">
         </form>
       </div>
       <div>
-        <button class="custom-button rounded shadow-2" [routerLink]="['/bus/new']"><i
-            class="bi bi-plus"></i>Ônibus</button>
+        <button class="custom-button rounded shadow-2" [routerLink]="['/bus/new']">
+          <i class="bi bi-plus"></i>
+          Ônibus
+        </button>
       </div>
     </div>
   </div>
   <app-card cardTitle="Frota" cardClass="bus" blockClass="p-0">
-    <div class="fleet-container">
+    <div class="fleet-container" *ngIf="frota?.length != 0 else notFound">
       <div *ngFor="let item of frota">
-        <div class="fleet-row" (click)="OpenDetails(item.id)" title="Detalhes">
+        <div class="fleet-row" (click)="openDetails(item.id)" title="Detalhes">
           <div class="fleet-cell">
             <p>{{item.brand}}</p>
           </div>
@@ -35,26 +37,38 @@
             <p>{{item.seatingCapacity}}</p>
           </div>
           <div class="fleet-cell actions rounded">
-            <a href="javascript:" class="label {{GetLabelStatus(item.status)}} rounded shadow-1">{{GetDetailStatus(item.status)}}</a>
+            <a href="javascript:"
+              class="label {{getLabelStatus(item.status)}} rounded shadow-1">{{getDetailStatus(item.status)}}</a>
           </div>
           <div class="fleet-cell actions rounded">
-            <a href="javascript:" class="label {{GetLabelAvailability(item.availability)}} rounded shadow-1">{{GetDetailAvailability(item.availability)}}</a>
+            <a href="javascript:"
+              class="label {{getLabelAvailability(item.availability)}} rounded shadow-1">{{getDetailAvailability(item.availability)}}</a>
           </div>
           <div class="fleet-cell actions">
             <div class="action-menu">
-              <a [routerLink]="['/bus/edit/' + item.id]" class="action-item" title="Editar"><i class="feather icon-edit"></i></a>
-              <a [routerLink]="['/bus']" class="action-item" title="Gerir disponibilidade" (click)="OpenAvailability($event, item.id)"><i class="{{GetIconAvailability(item.availability)}}"></i></a>
+              <a [routerLink]="['/bus/edit/' + item.id]" class="action-item" title="Editar"><i
+                  class="feather icon-edit"></i></a>
+              <a [routerLink]="['/bus']" class="action-item" title="Gerir disponibilidade"
+                (click)="openAvailability($event, item.id)"><i
+                  class="{{getIconAvailability(item.availability)}}"></i></a>
             </div>
           </div>
         </div>
       </div>
       <div class="fleet-row pagination">
-        <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
+        <mat-paginator (page)="handlePageEvent($event)" [length]="pagination.totalSize" [pageSize]="pagination.pageSize"
+          [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Select page">
         </mat-paginator>
       </div>
     </div>
+    <ng-template #notFound>
+      <div class="fleet-container">
+        <div class="fleet-row">
+          <div class="fleet-cell">
+            <p>Nenhum registro foi encontrado</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </app-card>
 </div>
