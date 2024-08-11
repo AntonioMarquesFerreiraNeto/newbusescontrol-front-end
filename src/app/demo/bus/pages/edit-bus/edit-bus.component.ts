@@ -60,39 +60,7 @@ export class EditBusComponent implements OnInit {
       }
     });
 
-    this.colorService.GetPaginated(1, 100).subscribe(x => this.colors = x);
-  }
-
-  get colorId() {
-    return this.busForm.get('colorId').value!;
-  }
-
-  get brand() {
-    return this.busForm.get('brand').value!;
-  }
-
-  get name() {
-    return this.busForm.get('name').value!;
-  }
-
-  get manufactureDate() {
-    return this.busForm.get('manufactureDate').value!;
-  }
-
-  get renavam() {
-    return this.busForm.get('renavam').value!;
-  }
-
-  get licensePlate() {
-    return this.busForm.get('licensePlate').value!;
-  }
-
-  get chassi() {
-    return this.busForm.get('chassi').value!;
-  }
-
-  get seatingCapacity() {
-    return this.busForm.get('seatingCapacity').value!;
+    this.colorService.GetPaginated(1, 100).subscribe(x => this.colors = x.response);
   }
 
   submit() {

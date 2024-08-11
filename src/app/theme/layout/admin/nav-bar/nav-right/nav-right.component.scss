@@ -3,3 +3,13 @@
     margin: 0;
     position: 0;
 }
+
+.notification-body {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.notification-title {
+    color: #141e30;
+}

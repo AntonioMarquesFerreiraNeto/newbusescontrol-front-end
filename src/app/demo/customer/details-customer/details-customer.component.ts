@@ -46,7 +46,7 @@ export class DetailsCustomerComponent implements OnInit {
   }
 
   getGender() {
-    return this.customer.gender == 'Male' ? 'Mascúlino' : 'Feminino';
+    return this.customer.gender == 'Male' ? 'Masculino' : 'Feminino';
   }
 
   phoneNumberFormatted() {

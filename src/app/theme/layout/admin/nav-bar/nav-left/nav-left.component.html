@@ -3,12 +3,13 @@
     <a href="javascript:" class="full-screen"><i class="feather icon-maximize"></i></a>
   </li>
   <li class="nav-item dropdown" ngbDropdown placement="auto" *ngIf="loggedUser?.role == 'Admin'">
-    <a href="javascript:" data-toggle="dropdown" ngbDropdownToggle>Ações administrativas</a>
+    <a href="javascript:" data-toggle="dropdown" ngbDropdownToggle>Outras funcionalidades</a>
     <ul class="dropdown-menu" ngbDropdownMenu>
-      <li><a class="dropdown-item" href="javascript:">Registro de Webhooks</a></li>
-      <li><a class="dropdown-item" href="javascript:">Registro de Usuários</a></li>
-      <li><a class="dropdown-item" href="javascript:">Painel de Configuração</a></li>
-      <li><a class="dropdown-item" href="javascript:">Execução de Rotinas</a></li>
+      <li><a class="dropdown-item" href="javascript:"><i class="bi bi-journal-code"></i> Registro de Webhooks</a></li>
+      <li><a class="dropdown-item" href="javascript:"><i class="bi bi-bell"></i> Registro de Notificações</a></li>
+      <li><a class="dropdown-item" href="javascript:"><i class="bi bi-person-gear"></i> Registro de Usuários</a></li>
+      <li><a class="dropdown-item" href="javascript:"><i class="bi bi-ui-checks-grid"></i> Painel de Configuração</a></li>
+      <li><a class="dropdown-item" href="javascript:"><i class="bi bi-dpad"></i> Rotinas automatizadas</a></li>
     </ul>
   </li>
   <li class="nav-item">

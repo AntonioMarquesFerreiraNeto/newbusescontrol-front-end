@@ -26,13 +26,13 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 export class NewCustomerComponent {
   customerForm: FormGroup;
   typeList = [
-    { value: 1, description: 'Pessoa física' },
-    { value: 2, description: 'Pessoa jurídica' }
+    { value: 'NaturalPerson', description: 'Pessoa física' },
+    { value: 'LegalEntity', description: 'Pessoa jurídica' }
   ]
 
   genderList = [
-    { value: 1, description: 'Mascúlino' },
-    { value: 2, description: 'Feminino' }
+    { value: 'Male', description: 'Masculino' },
+    { value: 'Female', description: 'Feminino' }
   ]
 
   constructor(private fb: FormBuilder, private customerService: CustomerService, private snackbarService: SnackbarService, private router: Router) {
@@ -51,26 +51,22 @@ export class NewCustomerComponent {
       city: ['', [Validators.required, Validators.maxLength(60)]],
       state: [null, [Validators.required, Validators.maxLength(60)]],
       gender: [null],
-      type: [1, Validators.required]
-    });
-
-    this.customerForm.get('type')?.valueChanges.subscribe(value => {
-      this.onTypeChange(value);
+      type: ['NaturalPerson', Validators.required]
     });
   }
 
   NaturalPerson(): boolean {
-    return this.customerForm.get('type')?.value == 1;
+    return this.customerForm.get('type')?.value == 'NaturalPerson';
   }
 
   onTypeChange(type: string) {
-    if (type === 'PessoaFisica') {
+    if (type == 'NaturalPerson') {
       this.customerForm.get('cpf')?.setValidators([Validators.required, Validators.maxLength(11)]);
       this.customerForm.get('birthDate')?.setValidators([Validators.required]);
       this.customerForm.get('gender')?.setValidators([Validators.required]);
       this.customerForm.get('cnpj')?.clearValidators();
       this.customerForm.get('openDate')?.clearValidators();
-    } else if (type === 'PessoaJuridica') {
+    } else if (type == 'LegalEntity') {
       this.customerForm.get('cnpj')?.setValidators([Validators.required, Validators.maxLength(14)]);
       this.customerForm.get('openDate')?.setValidators([Validators.required]);
       this.customerForm.get('cpf')?.clearValidators();
@@ -84,8 +80,11 @@ export class NewCustomerComponent {
     this.customerForm.get('cnpj')?.updateValueAndValidity();
     this.customerForm.get('openDate')?.updateValueAndValidity();
   }
-
+  
   Submit() {
+    const type = this.customerForm.get('type').value;
+    this.onTypeChange(type);
+
     if (this.customerForm.invalid) {
       return;
     }

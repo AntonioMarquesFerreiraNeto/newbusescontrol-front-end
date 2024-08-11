@@ -76,7 +76,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="seatingCapacity">Capacidade de Assentos</label>
-            <input type="number" class="form-control" id="seatingCapacity" placeholder="Digite a capacidade de assentos" formControlName="seatingCapacity">
+            <input type="number" class="form-control" id="seatingCapacity" placeholder="Digite a capacidade de assentos" formControlName="seatingCapacity" maxlength="3" onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;">
             <div class="attribute-container" *ngIf="formDir.submitted">
               <small class="attribute-error" *ngIf="busForm.get('seatingCapacity')?.hasError('required')">Capacidade de assentos é um campo obrigatório</small>
               <small class="attribute-error" *ngIf="busForm.get('seatingCapacity')?.hasError('max')">Capacidade não permitida</small>

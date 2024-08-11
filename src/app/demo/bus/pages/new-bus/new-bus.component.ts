@@ -36,7 +36,7 @@ export class NewBusComponent implements OnInit {
   constructor(private busService: BusService, private colorService: ColorService, private snackBarService: SnackbarService, private router: Router) { }
 
   ngOnInit(): void {
-    this.colorService.GetPaginated(1, 100).subscribe(x => this.colors = x);
+    this.colorService.GetPaginated(1, 100).subscribe(x => this.colors = x.response);
 
     this.busForm = new FormGroup({
       colorId: new FormControl(null, [Validators.required]),
@@ -48,38 +48,6 @@ export class NewBusComponent implements OnInit {
       chassi: new FormControl('', [Validators.required, Validators.minLength(17)]),
       seatingCapacity: new FormControl('', [Validators.required, Validators.max(240)])
     });
-  }
-
-  get colorId() {
-    return this.busForm.get('colorId').value!;
-  }
-  
-  get brand() {
-    return this.busForm.get('brand').value!;
-  }
-
-  get name() {
-    return this.busForm.get('name').value!;
-  }
-
-  get manufactureDate() {
-    return this.busForm.get('manufactureDate').value!;
-  }
-
-  get renavam() {
-    return this.busForm.get('renavam').value!;
-  }
-
-  get licensePlate() {
-    return this.busForm.get('licensePlate').value!;
-  }
-
-  get chassi() {
-    return this.busForm.get('chassi').value!;
-  }
-
-  get seatingCapacity() {
-    return this.busForm.get('seatingCapacity').value!;
   }
 
   submit() {
