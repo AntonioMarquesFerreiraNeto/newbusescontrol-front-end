@@ -19,11 +19,10 @@
             <div class="form-group">
               <label for="name">Nome</label>
               <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite o nome"
-                maxlength="90">
+                maxlength="60">
               <div class="attribute-container" *ngIf="formDir.submitted">
                 <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('required')">Nome é um campo obrigatório</small>
-                <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('minLength')">Nome deve ter no mínimo 3 caracteres</small>
-                <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('maxlength')">Nome deve ter no máximo 60 caracteres</small>
+                <small class="attribute-error" *ngIf="customerForm.get('name')?.hasError('minlength')">Nome deve ter no mínimo 3 caracteres</small>
               </div>
             </div>
           </div>
@@ -170,8 +169,8 @@
     </mat-tab-group>
     <div class="row">
       <div class="section-button">
-        <button type="submit" class="custom-button rounded shadow-3">Salvar</button>
-        <button type="button" class="custom-button-light rounded shadow-3" [routerLink]="['/customer']">Voltar</button>
+        <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+        <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/customer']">Voltar</button>
       </div>
     </div>
   </form>

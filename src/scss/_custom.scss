@@ -90,6 +90,9 @@ header {
   height: 42.7px;
 }
 
+ng-select .ng-option {
+  z-index: 100000; 
+}
 
 @media(max-width: 550px) {
   .section-button {

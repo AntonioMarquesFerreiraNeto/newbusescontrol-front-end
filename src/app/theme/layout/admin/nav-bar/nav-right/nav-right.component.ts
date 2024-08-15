@@ -45,7 +45,7 @@ export class NavRightComponent {
     }
     this.pagination.page = 1;
     this.pagination.pageSize = 4;
-    this.notificationService.getMyPaginated(this.pagination).subscribe((response) => {
+    this.notificationService.GetMyPaginated(this.pagination).subscribe((response) => {
       this.notifications = response.response;
       this.displaySeeMore = this.notifications.length != 0 ? true : false;
       this.displaySeeMore = response.totalSize <= this.notifications.length;
@@ -54,7 +54,7 @@ export class NavRightComponent {
 
   seeMoreNotifications() {
     this.pagination.page = this.pagination.page + 1;
-    this.notificationService.getMyPaginated(this.pagination).subscribe((response) => {
+    this.notificationService.GetMyPaginated(this.pagination).subscribe((response) => {
       this.notifications = this.notifications.concat(response.response);
       this.displaySeeMore = this.notifications.length != 0 ? true : false;
       this.displaySeeMore = response.totalSize <= this.notifications.length;
@@ -72,7 +72,7 @@ export class NavRightComponent {
 
   getNameSender(notification: Notification) {
     if (notification.senderType == 'System') {
-      return 'Buses Control - Agent';
+      return 'Buses Control';
     }
     else {
       return notification.sender.name;
@@ -80,6 +80,6 @@ export class NavRightComponent {
   }
 
   getCreatedAtFormatted(createdAt: string) {
-    return this.notificationService.formatedCreatedAt(createdAt);
+    return this.notificationService.FormatedCreatedAt(createdAt);
   }
 }

@@ -1,0 +1,41 @@
+<app-card cardTitle="Criar" blockClass="p-0" [@fadeInOnEnter]>
+    <form class="card-body" (ngSubmit)="submit()" [formGroup]="notificationForm" #formDir="ngForm"> 
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="title">Título</label>
+              <input type="text" class="form-control" id="title" placeholder="Informe o título" maxlength="30" formControlName="title">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="notificationForm.get('title')?.hasError('required')">Título é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="notificationForm.get('title')?.hasError('minlength')">Título deve ter no mínimo 3 caracteres</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="accessLevel">Nível de acesso</label>
+              <ng-select class="d-flex flex-grow-1 custom" formControlName="accessLevel" [notFoundText]="'Nenhum registro encontrado'" [placeholder]="'Informe o nível de acesso'">
+                <ng-option *ngFor="let item of accessLevel" [value]="item.value">{{item.description}}</ng-option>
+              </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="notificationForm.get('accessLevel')?.hasError('required')">Nível de acesso é um campo obrigatório</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="message">Mensagem</label>
+              <textarea type="text" class="form-control" id="message" placeholder="Informe a mensagem" maxlength="200" formControlName="message" rows="4"></textarea>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="notificationForm.get('message')?.hasError('required')">Mensagem é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="notificationForm.get('message')?.hasError('minlength')">Mensagem deve ter no mínimo 10 caracteres</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-button">
+          <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+          <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/notifications']">Voltar</button>
+        </div>
+    </form>
+</app-card>

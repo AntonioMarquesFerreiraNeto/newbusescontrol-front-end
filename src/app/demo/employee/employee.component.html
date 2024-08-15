@@ -1,0 +1,62 @@
+<div [@fadeInOnEnter]>
+    <div class="search-form-container rounded">
+      <div class="container-fluid">
+        <div>
+          <form class="input-group">
+            <span class="span-custom">
+              <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control rounded" placeholder="Pesquisar por..." (input)="search($event)">
+          </form>
+        </div>
+        <div>
+          <button class="custom-button rounded shadow-2" [routerLink]="['/employee/new']"><i
+              class="bi bi-plus"></i>Funcionário</button>
+        </div>
+      </div>
+    </div>
+    <app-card cardTitle="Funcionários" cardClass="bus" blockClass="p-0">
+      <div class="fleet-container" *ngIf="employees && employees.length != 0 else notFound">
+        <div *ngFor="let item of employees">
+          <div class="fleet-row">
+            <div class="fleet-cell">
+              <p>{{item.name}}</p>
+            </div>
+            <div class="fleet-cell">
+                <p><span class="type">{{typeFormattedEmployee(item.type)}}</span></p>
+            </div>
+            <div class="fleet-cell">
+                <p>{{phoneNumberFormatted(item.phoneNumber)}}</p>
+            </div>
+            <div class="fleet-cell">
+                <p>{{dateFormatted(item.birthDate)}}</p>
+            </div>
+            <div class="fleet-cell actions rounded">
+                <a href="javascript:"
+                  class="label {{getLabelStatus(item.status)}} rounded shadow-1">{{getDetailStatus(item.status)}}</a>
+              </div>
+            <div class="fleet-cell actions">
+              <div class="action-menu">
+                <a [routerLink]="'/customer/edit/' + item.id" class="action-item" title="Cargo do funcionário"><i class="feather icon-repeat"></i></a>
+                <a [routerLink]="'/customer/edit/' + item.id" class="action-item" title="Editar"><i class="feather icon-edit"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fleet-row pagination">
+          <mat-paginator (page)="handlePageEvent($event)" [length]="pagination.totalSize" [pageSize]="pagination.pageSize"
+            [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Selecione a página">
+          </mat-paginator>
+        </div>
+      </div>
+      <ng-template #notFound>
+        <div class="fleet-container">
+          <div class="fleet-row">
+            <div class="fleet-cell">
+              <p>Nenhum registro foi encontrado</p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </app-card>
+  </div>

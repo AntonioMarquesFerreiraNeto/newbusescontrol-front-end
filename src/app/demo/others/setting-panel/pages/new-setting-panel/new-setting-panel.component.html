@@ -1,0 +1,72 @@
+<app-card cardTitle="Adicionar" blockClass="p-0" [@fadeInOnEnter]>
+    <form class="card-body" (ngSubmit)="submit()" [formGroup]="settingPanelForm" #formDir="ngForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="parent">Destino <span class="span-error">*</span></label>
+                    <ng-select class="d-flex flex-grow-1 custom" [notFoundText]="'Registro não encontrado'" [placeholder]="'Informe o destino do painel'" formControlName="parent">
+                        <ng-option *ngFor="let item of parentList" [value]="item.value">{{item.description}}</ng-option>
+                    </ng-select>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="settingPanelForm.get('parent')?.hasError('required')">Destino é um campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="active">Situação <span class="span-error">*</span></label>
+                    <ng-select class="d-flex flex-grow-1 custom" [notFoundText]="'Registro não encontrado'" [placeholder]="'Informe a situação do painel'" formControlName="active">
+                        <ng-option *ngFor="let item of activeList" [value]="item.value">{{item.description}}</ng-option>
+                    </ng-select>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="settingPanelForm.get('active')?.hasError('required')">Situação é um campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="customerDelinquencyEnabled">Inadimplência de clientes <span class="span-error">*</span></label>
+                    <ng-select class="d-flex flex-grow-1 custom" [notFoundText]="'Registro não encontrado'" [placeholder]="'Deseja tornar clientes devedores inadimplentes?'" formControlName="customerDelinquencyEnabled">
+                        <ng-option *ngFor="let item of customerDelinquencyEnabledList" [value]="item.value">{{item.description}}</ng-option>
+                    </ng-select>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="settingPanelForm.get('customerDelinquencyEnabled')?.hasError('required')">Inadimplência é um campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="terminationFee">Taxa de rescisão <span class="span-error">*</span></label>
+                    <ng-select class="d-flex flex-grow-1 custom" id="terminationFee" [notFoundText]="'Registro não encontrado'" [placeholder]="'Informe a taxa de rescisão'" formControlName="terminationFee">
+                        <ng-option *ngFor="let item of filteredPercentageList" [value]="item.value">{{item.description}}</ng-option>
+                    </ng-select>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="settingPanelForm.get('terminationFee')?.hasError('required')">Taxa de rescisão é um campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="lateFeeInterestRate">Taxa de juros de atraso</label>
+                    <ng-select class="d-flex flex-grow-1 custom" id="lateFeeInterestRate" [notFoundText]="'Registro não encontrado'" [placeholder]="'Informe a taxa de juros aplicada'" formControlName="lateFeeInterestRate">
+                        <ng-option *ngFor="let item of percentageList" [value]="item.value">{{item.description}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="limitDateTerminate">Data de término limite</label>
+                    <ng-select class="d-flex flex-grow-1 custom" id="limitDateTerminate" [notFoundText]="'Registro não encontrado'" [placeholder]="'Informe o limite da data de término'" formControlName="limitDateTerminate">
+                        <ng-option *ngFor="let item of limitDateTerminateList" [value]="item.value">{{item.description}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="section-button">
+            <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+            <button type="button" class="custom-button-light rounded shadow-3 submit"
+                [routerLink]="['/setting-panel']">Voltar</button>
+        </div>
+    </form>
+</app-card>

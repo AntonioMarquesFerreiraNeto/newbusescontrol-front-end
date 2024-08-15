@@ -1,0 +1,33 @@
+<div [@fadeInOnEnter]>
+    <div cardTitle="Frota" class="search-form-container rounded">
+        <div class="container-fluid">
+            <div>
+                <form class="input-group">
+                    <span class="span-custom">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control rounded" placeholder="Pesquisar por título..." (input)="search($event)">
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div *ngIf="list.length != 0 else notFound">
+        <div *ngFor="let item of list">
+            <app-card cardTitle="{{item.title}}">
+                <a class="link-run" [routerLink]="['/system/automated/run/' + item.id]" style="text-align: justify;">
+                    {{item.description}}
+                </a>
+            </app-card>
+        </div>
+    </div>
+    <ng-template #notFound>
+        <div>
+            <app-card cardTitle="Rotina automatizada">
+                <p style="text-align: center;">
+                    Desculpe, mas nenhuma rotina automatizada foi encontrada
+                </p>
+            </app-card>
+        </div>
+    </ng-template>
+</div>

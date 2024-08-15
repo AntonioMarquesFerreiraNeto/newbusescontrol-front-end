@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <div class="modal-title">Detalhes</div>
+    <div class="closed"><a class="link-closed" href="javascript:" (click)="close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body modal-scroll">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" class="form-control" id="title" value="{{notification.title}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="senderType">Tipo envio</label>
+                <input type="text" class="form-control" id="senderType"
+                    value="{{getSenderType(notification.senderType)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="sender">Enviada por</label>
+                <input type="text" class="form-control" id="sender" value="{{getSender()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="accessLevel">Nível de acesso</label>
+                <input type="text" class="form-control" id="accessLevel" value="{{getAccessLevel(notification.accessLevel)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="createdAt">Criado em</label>
+                <input type="text" class="form-control" id="createdAt" value="{{getDateFormated(notification.createdAt)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="message">Mensagem da notificação</label>
+                <textarea type="text" class="form-control" id="message" value="{{notification.message}}" readonly
+                    rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">Deletar</button>
+    <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
+</div>

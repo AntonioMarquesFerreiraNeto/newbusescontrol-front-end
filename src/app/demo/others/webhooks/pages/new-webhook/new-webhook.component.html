@@ -1,0 +1,62 @@
+<app-card cardTitle="Adicionar" [@fadeInOnEnter] blockClass="p-0">
+    <form class="card-body" (ngSubmit)="submit()" [formGroup]="webhookForm" #formDir="ngForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" class="form-control" id="name" placeholder="Digite o nome" formControlName="name">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="webhookForm.get('name')?.hasError('required')">Nome é um campo obrigatório</small>
+                        <small class="attribute-error" *ngIf="webhookForm.get('name')?.hasError('minlength')">Nome deve ter no mínimo 11 caracteres</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="type">Tipo</label>
+                    <ng-select class="d-flex flex-grow-1 custom" [notFoundText]="'Nenhum registro encontrado'" [placeholder]="'Informe o tipo principal do webhook'" formControlName="type">
+                        <ng-option *ngFor="let item of listType" [value]="item.value">{{item.description}}</ng-option>
+                    </ng-select>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="webhookForm.get('type')?.hasError('required')">Tipo é um campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                  <label for="events">Eventos</label>
+                  <ng-select class="d-flex flex-grow-1 custom" [hideSelected]="true" [multiple]="true" [placeholder]="'Informe os eventos'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="events">
+                    <ng-option *ngFor="let item of listEvents" [value]="item">{{item}}</ng-option>
+                  </ng-select>
+                  <div class="attribute-container" *ngIf="formDir.submitted">
+                    <small class="attribute-error" *ngIf="webhookForm.get('events')?.hasError('required')">Eventos não pode estar vazio</small>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="url">URL</label>
+                    <input type="text" class="form-control" id="url" placeholder="Digite a URL do webhook" formControlName="url">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="webhookForm.get('url')?.hasError('required')">URL é um campo obrigatório</small>
+                        <small class="attribute-error" *ngIf="webhookForm.get('url')?.hasError('minlength')">URL deve ter no mínimo 20 caracteres</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Digite o email para notificações" formControlName="email">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="webhookForm.get('email')?.hasError('required')">Email é um campo obrigatório</small>
+                        <small class="attribute-error" *ngIf="webhookForm.get('email')?.hasError('email')">Formato de email inválido</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-button">
+            <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+            <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/webhooks']">Voltar</button>
+        </div>
+    </form>
+</app-card>

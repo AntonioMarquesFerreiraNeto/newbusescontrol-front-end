@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Pagination } from '../class/Pagination';
 import { Observable } from 'rxjs';
 import { differenceInDays, differenceInHours, parseISO } from 'date-fns';
+import { Notification } from '../interfaces/Notification';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,27 @@ export class NotificationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getMyPaginated(pagination: Pagination): Observable<any> {
+  GetMyPaginated(pagination: Pagination): Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}/my?page=${pagination.page}&pageSize=${pagination.pageSize}`);
   }
 
-  formatedCreatedAt(createdAt: string): string {
+  GetForAdminPaginated(pagination: Pagination) : Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}?page=${pagination.page}&pageSize=${pagination.pageSize}`);
+  }
+
+  GetById(id: string): Observable<Notification> {
+    return this.httpClient.get<Notification>(`${this.baseUrl}/${id}`);
+  }
+
+  Create(notification: Notification): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}`, notification);
+  }
+
+  Delete(id: string): Observable<any> {
+    return this.httpClient.delete<any>(`${this.baseUrl}/${id}`);
+  }
+
+  FormatedCreatedAt(createdAt: string): string {
     const now = new Date();
     const parsedCreatedAt = parseISO(createdAt);
 

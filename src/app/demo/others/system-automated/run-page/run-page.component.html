@@ -1,0 +1,40 @@
+<div [@fadeInOnEnter]>
+    <app-card cardTitle="Rotina - {{system.title}}">
+        <div class="search-form-container">
+            <div class="container-fluid">
+                <div>
+                    <button class="custom-button rounded shadow-2" (click)="runSystem()">
+                        Executar
+                    </button>
+                </div>
+                <div>
+                    <button class="custom-button back rounded shadow-2" [routerLink]="['/system/automated']">
+                        Voltar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </app-card>
+    <app-card cardTitle="Operações bem-sucedidas">
+        <div *ngIf="systemResponse && systemResponse.successOperation?.length != 0 else successNotFound">
+            <p *ngFor="let item of systemResponse.successOperation" class="p-success">
+                <i class="bi bi-patch-check"></i> 
+                {{item}}
+            </p>
+        </div>
+        <ng-template #successNotFound>
+            <p style="text-align: center;">Nenhuma operação foi encontrada</p>
+        </ng-template>
+    </app-card>
+    <app-card cardTitle="Operações falhadas">
+        <div *ngIf="systemResponse && systemResponse.failureOperation?.length != 0 else failureNotFound">
+            <p *ngFor="let item of systemResponse.failureOperation" class="p-failure">
+                <i class="bi bi-patch-exclamation"></i> 
+                {{item}}
+            </p>
+        </div>
+        <ng-template #failureNotFound>
+            <p style="text-align: center;">Nenhuma operação foi encontrada</p>
+        </ng-template>
+    </app-card>
+</div>

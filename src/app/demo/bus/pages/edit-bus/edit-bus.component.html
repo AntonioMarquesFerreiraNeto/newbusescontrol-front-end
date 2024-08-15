@@ -7,7 +7,7 @@
             <input type="text" class="form-control" id="brand" placeholder="Digite a marca" maxlength="60" formControlName="brand">
             <div class="attribute-container" *ngIf="formDir.submitted">
               <small class="attribute-error" *ngIf="busForm.get('brand')?.hasError('required')">Marca é um campo obrigatório</small>
-              <small class="attribute-error" *ngIf="busForm.get('brand')?.hasError('minLength')">Marca deve ter no mínimo 3 caracteres</small>
+              <small class="attribute-error" *ngIf="busForm.get('brand')?.hasError('minlength')">Marca deve ter no mínimo 3 caracteres</small>
               <small class="attribute-error" *ngIf="busForm.get('brand')?.hasError('maxlength')">Marca deve ter no máximo 60 caracteres</small>
             </div>
           </div>
@@ -18,7 +18,7 @@
             <input type="text" class="form-control" id="name" placeholder="Digite o nome" maxlength="60" formControlName="name">
             <div class="attribute-container" *ngIf="formDir.submitted">
               <small class="attribute-error" *ngIf="busForm.get('name')?.hasError('required')">Nome é um campo obrigatório</small>
-              <small class="attribute-error" *ngIf="busForm.get('name')?.hasError('minLength')">Nome deve ter no mínimo 3 caracteres</small>
+              <small class="attribute-error" *ngIf="busForm.get('name')?.hasError('minlength')">Nome deve ter no mínimo 3 caracteres</small>
               <small class="attribute-error" *ngIf="busForm.get('name')?.hasError('maxlength')">Nome deve ter no máximo 60 caracteres</small>
             </div>
           </div>

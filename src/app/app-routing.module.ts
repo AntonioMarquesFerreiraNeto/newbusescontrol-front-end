@@ -8,6 +8,17 @@ import { CustomerComponent } from './demo/customer/customer.component';
 import { NewCustomerComponent } from './demo/customer/new-customer/new-customer.component';
 import { EditBusComponent } from './demo/bus/pages/edit-bus/edit-bus.component';
 import { EditCustomerComponent } from './demo/customer/edit-customer/edit-customer.component';
+import { SystemAutomatedComponent } from './demo/others/system-automated/system-automated.component';
+import { RunPageComponent } from './demo/others/system-automated/run-page/run-page.component';
+import { WebhooksComponent } from './demo/others/webhooks/webhooks.component';
+import { NewWebhookComponent } from './demo/others/webhooks/pages/new-webhook/new-webhook.component';
+import { NotificationComponent } from './demo/others/notification/notification.component';
+import { NewNotificationComponent } from './demo/others/notification/pages/new-notification/new-notification.component';
+import { SettingPanelComponent } from './demo/others/setting-panel/setting-panel.component';
+import { NewSettingPanelComponent } from './demo/others/setting-panel/pages/new-setting-panel/new-setting-panel.component';
+import { EditSettingPanelComponent } from './demo/others/setting-panel/pages/edit-setting-panel/edit-setting-panel.component';
+import { EmployeeComponent } from './demo/employee/employee.component';
+import { NewEmployeeComponent } from './demo/employee/pages/new-employee/new-employee.component';
 
 const routes: Routes = [
   {
@@ -48,6 +59,50 @@ const routes: Routes = [
         component: EditCustomerComponent
       },
       {
+        path: 'system/automated',
+        component: SystemAutomatedComponent
+      },
+      {
+        path: 'system/automated/run/:id',
+        component: RunPageComponent
+      },
+      {
+        path: 'webhooks',
+        component: WebhooksComponent
+      },
+      {
+        path: 'webhooks/new',
+        component: NewWebhookComponent
+      },
+      {
+        path: 'notifications',
+        component: NotificationComponent
+      },
+      {
+        path: 'notifications/new',
+        component: NewNotificationComponent
+      },
+      {
+        path: 'setting-panel',
+        component: SettingPanelComponent
+      },
+      {
+        path: 'setting-panel/new',
+        component: NewSettingPanelComponent
+      },
+      {
+        path: 'setting-panel/edit/:id',
+        component: EditSettingPanelComponent
+      },
+      {
+        path: 'employee',
+        component: EmployeeComponent
+      },
+      {
+        path: 'employee/new',
+        component: NewEmployeeComponent
+      },
+      {
         path: 'basic',
         loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then((m) => m.UiBasicModule)
       },
@@ -85,4 +140,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

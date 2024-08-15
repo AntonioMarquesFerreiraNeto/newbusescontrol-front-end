@@ -1,0 +1,78 @@
+<div class="modal-header">
+    <div class="modal-title">Detalhes</div>
+    <div class="closed"><a class="link-closed" href="javascript:" (click)="close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body modal-scroll">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name" value="{{webhook.name}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="text" class="form-control" id="email" value="{{webhook.email}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="url">URL</label>
+          <input type="text" class="form-control" id="url" value="{{webhook.url}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="enabled">Situação</label>
+          <input type="text" class="form-control" id="enabled" value="{{getDetailStatus(webhook.enabled)}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="sendType">Tipo de execução</label>
+          <input type="text" class="form-control" id="sendType" value="{{webhook.sendType}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="interrupted">Interrupção</label>
+          <input type="text" class="form-control" id="interrupted" value="{{webhook.interrupted ? 'interropido' : 'não interropido'}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="type">Tipo</label>
+          <input type="text" class="form-control" id="type" value="{{getType(webhook.type)}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="apiVersion">Versão da API usada no webhook</label>
+          <input type="text" class="form-control" id="apiVersion" value="v{{webhook.apiVersion}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="createdAt">Data da criação</label>
+          <input type="text" class="form-control" id="createdAt" value="{{dateFormated(webhook.createdAt)}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="updatedAt">Última atualização</label>
+          <input type="text" class="form-control" id="updatedAt" value="{{dateFormated(webhook.updatedAt)}}" readonly>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="events">Eventos do webhook</label>
+          <input style="margin-bottom: 10px;" type="text" class="form-control" id="events" value="{{item}}" readonly *ngFor="let item of webhook.events">
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">Deletar</button>
+    <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
+</div>

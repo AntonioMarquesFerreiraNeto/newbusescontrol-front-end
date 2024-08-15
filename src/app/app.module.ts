@@ -1,5 +1,5 @@
 // angular import
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,7 +26,9 @@ import { ToggleFullScreenDirective } from './theme/shared/components/full-screen
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors  } from '@angular/common/http';
 import { authInterceptor } from './interceptor/auth.interceptor';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+registerLocaleData(localePT);
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { DatePipe } from '@angular/common';
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, BrowserAnimationsModule],
   providers: [
+    { provide: LOCALE_ID, useValue: 'pt-br'},
     DatePipe,
     NavigationItem, 
     provideAnimationsAsync(), 

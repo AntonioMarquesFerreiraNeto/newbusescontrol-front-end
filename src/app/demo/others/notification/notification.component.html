@@ -1,0 +1,53 @@
+<div [@fadeInOnEnter]>
+    <div cardTitle="Frota" class="search-form-container rounded">
+        <div class="container-fluid">
+            <div class="sub-header">
+                <i class="bi bi-bell"></i>
+            </div>
+            <div>
+                <button class="custom-button rounded shadow-2" [routerLink]="['/notifications/new']">
+                    <i class="bi bi-plus"></i>
+                    Notificação
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <app-card cardTitle="Notificações" blockClass="p-0">
+        <div class="fleet-container" *ngIf="notifications && notifications.length != 0 else notFound">
+            <div class="fleet-row" title="Detalhes" *ngFor="let item of notifications">
+                <div class="fleet-cell">
+                    <p><span class="access-level">{{getAccessLevel(item.accessLevel)}}</span></p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{item.title}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{getSenderType(item.senderType)}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{getDateFormated(item.createdAt)}}</p>
+                </div>
+                <div class="fleet-cell actions">
+                    <div class="action-menu">
+                        <a href="javascript:" (click)="openDetails(item.id)" class="action-item" title="Deletar"><i class="feather icon-trash-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="fleet-row pagination">
+                <mat-paginator (page)="handlePageEvent($event)" [length]="pagination.totalSize" [pageSize]="pagination.pageSize"
+                  [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+        <ng-template #notFound>
+            <div class="fleet-container">
+              <div class="fleet-row">
+                <div class="fleet-cell">
+                  <p>Nenhum registro foi encontrado</p>
+                </div>
+              </div>
+            </div>
+        </ng-template>
+    </app-card>
+</div>

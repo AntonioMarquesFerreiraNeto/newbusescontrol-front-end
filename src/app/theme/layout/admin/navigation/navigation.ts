@@ -80,7 +80,7 @@ const NavigationItems = [
         id: 'employee',
         title: 'Funcionários',
         type: 'item',
-        url: '/basic/button',
+        url: '/employee',
         icon: 'bi bi-person-gear',
         classes: 'nav-item'
       }
@@ -122,14 +122,6 @@ const NavigationItems = [
         type: 'item',
         url: '/apexchart',
         icon: 'feather icon-file-text',
-        classes: 'nav-item'
-      },
-      {
-        id: 'contract',
-        title: 'Configurações',
-        type: 'item',
-        url: '/datta-able/angular/default/widget/table',
-        icon: 'bi bi-file-lock',
         classes: 'nav-item'
       }
     ]

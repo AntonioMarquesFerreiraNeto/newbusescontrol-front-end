@@ -40,6 +40,8 @@ export class CustomerComponent implements OnInit {
   search(event: Event) {
     const input = event.target as HTMLInputElement;
     this.pagination.search = input.value;
+    this.pagination.page = 1;
+
     this.customerService.GetPaginated(this.pagination).subscribe(response => {
       this.customers = response.response,
         this.pagination.totalSize = response.totalSize

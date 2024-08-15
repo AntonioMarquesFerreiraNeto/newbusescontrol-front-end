@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <div class="modal-title">Detalhes</div>
+    <div class="closed"><a class="link-closed" href="javascript:" (click)="close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body modal-scroll">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="requester">Criado Por</label>
+                <input type="text" class="form-control" id="requester" value="{{settingPanel.requester.name}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="parent">Destino</label>
+                <input type="text" class="form-control" id="parent" value="{{getParent(settingPanel.parent)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="active">Situação</label>
+                <input type="text" class="form-control" id="active" value="{{getDetailActive(settingPanel.active)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="customerDelinquencyEnabled">Inadimplência de clientes</label>
+                <input type="text" class="form-control" id="customerDelinquencyEnabled" value="{{settingPanel.customerDelinquencyEnabled ? 'Habilitada' : 'Desabilitada'}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="terminationFee">Taxa de rescisão</label>
+                <input type="text" class="form-control" id="terminationFee" value="{{settingPanel.terminationFee}}%" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="lateFeeInterestRate">Taxa de juros de atraso</label>
+                <input type="text" class="form-control" id="lateFeeInterestRate" value="{{getPercentageFormatted(settingPanel.lateFeeInterestRate)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="limitDateTerminate">Data de término limite</label>
+                <input type="text" class="form-control" id="limitDateTerminate" value="{{getLimitDateTerminateFormated(settingPanel.limitDateTerminate)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="createdAt">Criado em</label>
+                <input type="text" class="form-control" id="createdAt" value="{{getDateFormated(settingPanel.createdAt)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="createdAt">Atualizado em</label>
+                <input type="text" class="form-control" id="createdAt" value="{{settingPanel.updatedAt ? getDateFormated(settingPanel.updatedAt) : 'Não possui atualização'}}" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">Deletar</button>
+    <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
+</div>

@@ -10,7 +10,7 @@ export class SnackbarService {
 
   Open(message: string) {
     this.snackBar.open(message, "Fechar", {
-      duration: 3000,
+      duration: 5000,
       verticalPosition: 'top',
       horizontalPosition: 'center'
     });
