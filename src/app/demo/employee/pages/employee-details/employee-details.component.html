@@ -1,0 +1,100 @@
+<div class="modal-header">
+    <div class="modal-title">Detalhes</div>
+    <div class="closed"><a class="link-closed" href="javascript:" (click)="close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body modal-scroll">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="status">Situação</label>
+                <input type="text" id="status" class="form-control"
+                    value="{{employee.status == 'Active' ? 'Ativo' : 'Inativo'}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="type">Tipo</label>
+                <input type="text" id="type" class="form-control" value="{{getTypeByValue(employee.type)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" class="form-control" value="{{employee.name}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="gender">Sexo</label>
+                <input type="text" id="gender" class="form-control"
+                    value="{{employee.gender == 'Male' ? 'Masculino' : 'Feminino'}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="birthDate">Data de nascimento</label>
+                <input type="date" id="birthDate" class="form-control" value="{{employee.birthDate}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" class="form-control" value="{{getCpfFormatted()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="phoneNumber">Telefone</label>
+                <input type="text" id="phoneNumber" class="form-control" value="{{phoneNumberFormatted()}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" id="email" class="form-control" value="{{employee.email}}" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="homeNumber">Número da Casa</label>
+                <input type="text" class="form-control" id="homeNumber" value="{{employee.homeNumber}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" class="form-control" id="logradouro" value="{{employee.logradouro}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="complementResidential">Complemento Residencial</label>
+                <input type="text" class="form-control" id="complementResidential"
+                    value="{{employee.complementResidential}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="neighborhood">Bairro</label>
+                <input type="text" class="form-control" id="neighborhood" value="{{employee.neighborhood}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" class="form-control" id="city" value="{{employee.city}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="state">Estado</label>
+                <input type="text" class="form-control" id="state" value="{{employee.state}}" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">{{actionTxt}}</button>
+    <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
+</div>

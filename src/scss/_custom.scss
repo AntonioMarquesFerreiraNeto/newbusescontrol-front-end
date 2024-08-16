@@ -30,8 +30,8 @@ body {
 }
 
 .modal-title {
-  color: black;
-  font-weight: 400;
+  color: #415d8e;
+  font-weight: 450;
   font-size: 12pt;
 }
 
@@ -76,6 +76,9 @@ header {
   overflow-y: auto;
 }
 
+.disabled {
+  color: gray;
+}
 .form-control {
   height: auto;
 }

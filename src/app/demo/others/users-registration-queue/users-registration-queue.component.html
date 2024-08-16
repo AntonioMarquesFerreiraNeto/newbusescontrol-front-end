@@ -1,0 +1,62 @@
+
+<div [@fadeInOnEnter]>
+    <div cardTitle="Frota" class="search-form-container rounded">
+        <div class="container-fluid">
+            <div>
+                <form class="input-group">
+                  <span class="span-custom">
+                    <i class="bi bi-search"></i>
+                  </span>
+                  <input type="text" class="form-control rounded" placeholder="Pesquisar por..." (input)="search($event)">
+                </form>
+              </div>
+              <div>
+                <button class="custom-button rounded shadow-2" [routerLink]="['/users-registration-queue/new']">
+                  <i class="bi bi-plus"></i>
+                  Registro
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <app-card cardTitle="Registro de usuários" blockClass="p-0">
+        <div class="fleet-container" *ngIf="usersRegistrationQueue && usersRegistrationQueue.length != 0 else notFound">
+            <div class="fleet-row" title="Detalhes" *ngFor="let item of usersRegistrationQueue" (click)="openDetails(item)">
+                <div class="fleet-cell">
+                    <p>{{item.employee.name}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p><span class="status">{{getStatusFormatted(item.status)}}</span></p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{typeFormattedEmployee(item.employee.type)}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p>Criado em {{getDateFormatted(item.createdAt)}}</p>
+                </div>
+                <div class="fleet-cell actions">
+                    <div class="action-menu" *ngIf="item.status != 'Approved' else isApproved">
+                        <a href="javascript:" (click)="approve(item, $event)" class="action-item" title="Aprovar"><i class="feather icon-user-check"></i></a>
+                    </div>
+                    <ng-template #isApproved>
+                      <a class="action-item" title="Aprovar"><i class="disabled feather icon-user-check"></i></a>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="fleet-row pagination">
+                <mat-paginator (page)="handlePageEvent($event)" [length]="pagination.totalSize" [pageSize]="pagination.pageSize"
+                  [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+        <ng-template #notFound>
+            <div class="fleet-container">
+              <div class="fleet-row">
+                <div class="fleet-cell">
+                  <p>Nenhum registro foi encontrado</p>
+                </div>
+              </div>
+            </div>
+        </ng-template>
+    </app-card>
+</div>

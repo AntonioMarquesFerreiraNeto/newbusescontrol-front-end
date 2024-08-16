@@ -18,7 +18,7 @@
     <app-card cardTitle="Funcionários" cardClass="bus" blockClass="p-0">
       <div class="fleet-container" *ngIf="employees && employees.length != 0 else notFound">
         <div *ngFor="let item of employees">
-          <div class="fleet-row">
+          <div class="fleet-row" (click)="openDetails(item.id)" title="Detalhes">
             <div class="fleet-cell">
               <p>{{item.name}}</p>
             </div>
@@ -37,8 +37,8 @@
               </div>
             <div class="fleet-cell actions">
               <div class="action-menu">
-                <a [routerLink]="'/customer/edit/' + item.id" class="action-item" title="Cargo do funcionário"><i class="feather icon-repeat"></i></a>
-                <a [routerLink]="'/customer/edit/' + item.id" class="action-item" title="Editar"><i class="feather icon-edit"></i></a>
+                <a href="javascript:" class="action-item" title="Atualiza tipo do funcionário" (click)="changeType(item.id, $event)"><i class="feather icon-repeat"></i></a>
+                <a [routerLink]="'/employee/edit/' + item.id" class="action-item" title="Editar"><i class="feather icon-edit"></i></a>
               </div>
             </div>
           </div>

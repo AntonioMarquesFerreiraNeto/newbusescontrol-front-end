@@ -2,11 +2,14 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { RouterModule } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { Pagination } from 'src/app/class/Pagination';
 import { Employee } from 'src/app/interfaces/Employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { ChangeTypeEmployeeComponent } from './pages/change-type-employee/change-type-employee.component';
+import { EmployeeDetailsComponent } from './pages/employee-details/employee-details.component';
 
 @Component({
   selector: 'app-employee',
@@ -23,7 +26,7 @@ export class EmployeeComponent {
   pagination = new Pagination;
   employees: Employee[];
 
-  constructor(private employeeService: EmployeeService, private datePipe: DatePipe) {
+  constructor(private employeeService: EmployeeService, private datePipe: DatePipe, private modal: NgbModal) {
     this.employeeService.GetPaginated(this.pagination).subscribe((response) => {
       this.employees = response.response;
       this.pagination.totalSize = response.totalSize;
@@ -85,5 +88,24 @@ export class EmployeeComponent {
     }
 
     this.refreshEmployees();
+  }
+
+  openDetails(id: string) {
+    const style = { size: 'lg' };
+    let modalRef = this.modal.open(EmployeeDetailsComponent, style);
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.onSubmitted.subscribe(() => {
+      this.refreshEmployees();
+    });
+  }
+
+  changeType(id: string, event: MouseEvent) {
+    event.stopPropagation();
+    const style = { size: 'md' };
+    let modalRef = this.modal.open(ChangeTypeEmployeeComponent, style);
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.onSubmitted.subscribe(() => {
+      this.refreshEmployees();
+    });
   }
 }

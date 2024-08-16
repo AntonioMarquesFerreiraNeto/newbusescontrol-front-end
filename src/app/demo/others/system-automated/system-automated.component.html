@@ -16,7 +16,7 @@
         <div *ngFor="let item of list">
             <app-card cardTitle="{{item.title}}">
                 <a class="link-run" [routerLink]="['/system/automated/run/' + item.id]" style="text-align: justify;">
-                    {{item.description}}
+                    <i class="bi bi-robot"></i> {{item.description}}
                 </a>
             </app-card>
         </div>

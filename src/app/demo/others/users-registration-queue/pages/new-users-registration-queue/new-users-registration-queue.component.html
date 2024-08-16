@@ -1,0 +1,45 @@
+<app-card cardTitle="Adicionar" blockClass="p-0" [@fadeInOnEnter]>
+    <form class="card-body" (ngSubmit)="submit()" [formGroup]="userRegistrationQueueForm" #formDir="ngForm">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="type">Funcionário</label>
+                    <ng-select 
+                        class="d-flex flex-grow-1 custom" 
+                        [placeholder]="'Informe o funcionário'"
+                        [notFoundText]="'Nenhum registro encontrado'" 
+                        formControlName="employeeId"
+                        (change)="selectedEmployee(userRegistrationQueueForm.get('employeeId').value)">
+                        <ng-option *ngFor="let item of employeeList" [value]="item.id">{{item.name}}
+                        </ng-option>
+                    </ng-select>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="userRegistrationQueueForm.get('employeeId')?.hasError('required')">Funcionário é um campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="type">Tipo</label>
+                    <input type="text" id="type" class="form-control readonly" placeholder="Tipo do funcionário selecionado" value="{{getTypeFormattedEmployee()}}" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="gender">Sexo</label>
+                    <input type="text" id="gender" class="form-control readonly" placeholder="Sexo do funcionário selecionado" value="{{employee ? getGender() : ''}}" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" class="form-control readonly" placeholder="CPF do funcionário selecionado" value="{{employee ? getCpfFormatted() : ''}}" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="section-button">
+            <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+            <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/users-registration-queue']">Voltar</button>
+        </div>
+    </form>
+</app-card>

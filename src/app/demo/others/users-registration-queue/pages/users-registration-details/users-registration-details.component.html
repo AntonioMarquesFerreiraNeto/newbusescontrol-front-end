@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <div class="modal-title">Detalhes</div>
+    <div class="closed"><a class="link-closed" href="javascript:" (click)="close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body modal-scroll">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="employeeName">Nome do funcionário</label>
+                <input class="form-control" type="text" value="{{userRegistrationQueue.employee.name}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="employeeName">Tipo de funcionário</label>
+                <input class="form-control" type="text" value="{{getTypeFormattedEmployee(userRegistrationQueue.employee.type)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="employeeName">Situação do registro</label>
+                <input class="form-control" type="text" value="{{getStatusFormatted(userRegistrationQueue.status)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="employeeName">Nome do solicitante</label>
+                <input class="form-control" type="text" value="{{userRegistrationQueue.requester.name}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="employeeName">Nome do aprovador</label>
+                <input class="form-control" type="text" value="{{userRegistrationQueue.approved ? userRegistrationQueue.approved.name : 'Não possui aprovador'}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="employeeName">Data da criação</label>
+                <input class="form-control" type="text" value="{{getDateFormated(userRegistrationQueue.createdAt)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="employeeName">Data da atualização</label>
+                <input class="form-control" type="text" value="{{userRegistrationQueue.updatedAt ? getDateFormated(userRegistrationQueue.updatedAt) : 'Não possui atualização'}}" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">Deletar</button>
+    <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
+</div>

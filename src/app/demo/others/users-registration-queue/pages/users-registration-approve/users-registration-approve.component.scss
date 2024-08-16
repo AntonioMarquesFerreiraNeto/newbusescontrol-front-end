@@ -1,0 +1,43 @@
+.section-button {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.custom-button {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 42px;
+    border: none;
+    font-size: 0.8rem;
+    background-color: #415d8e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #293548;
+    }
+}
+
+.custom-button-light {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 42px;
+    border: none;
+    font-size: 0.8rem;
+    background-color: #c15050;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #832c2c;
+    }
+}

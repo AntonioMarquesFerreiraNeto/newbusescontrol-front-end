@@ -39,7 +39,7 @@ export class EmployeeService {
     return this.httpClient.patch<any>(`${this.baseUrl}/${id}/active`, null);
   }
 
-  ToggleType(id: string): Observable<any> {
-    return this.httpClient.patch<any>(`${this.baseUrl}/${id}/type`, null);
+  ToggleType(id: string, requestType: any): Observable<any> {
+    return this.httpClient.patch<any>(`${this.baseUrl}/${id}/type`, requestType);
   }
 }
