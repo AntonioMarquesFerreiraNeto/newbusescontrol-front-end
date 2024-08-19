@@ -1,0 +1,61 @@
+<div [@fadeInOnEnter]>
+    <div cardTitle="Frota" class="search-form-container rounded">
+        <div class="container-fluid">
+            <div>
+                <form class="input-group">
+                    <span class="span-custom">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control rounded" placeholder="Pesquisar por..."
+                        (input)="search($event)">
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <app-card cardTitle="Usuários" blockClass="p-0">
+        <div class="fleet-container" *ngIf="users && users.length != 0 else notFound">
+            <div class="fleet-row" title="Detalhes" *ngFor="let item of users" (click)="openDetails(item, $event)">
+                <div class="fleet-cell">
+                    <p>{{item.employee?.name}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p><span class="type">{{typeFormattedEmployee(item.employee?.type)}}</span></p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{phoneNumberFormatted(item.employee?.phoneNumber)}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{getDateFormatted(item.employee?.birthDate)}}</p>
+                </div>
+                <div class="fleet-cell actions rounded">
+                    <a href="javascript:" class="label {{getLabelStatus(item.status)}} rounded shadow-1">{{getDetailStatus(item.status)}}</a>
+                </div>
+                <div class="fleet-cell actions">
+                    <div class="action-menu" *ngIf="item.status == 'Active' else notFound">
+                        <a href="javascript:" (click)="openDetails(item, $event)" class="action-item" title="Inativar"><i class="feather icon-lock"></i></a>
+                    </div>
+                    <ng-template #notFound>
+                        <div class="action-menu">
+                            <a href="javascript:" (click)="openDetails(item, $event)" class="action-item" title="Ativar"><i class="feather icon-unlock"></i></a>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="fleet-row pagination">
+                <mat-paginator (page)="handlePageEvent($event)" [length]="pagination.totalSize"
+                    [pageSize]="pagination.pageSize" [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+        <ng-template #notFound>
+            <div class="fleet-container">
+                <div class="fleet-row">
+                    <div class="fleet-cell">
+                        <p>Nenhum registro foi encontrado</p>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </app-card>
+</div>

@@ -8,4 +8,5 @@ export interface User
     role: string;
     nickName: string;
     email: string;
+    status: string;
 }

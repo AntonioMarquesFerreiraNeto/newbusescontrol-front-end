@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <div class="modal-title">Detalhes</div>
+    <div class="closed"><a class="link-closed" href="javascript:" (click)="close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body modal-scroll">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" class="form-control" value="{{user.employee?.name}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="status">Situação</label>
+                <input type="text" id="status" class="form-control" value="{{user.status == 'Active' ? 'Ativo' : 'Inativo'}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="type">Tipo</label>
+                <input type="text" id="type" class="form-control" value="{{typeFormattedEmployee(user.employee?.type)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="phoneNumber">Telefone</label>
+                <input type="text" id="phoneNumber" class="form-control" value="{{phoneNumberFormatted(user.employee.phoneNumber)}}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="birthDate">Data de nascimento</label>
+                <input type="date" id="birthDate" class="form-control" value="{{user.employee?.birthDate}}" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">{{actionTxt}}</button>
+    <button type="button" class="custom-button-light rounded shadow-3" (click)="close()">Fechar</button>
+</div>
