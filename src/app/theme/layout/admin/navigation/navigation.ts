@@ -72,7 +72,7 @@ const NavigationItems = [
         id: 'supplier',
         title: 'Fornecedores',
         type: 'item',
-        url: '/sample-page',
+        url: '/suppliers',
         icon: 'feather icon-users',
         classes: 'nav-item'
       },

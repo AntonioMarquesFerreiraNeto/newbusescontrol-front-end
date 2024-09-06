@@ -23,6 +23,8 @@ import { EditEmployeeComponent } from './demo/employee/pages/edit-employee/edit-
 import { UsersRegistrationQueueComponent } from './demo/others/users-registration-queue/users-registration-queue.component';
 import { NewUsersRegistrationQueueComponent } from './demo/others/users-registration-queue/pages/new-users-registration-queue/new-users-registration-queue.component';
 import { AccessManagerComponent } from './demo/others/access-manager/access-manager.component';
+import { SupplierComponent } from './demo/supplier/supplier.component';
+import { NewSupplierComponent } from './demo/supplier/pages/new-supplier/new-supplier.component';
 
 const routes: Routes = [
   {
@@ -121,6 +123,14 @@ const routes: Routes = [
       {
         path: 'access-manager',
         component: AccessManagerComponent
+      },
+      {
+        path: 'suppliers',
+        component: SupplierComponent
+      },
+      {
+        path: 'suppliers/new',
+        component: NewSupplierComponent
       },
       {
         path: 'basic',

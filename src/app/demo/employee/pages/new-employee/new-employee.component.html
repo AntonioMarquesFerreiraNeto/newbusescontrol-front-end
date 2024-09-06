@@ -53,7 +53,7 @@
                   maxlength="14" mask="000.000.000-00">
                   <div class="attribute-container" *ngIf="formDir.submitted">
                     <small class="attribute-error" *ngIf="employeeForm.get('cpf')?.hasError('required')">CPF é um campo obrigatório</small>
-                    <small class="attribute-error" *ngIf="employeeForm.get('cpf')?.hasError('minLength')">CPF deve ter no mínimo 11 caracteres</small>
+                    <small class="attribute-error" *ngIf="employeeForm.get('cpf')?.hasError('minlength')">CPF deve ter no mínimo 11 caracteres</small>
                   </div>
               </div>
             </div>

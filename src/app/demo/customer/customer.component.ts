@@ -86,7 +86,7 @@ export class CustomerComponent implements OnInit {
   dateFormatted(date: string) {
     return this.datePipe.transform(date, 'dd/MM/yyyy');
   }
-
+  
   phoneNumberFormatted(phoneNumber: string) {
     return phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
   }

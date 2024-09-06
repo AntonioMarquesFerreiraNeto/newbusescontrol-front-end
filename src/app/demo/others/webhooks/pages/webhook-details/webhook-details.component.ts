@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Webhook } from 'src/app/interfaces/Webhook';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
@@ -15,6 +15,7 @@ import { WebhookService } from 'src/app/services/webhook.service';
 })
 export class WebhookDetailsComponent implements OnInit{
   @Input() webhookId?: string;
+  @Output() onSubmitted: EventEmitter<void> = new EventEmitter<void>();
   webhook: Webhook;
 
   ngOnInit(): void {
@@ -66,6 +67,7 @@ export class WebhookDetailsComponent implements OnInit{
       next: (response: any) => {
         this.snackbarService.Open(response.message)
         this.modal.close();
+        this.onSubmitted.emit();
       },
       error: (error: HttpErrorResponse) => {
         this.snackbarService.Open(error.error.detail);
