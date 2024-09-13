@@ -9,6 +9,7 @@ import { Supplier } from 'src/app/interfaces/Supplier';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { SupplierDetailsComponent } from './pages/supplier-details/supplier-details.component';
 
 @Component({
   selector: 'app-supplier',
@@ -31,21 +32,6 @@ export class SupplierComponent {
     });
   }
 
-  typeFormattedEmployee(type: string) {
-    switch (type) {
-      case 'Admin':
-        return 'Administrador';
-      case 'Assistant':
-        return 'Assistente';
-      case 'SupportAgent':
-        return 'Suporte';
-      case 'Driver':
-        return 'Motorista';
-      default:
-        return 'Não encontrado';
-    }
-  }
-
   dateFormatted(date: string) {
     return this.datePipe.transform(date, 'dd/MM/yyyy');
   }
@@ -66,8 +52,16 @@ export class SupplierComponent {
     return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
   }
 
+  openDetails(id: string) {
+    const style = { size: 'lg' };
+    const modalRf = this.modal.open(SupplierDetailsComponent, style);
+    modalRf.componentInstance.id = id;
+    modalRf.componentInstance.onSubmitted.subscribe(() => {
+      this.refreshSuppliers();
+    });
+  }
 
-  refreshEmployees() {
+  refreshSuppliers() {
     this.supplierService.GetPaginated(this.pagination).subscribe((response) => {
       this.suppliers = response.response;
       this.pagination.totalSize = response.totalSize;
@@ -78,7 +72,7 @@ export class SupplierComponent {
     const input = event.target as HTMLInputElement;
     this.pagination.search = input.value;
     this.pagination.page = 1;
-    this.refreshEmployees();
+    this.refreshSuppliers();
   }
 
   handlePageEvent(event: PageEvent) {
@@ -90,15 +84,6 @@ export class SupplierComponent {
       this.pagination.page = 1;
     }
 
-    this.refreshEmployees();
-  }
-
-  openDetails(id: string) {
-    const style = { size: 'lg' };
-    //let modalRef = this.modal.open(EmployeeDetailsComponent, style);
-    //modalRef.componentInstance.id = id;
-    //modalRef.componentInstance.onSubmitted.subscribe(() => {
-    //  this.refreshEmployees();
-    //});
+    this.refreshSuppliers();
   }
 }

@@ -8,6 +8,7 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 import { SettingPanel } from 'src/app/interfaces/SettingPanel';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { SettingPanelService } from 'src/app/services/setting-panel.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
@@ -78,7 +79,7 @@ export class EditSettingPanelComponent implements OnInit {
     { value: 10, description: '10 anos' }
   ];
   
-  constructor(private settingPanelService: SettingPanelService, private snackbarService: SnackbarService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private settingPanelService: SettingPanelService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -109,12 +110,16 @@ export class EditSettingPanelComponent implements OnInit {
     var data: SettingPanel = this.settingPanelForm.value;
     data.limitDateTerminate = data.limitDateTerminate == 0 ? null : data.limitDateTerminate;
 
+    this.swalFireService.SwalLoading();
+
     this.settingPanelService.Update(this.id, data).subscribe({
       next: () => {
+        this.swalFireService.Close();
         this.snackbarService.Open('Painel de configuração editado com sucesso!');
         this.router.navigate(['/setting-panel']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
       }
     });

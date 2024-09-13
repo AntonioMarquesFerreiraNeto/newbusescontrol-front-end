@@ -8,6 +8,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Supplier } from 'src/app/interfaces/Supplier';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { SupplierService } from 'src/app/services/supplier.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
@@ -24,7 +25,7 @@ export class NewSupplierComponent implements OnInit {
 
   supplierForm: FormGroup;
 
-  constructor(private supplierService: SupplierService, private snackbarService: SnackbarService, private router: Router) { }
+  constructor(private supplierService: SupplierService, private snackbarService: SnackbarService, private router: Router, private swalFireService: SwalFireService) { }
 
   ngOnInit(): void {
     this.supplierForm = new FormGroup({
@@ -49,12 +50,16 @@ export class NewSupplierComponent implements OnInit {
 
     const data: Supplier = this.supplierForm.value;
 
+    this.swalFireService.SwalLoading();
+
     this.supplierService.Create(data).subscribe({
       next: () => {
+        this.swalFireService.Close();
         this.snackbarService.Open('Fornecedor cadastrado com sucesso!');
         this.router.navigate(['/suppliers']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
       }
     });

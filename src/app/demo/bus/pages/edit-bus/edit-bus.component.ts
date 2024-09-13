@@ -11,6 +11,7 @@ import { Color } from 'src/app/interfaces/Color';
 import { BusService } from 'src/app/services/bus.service';
 import { ColorService } from 'src/app/services/color.service';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
@@ -34,7 +35,7 @@ export class EditBusComponent implements OnInit {
     { value: 2, description: 'Indisponível' }
   ]
 
-  constructor(private busService: BusService, private colorService: ColorService, private snackBarService: SnackbarService, private router: Router, private activeRoute: ActivatedRoute) { }
+  constructor(private busService: BusService, private colorService: ColorService, private swalFireService: SwalFireService, private snackBarService: SnackbarService, private router: Router, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     var id = this.activeRoute.snapshot.paramMap.get('id');
@@ -68,12 +69,17 @@ export class EditBusComponent implements OnInit {
 
     const data: Bus = this.busForm.value;
 
+    this.swalFireService.SwalLoading();
+
     this.busService.Update(this.busEdit.id, data).subscribe({
+      
       next: () => {
+        this.swalFireService.Close();
         this.snackBarService.Open("Ônibus editado com sucesso!");
         this.router.navigate(['/bus']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackBarService.Open(error.error.detail);
       }
     });

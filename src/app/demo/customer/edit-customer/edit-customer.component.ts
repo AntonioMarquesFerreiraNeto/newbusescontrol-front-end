@@ -9,6 +9,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Customer } from 'src/app/interfaces/Customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
@@ -32,7 +33,7 @@ export class EditCustomerComponent implements OnInit {
     { value: 'Female', description: 'Feminino' }
   ]
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private snackbarService: SnackbarService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
 
@@ -105,12 +106,15 @@ export class EditCustomerComponent implements OnInit {
 
     data.homeNumber = data.homeNumber.toString();
 
+    this.swalFireService.SwalLoading();
+
     this.customerService.Update(this.id, data).subscribe({
       next: () => {
         this.snackbarService.Open("Cliente atualizado com sucesso!");
         this.router.navigate(['/customer']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
       }
     });

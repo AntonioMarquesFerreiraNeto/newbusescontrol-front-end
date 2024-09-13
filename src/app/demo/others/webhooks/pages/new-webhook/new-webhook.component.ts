@@ -7,6 +7,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { Webhook } from 'src/app/interfaces/Webhook';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { WebhookService } from 'src/app/services/webhook.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
@@ -30,7 +31,7 @@ export class NewWebhookComponent implements OnInit {
     { value: 'Chargeback', description: 'Pagamento em chargeback' },
   ]
 
-  constructor(private webhookService: WebhookService, private snackbarService: SnackbarService, private router: Router) { }
+  constructor(private webhookService: WebhookService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) { }
 
   ngOnInit(): void {
     this.webhookForm = new FormGroup({
@@ -53,12 +54,16 @@ export class NewWebhookComponent implements OnInit {
 
     const data : Webhook = this.webhookForm.value;
 
+    this.swalFireService.SwalLoading();
+
     this.webhookService.Create(data).subscribe({
       next: () => {
+        this.swalFireService.Close();
         this.snackbarService.Open('Webhook criado com sucesso!');
         this.router.navigate(['/webhooks']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
       }
     });

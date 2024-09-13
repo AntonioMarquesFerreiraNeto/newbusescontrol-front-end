@@ -8,6 +8,7 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 import { SettingPanel } from 'src/app/interfaces/SettingPanel';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { SettingPanelService } from 'src/app/services/setting-panel.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
@@ -79,7 +80,7 @@ export class NewSettingPanelComponent implements OnInit {
   ];
   
 
-  constructor(private settingPanelService: SettingPanelService, private snackbarService: SnackbarService, private router: Router) { }
+  constructor(private settingPanelService: SettingPanelService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) { }
 
   ngOnInit(): void {
     this.settingPanelForm = new FormGroup({
@@ -100,12 +101,16 @@ export class NewSettingPanelComponent implements OnInit {
     var data: SettingPanel = this.settingPanelForm.value;
     data.limitDateTerminate = data.limitDateTerminate == 0 ? null : data.limitDateTerminate;
 
+    this.swalFireService.SwalLoading();
+
     this.settingPanelService.Create(data).subscribe({
       next: () => {
+        this.swalFireService.Close();
         this.snackbarService.Open('Painel de configuração adicionado com sucesso!');
         this.router.navigate(['/setting-panel']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
       }
     });

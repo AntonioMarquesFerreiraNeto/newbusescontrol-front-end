@@ -8,6 +8,7 @@ import { Pagination } from 'src/app/class/Pagination';
 import { Employee } from 'src/app/interfaces/Employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { UserRegistrationQueueService } from 'src/app/services/user-registration-queue.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
@@ -29,7 +30,7 @@ export class NewUsersRegistrationQueueComponent implements OnInit {
   employeeList: Employee[];
   pagination = new Pagination;
 
-  constructor(private employeeService: EmployeeService, private userRegistrationQueueService: UserRegistrationQueueService, private snackbarService: SnackbarService, private router: Router) { }
+  constructor(private employeeService: EmployeeService, private userRegistrationQueueService: UserRegistrationQueueService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) { }
 
   ngOnInit(): void {
     this.pagination.pageSize = 100;
@@ -77,14 +78,18 @@ export class NewUsersRegistrationQueueComponent implements OnInit {
       return;
     }
 
+    this.swalFireService.SwalLoading();
+
     this.userRegistrationQueueService.Create(this.userRegistrationQueueForm.value).subscribe({
       next: (response) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(response.message);
         this.router.navigate(['/users-registration-queue']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
-      },
+      }
     });
   }
 }

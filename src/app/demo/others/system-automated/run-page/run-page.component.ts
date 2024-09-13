@@ -5,6 +5,7 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 import { System } from 'src/app/interfaces/helpers/system';
 import { SystemResponse } from 'src/app/interfaces/helpers/SystemResponse';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SystemService } from 'src/app/services/system.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
@@ -23,7 +24,7 @@ export class RunPageComponent {
   system: System;
   systemResponse?: SystemResponse;
 
-  constructor (private route: ActivatedRoute, private systemService: SystemService, private router: Router, private snackbarService: SnackbarService) {
+  constructor (private route: ActivatedRoute, private swalFireService: SwalFireService, private systemService: SystemService, private router: Router, private snackbarService: SnackbarService) {
     const id = this.route.snapshot.paramMap.get('id');
 
     var systemRecord = systemService.GetById(id);
@@ -37,15 +38,20 @@ export class RunPageComponent {
   }
 
   runSystem() {
+
+    this.swalFireService.SwalLoading();
+
     this.systemService.RunSystem(this.system.route).subscribe({
       next: (response) => {
+        this.swalFireService.Close();
         this.systemResponse = response;
         if(this.systemResponse.noOperation)
         {
-          this.snackbarService.Open(this.systemResponse.noOperation);
+          this.swalFireService.SwalInfo(this.systemResponse.noOperation);
         }
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
         this.router.navigate(['/system/automated']);
       }

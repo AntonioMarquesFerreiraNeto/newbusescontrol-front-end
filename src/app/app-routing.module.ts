@@ -25,6 +25,7 @@ import { NewUsersRegistrationQueueComponent } from './demo/others/users-registra
 import { AccessManagerComponent } from './demo/others/access-manager/access-manager.component';
 import { SupplierComponent } from './demo/supplier/supplier.component';
 import { NewSupplierComponent } from './demo/supplier/pages/new-supplier/new-supplier.component';
+import { EditSupplierComponent } from './demo/supplier/pages/edit-supplier/edit-supplier.component';
 
 const routes: Routes = [
   {
@@ -131,6 +132,10 @@ const routes: Routes = [
       {
         path: 'suppliers/new',
         component: NewSupplierComponent
+      },
+      {
+        path: 'suppliers/edit/:id',
+        component: EditSupplierComponent
       },
       {
         path: 'basic',

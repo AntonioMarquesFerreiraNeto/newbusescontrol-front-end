@@ -15,7 +15,7 @@ export class SupplierService {
   constructor(private httpClient: HttpClient) { }
 
   GetById(id: string) : Observable<Supplier> {
-    return this.httpClient.get<Supplier>(`${this.baseUrl}/suppliers/${id}`);
+    return this.httpClient.get<Supplier>(`${this.baseUrl}/${id}`);
   }
 
   GetPaginated(pagination: Pagination) : Observable<any> {
@@ -36,6 +36,6 @@ export class SupplierService {
   }
 
   ToggleActive(id: string) : Observable<any> {
-    return this.httpClient.patch<any>(`${this.baseUrl}/active/${id}`, null);
+    return this.httpClient.patch<any>(`${this.baseUrl}/${id}/active`, null);
   }
 }

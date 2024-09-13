@@ -9,6 +9,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Employee } from 'src/app/interfaces/Employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
@@ -41,7 +42,7 @@ export class EditEmployeeComponent implements OnInit {
     { value: 'Female', description: 'Feminino' }
   ]
 
-  constructor(private employeeService: EmployeeService, private snackbarService: SnackbarService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private employeeService: EmployeeService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -78,12 +79,16 @@ export class EditEmployeeComponent implements OnInit {
 
     const data: Employee = this.employeeForm.value;
 
+    this.swalFireService.SwalLoading();
+
     this.employeeService.Update(this.id, data).subscribe({
       next: () => {
+        this.swalFireService.Close();
         this.snackbarService.Open('Funcionário editado com sucesso!');
         this.router.navigate(['/employee']);
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
       }
     });

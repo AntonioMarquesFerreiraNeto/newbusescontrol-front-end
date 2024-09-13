@@ -97,6 +97,26 @@ ng-select .ng-option {
   z-index: 100000; 
 }
 
+.custom-button-swal {
+  display: flex !important;
+  gap: 3px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 120px !important;
+  height: 42px !important;
+  border: none;
+  font-weight: 100 !important;
+  font-size: 0.8rem !important;
+  background-color: #415d8e !important;
+  color: white !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s !important;
+
+  &:hover {
+      background-color: #374761 !important;
+  }
+}
+
 @media(max-width: 550px) {
   .section-button {
     display: flex;

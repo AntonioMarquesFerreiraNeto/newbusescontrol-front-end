@@ -2,77 +2,71 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { fadeInOnEnterAnimation } from 'angular-animations';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { Employee } from 'src/app/interfaces/Employee';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { Supplier } from 'src/app/interfaces/Supplier';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
+import { SupplierService } from 'src/app/services/supplier.service';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
-  selector: 'app-new-employee',
+  selector: 'app-edit-supplier',
   standalone: true,
   imports: [SharedModule, MatTabsModule, NgSelectModule, RouterModule, NgxMaskDirective],
-  providers: [provideNgxMask()],
-  templateUrl: './new-employee.component.html',
-  styleUrl: './new-employee.component.scss',
-  animations: [
-    fadeInOnEnterAnimation()
-  ]
+  providers: [
+    provideNgxMask()
+  ],
+  templateUrl: './edit-supplier.component.html',
+  styleUrl: './edit-supplier.component.scss'
 })
-export class NewEmployeeComponent implements OnInit {
+export class EditSupplierComponent implements OnInit {
+  supplierForm: FormGroup;
+  id: string;
 
-  employeeForm: FormGroup;
-
-  typeList = [
-    { value: 'Assistant', description: 'Assistente' },
-    { value: 'Admin', description: 'Administrador' },
-    { value: 'SupportAgent', description: 'Suporte' },
-    { value: 'Driver', description: 'Motorista' }
-  ]
-
-  genderList = [
-    { value: 'Male', description: 'Masculino' },
-    { value: 'Female', description: 'Feminino' }
-  ]
-
-  constructor(private employeeService: EmployeeService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) { }
+  constructor(private supplierService: SupplierService, private snackbarService: SnackbarService, private swalFireService: SwalFireService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.employeeForm = new FormGroup({
-      type: new FormControl(null, Validators.required),
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      birthDate: new FormControl('', Validators.required),
-      cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', [Validators.required]),
-      homeNumber: new FormControl('', [Validators.required]),
-      logradouro: new FormControl('', [Validators.required]),
-      complementResidential: new FormControl('', [Validators.required]),
-      neighborhood: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required]),
-      state: new FormControl(null, [Validators.required]),
-      gender: new FormControl(null, Validators.required)
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    this.supplierService.GetById(this.id).subscribe({
+      next: (response) => {
+        this.supplierForm = new FormGroup({
+          name: new FormControl(response.name, [Validators.required, Validators.minLength(3)]),
+          openDate: new FormControl(response.openDate, Validators.required),
+          cnpj: new FormControl(response.cnpj, [Validators.required, Validators.minLength(14)]),
+          email: new FormControl(response.email, [Validators.required, Validators.email]),
+          phoneNumber: new FormControl(response.phoneNumber, [Validators.required]),
+          homeNumber: new FormControl(response.homeNumber, [Validators.required]),
+          logradouro: new FormControl(response.logradouro, [Validators.required]),
+          complementResidential: new FormControl(response.complementResidential, [Validators.required]),
+          neighborhood: new FormControl(response.neighborhood, [Validators.required]),
+          city: new FormControl(response.city, [Validators.required]),
+          state: new FormControl(response.state, [Validators.required])
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        this.snackbarService.Open(error.error.detail);
+        this.router.navigate(['/suppliers']);
+      }
     });
   }
 
   submit() {
-    if (this.employeeForm.invalid) {
+    if (this.supplierForm.invalid) {
       return;
     }
 
-    const data: Employee = this.employeeForm.value;
+    const data: Supplier = this.supplierForm.value;
 
     this.swalFireService.SwalLoading();
 
-    this.employeeService.Create(data).subscribe({
+    this.supplierService.Update(this.id, data).subscribe({
       next: () => {
         this.swalFireService.Close();
-        this.snackbarService.Open('Funcionário cadastrado com sucesso!');
-        this.router.navigate(['/employee']);
+        this.snackbarService.Open('Fornecedor atualizado com sucesso!');
+        this.router.navigate(['/suppliers']);
       },
       error: (error: HttpErrorResponse) => {
         this.swalFireService.Close();

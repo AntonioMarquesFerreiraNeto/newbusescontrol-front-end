@@ -1,0 +1,135 @@
+<app-card cardTitle="Editar" blockClass="p-0" [@fadeInOnEnter]>
+    <form class="card-body" [formGroup]="supplierForm" (ngSubmit)="submit()" #formDir="ngForm" *ngIf="supplierForm">
+      <mat-tab-group>
+        <mat-tab label="Fornecedor">
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite o nome"
+                  maxlength="60">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('name')?.hasError('required')">Nome é um campo obrigatório</small>
+                  <small class="attribute-error" *ngIf="supplierForm.get('name')?.hasError('minlength')">Nome deve ter no mínimo 3 caracteres</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="openDate">Data de abertura</label>
+                <input type="date" class="form-control" id="openDate" formControlName="openDate">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('openDate')?.hasError('required')">Data de abertura é um campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="cnpj">CNPJ</label>
+                  <input type="text" class="form-control" id="cnpj" formControlName="cnpj" placeholder="Digite o CNPJ"
+                    maxlength="18" mask="00.000.000/0000-00">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                      <small class="attribute-error" *ngIf="supplierForm.get('cnpj')?.hasError('required')">CNPJ é um campo obrigatório</small>
+                      <small class="attribute-error" *ngIf="supplierForm.get('cnpj')?.hasError('minlength')">CNPJ deve ter no mínimo 14 caracteres</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="phoneNumber">Telefone</label>
+                  <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                    placeholder="Digite o telefone" maxlength="15" mask="(00) 00000-0000">
+                  <div class="attribute-container" *ngIf="formDir.submitted">
+                    <small class="attribute-error" *ngIf="supplierForm.get('phoneNumber')?.hasError('required')">Telefone é um campo obrigatório</small>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite o email"
+                  maxlength="80">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('email')?.hasError('required')">E-mail é um campo obrigatório</small>
+                  <small class="attribute-error" *ngIf="supplierForm.get('email')?.hasError('email')">E-mail inválido</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab class="mat-tab" label="Endereço">
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="homeNumber">Número da Residência</label>
+                <input type="text" class="form-control" id="homeNumber" formControlName="homeNumber" maxlength="5" onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" placeholder="Digite o número da residência">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('homeNumber')?.hasError('required')">Número residencial é um campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" class="form-control" id="logradouro" formControlName="logradouro"
+                  placeholder="Digite o logradouro" maxlength="60">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('logradouro')?.hasError('required')">Logradouro é um campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="complementResidential">Complemento Residencial</label>
+                <input type="text" class="form-control" id="complementResidential" formControlName="complementResidential"
+                  placeholder="Digite o complemento residencial" maxlength="60">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('complementResidential')?.hasError('required')">Complemento Residencial é um campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="neighborhood">Bairro</label>
+                <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood"
+                  placeholder="Digite o bairro" maxlength="60">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('neighborhood')?.hasError('required')">Bairro é um campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" class="form-control" id="city" formControlName="city" placeholder="Digite a cidade"
+                  maxlength="80">
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('city')?.hasError('required')">Cidade é um campo obrigatório</small>
+                  <small class="attribute-error" *ngIf="supplierForm.get('city')?.hasError('maxlength')">Cidade deve ter no máximo 80 caracteres</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="state">Estado</label>
+                <ng-select formControlName="state" class="d-flex flex-grow-1 custom" [placeholder]="'Informe o estado'" [notFoundText]="'Nenhum resultado encontrado'">
+                  <ng-option *ngFor="let item of stateList" [value]="item.id">{{item.description}}</ng-option>
+                </ng-select>
+                <div class="attribute-container" *ngIf="formDir.submitted">
+                  <small class="attribute-error" *ngIf="supplierForm.get('state')?.hasError('required')">Estado é um campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <div class="row">
+        <div class="section-button">
+          <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+          <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/suppliers']">Voltar</button>
+        </div>
+      </div>
+    </form>
+  </app-card>

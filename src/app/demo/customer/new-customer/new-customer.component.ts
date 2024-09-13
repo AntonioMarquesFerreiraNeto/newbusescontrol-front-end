@@ -11,6 +11,7 @@ import { Customer } from 'src/app/interfaces/Customer';
 import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { fadeInOnEnterAnimation } from 'angular-animations';
+import { SwalFireService } from 'src/app/services/swal-fire.service';
 
 @Component({
   selector: 'app-new-customer',
@@ -35,7 +36,7 @@ export class NewCustomerComponent {
     { value: 'Female', description: 'Feminino' }
   ]
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private snackbarService: SnackbarService, private router: Router) {
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) {
     this.customerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       cpf: ['', [Validators.minLength(11)]],
@@ -93,13 +94,17 @@ export class NewCustomerComponent {
 
     data.homeNumber = data.homeNumber.toString();
 
+    this.swalFireService.SwalLoading();
+
     this.customerService.Create(data).subscribe({
       next: () => {
+        this.swalFireService.Close();
         this.snackbarService.Open("Cliente registrado com sucesso!");
         this.router.navigate(['/customer']);
 
       },
       error: (error: HttpErrorResponse) => {
+        this.swalFireService.Close();
         this.snackbarService.Open(error.error.detail);
       }
     });
