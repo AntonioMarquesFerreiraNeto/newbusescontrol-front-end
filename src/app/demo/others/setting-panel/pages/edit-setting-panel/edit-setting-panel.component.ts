@@ -114,13 +114,12 @@ export class EditSettingPanelComponent implements OnInit {
 
     this.settingPanelService.Update(this.id, data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open('Painel de configuração editado com sucesso!');
-        this.router.navigate(['/setting-panel']);
+        this.swalFireService.SwalSuccess('Painel de configuração editado com sucesso!', () =>{
+          this.router.navigate(['/setting-panel']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

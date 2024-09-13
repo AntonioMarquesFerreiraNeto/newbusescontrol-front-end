@@ -64,13 +64,12 @@ export class EditSupplierComponent implements OnInit {
 
     this.supplierService.Update(this.id, data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open('Fornecedor atualizado com sucesso!');
-        this.router.navigate(['/suppliers']);
+        this.swalFireService.SwalSuccess('Fornecedor atualizado com sucesso!', () => {
+          this.router.navigate(['/suppliers']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

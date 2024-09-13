@@ -82,13 +82,12 @@ export class NewUsersRegistrationQueueComponent implements OnInit {
 
     this.userRegistrationQueueService.Create(this.userRegistrationQueueForm.value).subscribe({
       next: (response) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(response.message);
-        this.router.navigate(['/users-registration-queue']);
+        this.swalFireService.SwalSuccess(response.message, () => {
+          this.router.navigate(['/users-registration-queue']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

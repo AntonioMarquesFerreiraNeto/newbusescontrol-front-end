@@ -22,7 +22,7 @@ export class SwalFireService {
     });
   }
 
-  SwalError(message: string) {
+  SwalError(message: string, onClose?: () => void) {
     Swal.fire({
       title: '<h6>Ops, algo deu errado...</h6>',
       html: `<p style="font-size: 12pt; margin: 0;">${message}</p>`,
@@ -30,10 +30,14 @@ export class SwalFireService {
       customClass: {
         confirmButton: 'custom-button-swal rounded shadow-3 submit'
       }
-    });
+    }).then(() => {
+      if (onClose) {
+        onClose();
+      }
+    });;
   }
 
-  SwalSuccess(message: string) {
+  SwalSuccess(message: string, onClose?: () => void) {
     Swal.fire({
       title: '<h6>Ok, tudo certo!</h6>',
       html: `<p style="font-size: 12pt; margin: 0;">${message}</p>`,
@@ -43,10 +47,14 @@ export class SwalFireService {
         confirmButton: 'custom-button-swal rounded shadow-3 submit',
         icon: 'custom-icon-swal'
       }
+    }).then(() => {
+      if (onClose) {
+        onClose();
+      }
     });
   }
 
-  SwalInfo(message: string) {
+  SwalInfo(message: string, onClose?: () => void) {
     Swal.fire({
       html: `<p style="font-size: 12pt; margin: 0;">${message}</p>`,
       icon: 'info',
@@ -55,7 +63,11 @@ export class SwalFireService {
         confirmButton: 'custom-button-swal rounded shadow-3 submit',
         icon: 'custom-icon-swal'
       }
-    });
+    }).then(() => {
+      if (onClose) {
+        onClose();
+      }
+    });;
   }
 
   Close() {

@@ -51,8 +51,7 @@ export class RunPageComponent {
         }
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
         this.router.navigate(['/system/automated']);
       }
     });

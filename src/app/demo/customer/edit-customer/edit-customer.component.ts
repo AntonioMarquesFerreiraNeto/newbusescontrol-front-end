@@ -58,7 +58,6 @@ export class EditCustomerComponent implements OnInit {
           gender: [response.gender],
           type: [response.type, Validators.required]
         });
-        console.log(this.customerForm);
       }, 
       error: (error: HttpErrorResponse) => {
         this.snackbarService.Open(error.error.detail);
@@ -110,12 +109,12 @@ export class EditCustomerComponent implements OnInit {
 
     this.customerService.Update(this.id, data).subscribe({
       next: () => {
-        this.snackbarService.Open("Cliente atualizado com sucesso!");
-        this.router.navigate(['/customer']);
+        this.swalFireService.SwalSuccess("Cliente atualizado com sucesso!", () => {
+          this.router.navigate(['/customer']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

@@ -6,7 +6,6 @@ import { Router, RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Supplier } from 'src/app/interfaces/Supplier';
-import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -25,7 +24,7 @@ export class NewSupplierComponent implements OnInit {
 
   supplierForm: FormGroup;
 
-  constructor(private supplierService: SupplierService, private snackbarService: SnackbarService, private router: Router, private swalFireService: SwalFireService) { }
+  constructor(private supplierService: SupplierService, private router: Router, private swalFireService: SwalFireService) { }
 
   ngOnInit(): void {
     this.supplierForm = new FormGroup({
@@ -54,13 +53,12 @@ export class NewSupplierComponent implements OnInit {
 
     this.supplierService.Create(data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open('Fornecedor cadastrado com sucesso!');
-        this.router.navigate(['/suppliers']);
+        this.swalFireService.SwalSuccess('Fornecedor cadastrado com sucesso!', () => {
+          this.router.navigate(['/suppliers']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

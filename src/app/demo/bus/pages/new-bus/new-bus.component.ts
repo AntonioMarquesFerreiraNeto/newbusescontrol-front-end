@@ -11,7 +11,6 @@ import { BusService } from 'src/app/services/bus.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Color } from 'src/app/interfaces/Color';
 import { ColorService } from 'src/app/services/color.service';
-import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
 
 @Component({
@@ -34,7 +33,7 @@ export class NewBusComponent implements OnInit {
     { value: 2, description: 'Indisponível' }
   ]
   
-  constructor(private busService: BusService, private colorService: ColorService, private swalFireService: SwalFireService, private snackBarService: SnackbarService, private router: Router) { }
+  constructor(private busService: BusService, private colorService: ColorService, private swalFireService: SwalFireService, private router: Router) { }
 
   ngOnInit(): void {
     this.colorService.GetPaginated(1, 100).subscribe(x => this.colors = x.response);
@@ -60,13 +59,12 @@ export class NewBusComponent implements OnInit {
 
     this.busService.Create(data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackBarService.Open("Ônibus adicionado com sucesso!");
-        this.router.navigate(['/bus']);
+        this.swalFireService.SwalSuccess("Ônibus adicionado com sucesso!", () => {
+          this.router.navigate(['/bus']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackBarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

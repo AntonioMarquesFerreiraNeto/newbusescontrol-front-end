@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { fadeInOnEnterAnimation } from 'angular-animations';
-import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -29,7 +28,7 @@ export class NewNotificationComponent implements OnInit {
     { value: 'Assistant', description: 'Assistentes' }
   ]
 
-  constructor(private notificationService: NotificationService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) {
+  constructor(private notificationService: NotificationService, private swalFireService: SwalFireService, private router: Router) {
 
   }
 
@@ -52,13 +51,12 @@ export class NewNotificationComponent implements OnInit {
 
     this.notificationService.Create(data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open('Notificação criada com sucesso!');
-        this.router.navigate(['/notifications']);
+        this.swalFireService.SwalSuccess('Notificação criada com sucesso!', () => {
+          this.router.navigate(['/notifications']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

@@ -74,13 +74,12 @@ export class EditBusComponent implements OnInit {
     this.busService.Update(this.busEdit.id, data).subscribe({
       
       next: () => {
-        this.swalFireService.Close();
-        this.snackBarService.Open("Ônibus editado com sucesso!");
-        this.router.navigate(['/bus']);
+        this.swalFireService.SwalSuccess("Ônibus editado com sucesso!", () => {
+          this.router.navigate(['/bus']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackBarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

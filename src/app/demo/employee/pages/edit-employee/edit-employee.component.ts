@@ -83,13 +83,12 @@ export class EditEmployeeComponent implements OnInit {
 
     this.employeeService.Update(this.id, data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open('Funcionário editado com sucesso!');
-        this.router.navigate(['/employee']);
+        this.swalFireService.SwalSuccess('Funcionário editado com sucesso!', () => {
+          this.router.navigate(['/employee']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

@@ -70,13 +70,12 @@ export class NewEmployeeComponent implements OnInit {
 
     this.employeeService.Create(data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open('Funcionário cadastrado com sucesso!');
-        this.router.navigate(['/employee']);
+        this.swalFireService.SwalSuccess('Funcionário cadastrado com sucesso!', () => {
+          this.router.navigate(['/employee']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

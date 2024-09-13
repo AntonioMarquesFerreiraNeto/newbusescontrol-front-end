@@ -8,7 +8,6 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/interfaces/Customer';
-import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
@@ -36,7 +35,7 @@ export class NewCustomerComponent {
     { value: 'Female', description: 'Feminino' }
   ]
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) {
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private swalFireService: SwalFireService, private router: Router) {
     this.customerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       cpf: ['', [Validators.minLength(11)]],
@@ -98,14 +97,13 @@ export class NewCustomerComponent {
 
     this.customerService.Create(data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open("Cliente registrado com sucesso!");
-        this.router.navigate(['/customer']);
-
+        this.swalFireService.SwalSuccess("Cliente registrado com sucesso!", () => {
+          this.router.navigate(['/customer']);
+        });
       },
       error: (error: HttpErrorResponse) => {
         this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }

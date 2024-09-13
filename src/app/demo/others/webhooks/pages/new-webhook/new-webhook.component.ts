@@ -31,7 +31,7 @@ export class NewWebhookComponent implements OnInit {
     { value: 'Chargeback', description: 'Pagamento em chargeback' },
   ]
 
-  constructor(private webhookService: WebhookService, private swalFireService: SwalFireService, private snackbarService: SnackbarService, private router: Router) { }
+  constructor(private webhookService: WebhookService, private swalFireService: SwalFireService, private router: Router) { }
 
   ngOnInit(): void {
     this.webhookForm = new FormGroup({
@@ -58,13 +58,12 @@ export class NewWebhookComponent implements OnInit {
 
     this.webhookService.Create(data).subscribe({
       next: () => {
-        this.swalFireService.Close();
-        this.snackbarService.Open('Webhook criado com sucesso!');
-        this.router.navigate(['/webhooks']);
+        this.swalFireService.SwalSuccess('Webhook criado com sucesso!', () => {
+          this.router.navigate(['/webhooks']);
+        });
       },
       error: (error: HttpErrorResponse) => {
-        this.swalFireService.Close();
-        this.snackbarService.Open(error.error.detail);
+        this.swalFireService.SwalError(error.error.detail);
       }
     });
   }
