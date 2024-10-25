@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { Pagination } from 'src/app/class/Pagination';
 import { Supplier } from 'src/app/interfaces/Supplier';
-import { EmployeeService } from 'src/app/services/employee.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { SupplierDetailsComponent } from './pages/supplier-details/supplier-details.component';

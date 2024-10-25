@@ -1,0 +1,80 @@
+<app-card cardTitle="Adicionar" blockClass="p-0" [@fadeInOnEnter]>
+  <form class="card-body" (ngSubmit)="Submit()" [formGroup]="contractDescriptionForm" #formDir="ngForm">
+    <mat-tab-group style="width: 100%;">
+      <mat-tab label="Detalhes">
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="title">Título</label>
+              <input type="text" class="form-control" id="title" placeholder="Informe o título" maxlength="70" formControlName="title">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('title')?.hasError('required')">Título é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('title')?.hasError('minlength')">Título deve ter no mínimo 10 caracteres</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="subTitle">Subtítulo</label>
+              <input type="text" class="form-control" id="subTitle" placeholder="Informe o subtítulo" maxlength="70" formControlName="subTitle">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('subTitle')?.hasError('required')">Subtítulo é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('subTitle')?.hasError('minlength')">Subtítulo deve ter no mínimo 10 caracteres</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="copyright">Copyright</label>
+              <input type="text" class="form-control" id="copyright" placeholder="Informe o copyright da empresa" maxlength="70" formControlName="copyright">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('copyright')?.hasError('required')">Copyright é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('copyright')?.hasError('minlength')">Copyright deve ter no mínimo 10 caracteres</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="owner">Descrição sobre a empresa contratada</label>
+              <textarea type="text" class="form-control" id="owner" maxlength="3000" formControlName="owner" rows="6"></textarea>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('owner')?.hasError('required')">Descrição sobre a empresa é um campo obrigatório</small>
+                <small class="attribute-error" *ngIf="contractDescriptionForm.get('owner')?.hasError('minlength')">Descrição sobre a empresa deve ter no mínimo 200 caracteres</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Objetivo e Disposições">
+        <br>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="objective">Descrição sobre o objetivo do contrato</label>
+            <textarea type="text" class="form-control" id="objective" maxlength="3000" formControlName="objective" rows="6"></textarea>
+            <div class="attribute-container" *ngIf="formDir.submitted">
+              <small class="attribute-error" *ngIf="contractDescriptionForm.get('objective')?.hasError('required')">Descrição sobre a empresa é um campo obrigatório</small>
+              <small class="attribute-error" *ngIf="contractDescriptionForm.get('objective')?.hasError('minlength')">Descrição sobre a empresa deve ter no mínimo 200 caracteres</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="generalProvisions">Descrição sobre as disposições gerais do contrato</label>
+            <textarea type="text" class="form-control" id="generalProvisions" maxlength="3000" formControlName="generalProvisions" rows="6"></textarea>
+            <div class="attribute-container" *ngIf="formDir.submitted">
+              <small class="attribute-error" *ngIf="contractDescriptionForm.get('generalProvisions')?.hasError('required')">Descrição sobre a empresa é um campo obrigatório</small>
+              <small class="attribute-error" *ngIf="contractDescriptionForm.get('generalProvisions')?.hasError('minlength')">Descrição sobre a empresa deve ter no mínimo 200 caracteres</small>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="row">
+      <div class="section-button">
+        <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+        <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/contract/descriptions']">Voltar</button>
+      </div>
+    </div>
+  </form>
+</app-card>

@@ -26,6 +26,9 @@ import { AccessManagerComponent } from './demo/others/access-manager/access-mana
 import { SupplierComponent } from './demo/supplier/supplier.component';
 import { NewSupplierComponent } from './demo/supplier/pages/new-supplier/new-supplier.component';
 import { EditSupplierComponent } from './demo/supplier/pages/edit-supplier/edit-supplier.component';
+import { ContractDescriptionComponent } from './demo/contract-description/contract-description.component';
+import { NewContractDescriptionComponent } from './demo/contract-description/pages/new-contract-description/new-contract-description.component';
+import { EditContractDescriptionComponent } from './demo/contract-description/pages/edit-contract-description/edit-contract-description.component';
 
 const routes: Routes = [
   {
@@ -136,6 +139,18 @@ const routes: Routes = [
       {
         path: 'suppliers/edit/:id',
         component: EditSupplierComponent
+      },
+      {
+        path: 'contract/descriptions',
+        component: ContractDescriptionComponent
+      },
+      {
+        path: 'contract/descriptions/new',
+        component: NewContractDescriptionComponent
+      },
+      {
+        path: 'contract/descriptions/edit/:id',
+        component: EditContractDescriptionComponent
       },
       {
         path: 'basic',

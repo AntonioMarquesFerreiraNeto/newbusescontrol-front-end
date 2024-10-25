@@ -120,7 +120,7 @@ const NavigationItems = [
         id: 'contract',
         title: 'Descrições',
         type: 'item',
-        url: '/apexchart',
+        url: '/contract/descriptions',
         icon: 'feather icon-file-text',
         classes: 'nav-item'
       }

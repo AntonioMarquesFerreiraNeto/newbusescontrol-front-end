@@ -1,0 +1,51 @@
+<div [@fadeInOnEnter]>
+    <div cardTitle="Frota" class="search-form-container rounded">
+        <div class="container-fluid">
+            <div class="sub-header">
+                <i class="feather icon-file-text"></i>
+            </div>
+            <div>
+                <button class="custom-button rounded shadow-2" [routerLink]="['/contract/descriptions/new']">
+                    <i class="bi bi-plus"></i>
+                    Descrição
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <app-card cardTitle="Descrição de contratos" cardClass="bus" blockClass="p-0">
+        <div class="fleet-container" *ngIf="contractDescriptions && contractDescriptions.length != 0 else notFound">
+            <div class="fleet-row" title="Detalhes" *ngFor="let item of contractDescriptions">
+                <div class="fleet-cell">
+                    <p><span class="reference">{{item.reference}}</span></p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{item.title}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{item.subTitle}}</p>
+                </div>
+                <div class="fleet-cell actions">
+                    <div class="action-menu">
+                        <a [routerLink]="'/contract/descriptions/edit/' + item.id" class="action-item" title="Editar"><i class="feather icon-edit"></i></a>
+                        <a href="javascript:" (click)="openDelete(item.id)" class="action-item" title="Deletar"><i class="feather icon-trash-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="fleet-row pagination">
+                <mat-paginator (page)="handlePageEvent($event)" [length]="pagination.totalSize" [pageSize]="pagination.pageSize"
+                  [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+        <ng-template #notFound>
+            <div class="fleet-container">
+              <div class="fleet-row">
+                <div class="fleet-cell">
+                  <p>Nenhum registro foi encontrado</p>
+                </div>
+              </div>
+            </div>
+        </ng-template>
+    </app-card>
+</div>
