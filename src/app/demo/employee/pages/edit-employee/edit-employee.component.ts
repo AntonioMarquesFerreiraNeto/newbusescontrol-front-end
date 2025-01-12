@@ -55,7 +55,7 @@ export class EditEmployeeComponent implements OnInit {
           birthDate: new FormControl(response.birthDate, Validators.required),
           cpf: new FormControl(response.cpf, [Validators.required, Validators.minLength(11)]),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
-          phoneNumber: new FormControl(response.phoneNumber, [Validators.required]),
+          phoneNumber: new FormControl(response.phoneNumber, [Validators.required, Validators.minLength(11)]),
           homeNumber: new FormControl(response.homeNumber, [Validators.required]),
           logradouro: new FormControl(response.logradouro, [Validators.required]),
           complementResidential: new FormControl(response.complementResidential, [Validators.required]),

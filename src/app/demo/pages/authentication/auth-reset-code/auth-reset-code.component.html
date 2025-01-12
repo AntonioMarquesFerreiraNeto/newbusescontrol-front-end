@@ -1,0 +1,31 @@
+<div class="auth-wrapper" [@fadeInOnEnter]>
+    <div class="auth-content">
+      <div class="auth-bg">
+        <span class="r"></span>
+        <span class="r s"></span>
+        <span class="r s"></span>
+        <span class="r"></span>
+      </div>
+      <form autocomplete="off" [formGroup]="userResetPasswordStepResetTokenForm" (ngSubmit)="submit()" #formDir="ngForm">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="mb-4">
+              <i class="feather icon-lock auth-icon"></i>
+            </div>
+            <h5 class="mb-4">Buses Control - Código</h5>
+            <div class="input-group mb-4">
+              <input formControlName="code" type="text" class="form-control" placeholder="Informe seu código de redefinição"  mask="A-A-A-A-A-A" />
+              <div class="container-error" *ngIf="formDir.submitted">
+                <small class="error-message" *ngIf="userResetPasswordStepResetTokenForm.get('code')?.hasError('required')">Código é um campo obrigatório</small>
+              </div>
+            </div>
+            <button class="btn btn-primary shadow-2 mb-4">Verificar</button>
+            <p class="mb-0 text-muted">
+              Lembrou das informações de acesso?
+              <a [routerLink]="['/auth/signin']">Logar</a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

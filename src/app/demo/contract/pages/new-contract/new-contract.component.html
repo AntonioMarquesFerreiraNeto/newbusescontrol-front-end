@@ -1,0 +1,120 @@
+<app-card cardTitle="Adicionar" cardClass="Frota cadastrada" blockClass="p-0" [@fadeInOnEnter]>
+    <form class="card-body" (ngSubmit)="submit()" [formGroup]="contractForm" #formDir="ngForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="busId">Ônibus</label>
+            <ng-select class="d-flex flex-grow-1 custom" id="busId" [placeholder]="'Selecione o ônibus'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="busId">
+                <ng-option *ngFor="let item of busList" [value]="item.id">
+                    <strong>modelo:</strong> {{item.name}}<br><strong>placa:</strong> {{item.licensePlate}}
+                </ng-option>
+            </ng-select>
+            <div class="attribute-container" *ngIf="formDir.submitted">
+              <small class="attribute-error" *ngIf="contractForm.get('busId')?.hasError('required')">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="driverId">Motorista</label>
+              <ng-select class="d-flex flex-grow-1 custom" id="driverId" [placeholder]="'Selecione o motorista'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="driverId">
+                <ng-option *ngFor="let item of driverList" [value]="item.id">
+                    nome: {{item.name}} <br>
+                    data de nascimento: {{item.birthDate}}
+                </ng-option>
+              </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('driverId')?.hasError('required')">Campo obrigatório</small>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="settingPanelId">Painel de configuração</label>
+              <ng-select class="d-flex flex-grow-1 custom" id="settingPanelId" [placeholder]="'Selecione o painel de configuração'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="settingPanelId">
+                <ng-option *ngFor="let item of settingPanelList" [value]="item.id">
+                  referência: {{item.reference}} <br>
+                  criador: {{item.requester.name}}
+                </ng-option>
+              </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('settingPanelId')?.hasError('required')">Campo obrigatório</small>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="contractDescriptionId">Descrição de contrato</label>
+              <ng-select class="d-flex flex-grow-1 custom" id="contractDescriptionId" [placeholder]="'Selecione a descrição do contrato'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="contractDescriptionId">
+                <ng-option *ngFor="let item of contractDescriptionList" [value]="item.id">
+                  Referência: {{item.reference}} <br>
+                  Título: {{item.title}} <br>
+                  Sub-título: {{item.subTitle}}
+                </ng-option>
+              </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('contractDescriptionId')?.hasError('required')">Campo obrigatório</small>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="terminateDate">Data de término</label>
+              <input type="date" class="form-control" id="terminateDate" formControlName="terminateDate">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('terminateDate')?.hasError('required')">Campo obrigatório</small>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="paymentType">Tipo de pagamento</label>
+              <ng-select class="d-flex flex-grow-1 custom" id="paymentType" [placeholder]="'Selecione o tipo de pagamento'" [notFoundText]="'Nenhum registro encontrado'" formControlName="paymentType">
+                <ng-option *ngFor="let item of paymentTypeList" [value]="item.value">{{item.description}}</ng-option>
+              </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('paymentType')?.hasError('required')">Campo obrigatório</small>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="totalPrice">Valor total</label>
+              <input type="text" class="form-control" id="totalPrice" placeholder="Informe o valor total do contrato" mask="separator.2" thousandSeparator="." decimalMarker="," formControlName="totalPrice">
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('totalPrice')?.hasError('required')">Campo obrigatório</small>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+              <label for="customersId">Clientes</label>
+              <ng-select class="d-flex flex-grow-1 custom" id="customersId" [placeholder]="'Selecione os clientes'" [notFoundText]="'Nenhum registro encontrado'" [multiple]="true" formControlName="customersId">
+                <ng-option *ngFor="let item of customerList" [value]="item.id">
+                  [cliente]: {{item.name}}; [cpf/cnpj]: {{item.cpf ?? item.cnpj}}
+                </ng-option>
+              </ng-select>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('customersId')?.hasError('required')">Campo obrigatório</small>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+              <label for="details">Detalhes</label>
+              <textarea class="form-control" id="details" rows="4" formControlName="details" maxlength="2500" placeholder="Detalhes que irão aparecer no pdf gerado do contrato."></textarea>
+              <div class="attribute-container" *ngIf="formDir.submitted">
+                <small class="attribute-error" *ngIf="contractForm.get('details')?.hasError('required')">Campo obrigatório</small>
+                <small class="attribute-error" *ngIf="contractForm.get('details')?.hasError('minlength')">Detalhes deve ter no mínimo 20 caracteres</small>
+                <small class="attribute-error" *ngIf="contractForm.get('details')?.hasError('maxlength')">Detalhes deve ter no máximo 2500 caracteres</small>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="section-button">
+        <button type="submit" class="custom-button rounded shadow-3 submit">Salvar</button>
+        <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/contracts']">Voltar</button>
+      </div>
+    </form>
+  </app-card>
+  

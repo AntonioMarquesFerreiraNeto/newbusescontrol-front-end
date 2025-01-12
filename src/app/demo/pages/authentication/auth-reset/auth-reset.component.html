@@ -1,4 +1,4 @@
-<div class="auth-wrapper">
+<div class="auth-wrapper" [@fadeInOnEnter]>
   <div class="auth-content">
     <div class="auth-bg">
       <span class="r"></span>
@@ -6,27 +6,38 @@
       <span class="r s"></span>
       <span class="r"></span>
     </div>
-    <div class="card">
-      <div class="card-body text-center">
-        <div class="mb-4">
-          <i class="feather icon-user-plus auth-icon"></i>
+    <form autocomplete="off" [formGroup]="userResetPasswordStepCodeForm" (ngSubmit)="submit()" #formDir="ngForm">
+      <div class="card">
+        <div class="card-body text-center">
+          <div class="mb-4">
+            <i class="feather icon-lock auth-icon"></i>
+          </div>
+          <h5 class="mb-4">Buses Control - Redefinir senha</h5>
+          <div class="input-group mb-4">
+            <input formControlName="email" type="text" class="form-control" placeholder="Informe seu email" maxlength="100" />
+            <div class="container-error" *ngIf="formDir.submitted">
+              <small class="error-message" *ngIf="userResetPasswordStepCodeForm.get('email')?.hasError('required')">E-mail é um campo obrigatório</small>
+            </div>
+          </div>
+          <div class="input-group mb-4">
+            <input formControlName="cpf" type="text" class="form-control" placeholder="Informe seu CPF" mask="000.000.000-00" />
+            <div class="container-error" *ngIf="formDir.submitted">
+              <small class="error-message" *ngIf="userResetPasswordStepCodeForm.get('cpf')?.hasError('required')">Cpf é um campo obrigatório</small>
+            </div>
+          </div>
+          <div class="input-group mb-4">
+            <input formControlName="birthDate" type="date" class="form-control" placeholder="Informe sua data de nascimento" />
+            <div class="container-error" *ngIf="formDir.submitted">
+              <small class="error-message" *ngIf="userResetPasswordStepCodeForm.get('birthDate')?.hasError('required')">Data de nascimento é um campo obrigatório</small>
+            </div>
+          </div>
+          <button class="btn btn-primary shadow-2 mb-4">Redefinir</button>
+          <p class="mb-0 text-muted">
+            Lembrou das informações de acesso?
+            <a [routerLink]="['/auth/signin']">Logar</a>
+          </p>
         </div>
-        <h5 class="mb-4">Buses Control - Reset</h5>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" />
-        </div>
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" />
-        </div>
-        <div class="input-group mb-4">
-          <input type="password" class="form-control" placeholder="Password" />
-        </div>
-        <button class="btn btn-primary shadow-2 mb-4">Redefinir</button>
-        <p class="mb-0 text-muted">
-          Lembrou das informações de acesso?
-          <a [routerLink]="['/auth/signin']">Logar</a>
-        </p>
       </div>
-    </div>
+    </form>
   </div>
 </div>

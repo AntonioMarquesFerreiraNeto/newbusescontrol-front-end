@@ -8,10 +8,12 @@ export class SwalFireService {
 
   constructor() { }
 
-  SwalLoading() {
+  SwalLoading(msg = null) {
+    msg = msg != null ? msg : 'Estamos processando sua solicitação.';
+
     Swal.fire({
       title: '<h6>Por favor, aguarde...</h6>',
-      html: `<p style="font-size: 12pt; margin: 0;">Estamos processando sua solicitação.</p>`,
+      html: `<p style="font-size: 12pt; margin: 0;">${msg}</p>`,
       icon: 'info',
       showConfirmButton: false,
       allowOutsideClick: false,

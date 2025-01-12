@@ -84,13 +84,14 @@ header {
 }
 
 .ng-select.custom {
-  height: 42.7px;
+  min-height: 42.7px;
   font-size: 0.86em;
   font-weight: normal;
 }
 
 .ng-select.custom .ng-select-container {
-  height: 42.7px;
+  min-height: 42.7px;
+  padding: 3px;
 }
 
 ng-select .ng-option {

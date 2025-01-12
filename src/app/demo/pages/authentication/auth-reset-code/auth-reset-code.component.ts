@@ -7,29 +7,26 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { SharedModule } from 'primeng/api';
 import { UserResetPasswordStepCode } from 'src/app/interfaces/UserResetPasswordStepCode';
+import { UserResetPasswordStepNewPassword } from 'src/app/interfaces/UserResetPasswordStepNewPassword';
+import { UserResetPasswordStepResetToken } from 'src/app/interfaces/UserResetPasswordStepResetToken';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-auth-reset',
+  selector: 'app-auth-reset-code',
   standalone: true,
   imports: [RouterModule, SharedModule, NgxMaskDirective, CommonModule, FormsModule, ReactiveFormsModule],
   providers: [provideNgxMask()],
-  templateUrl: './auth-reset.component.html',
-  styleUrls: ['./auth-reset.component.scss'],
-  animations: [
-    fadeInOnEnterAnimation()
-  ]
+  templateUrl: './auth-reset-code.component.html',
+  styleUrl: './auth-reset-code.component.scss',
+  animations: [fadeInOnEnterAnimation()]
 })
-export default class AuthSignupComponent implements OnInit {
-
-  userResetPasswordStepCodeForm!: FormGroup;
+export class AuthResetCodeComponent implements OnInit {
+  userResetPasswordStepResetTokenForm!: FormGroup;
 
   ngOnInit(): void {
-    this.userResetPasswordStepCodeForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
-      cpf: new FormControl('', [Validators.required]),
-      birthDate: new FormControl('', [Validators.required])
+    this.userResetPasswordStepResetTokenForm = new FormGroup({
+      code: new FormControl('', [Validators.required])
     });
   }
 
@@ -38,18 +35,24 @@ export default class AuthSignupComponent implements OnInit {
   }
 
   submit() {
-    if (this.userResetPasswordStepCodeForm.invalid) {
+    if (this.userResetPasswordStepResetTokenForm.invalid) {
       return;
     }
 
-    const data: UserResetPasswordStepCode = this.userResetPasswordStepCodeForm.value;
+    const data: UserResetPasswordStepResetToken = this.userResetPasswordStepResetTokenForm.value;
 
     this.swalFireService.SwalLoading();
 
-    this.userService.resetPasswordStepCode(data).subscribe({
+    this.userService.resetPasswordStepResetToken(data).subscribe({
       next: (response) => {
-        this.swalFireService.SwalSuccess(response.message, () => {
-          this.router.navigate(['/auth/reset/code']);
+        this.swalFireService.SwalSuccess("Tudo certo! Agora você pode redefinir sua senha!", () => {
+          const data = {
+            userId: response.userId,
+            token: response.token,
+          };
+          sessionStorage.setItem('resetPassword', JSON.stringify(data));
+          
+          this.router.navigate(['/auth/reset/password']);
         });
       },
       error: (error: HttpErrorResponse) => {

@@ -24,3 +24,15 @@
     margin-top: 2px;
     font-size: 10pt;
 }
+
+.form-control {
+    background-color: #ffff;
+}
+
+.error-message {
+    position: absolute;
+    top: 39px; 
+    left: 0;
+    font-size: 9pt;
+    color: red;
+}

@@ -53,7 +53,6 @@ export default class AuthSigninComponent implements OnInit {
 
   submit() {
     if (this.loginForm.invalid) {
-      this.snackbarService.Open('E-mail ou senha inválido!');
       return;
     }
 

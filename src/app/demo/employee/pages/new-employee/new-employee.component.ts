@@ -48,7 +48,7 @@ export class NewEmployeeComponent implements OnInit {
       birthDate: new FormControl('', Validators.required),
       cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required, Validators.minLength(11)]),
       homeNumber: new FormControl('', [Validators.required]),
       logradouro: new FormControl('', [Validators.required]),
       complementResidential: new FormControl('', [Validators.required]),

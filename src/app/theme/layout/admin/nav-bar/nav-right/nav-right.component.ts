@@ -63,7 +63,7 @@ export class NavRightComponent {
 
   getAvatarForNotification(notification: Notification) {
     if (notification.senderType == 'System') {
-      return 'assets/images/user/avatar-2.jpg';
+      return 'assets/images/user/bot.png';
     }
     else {
       return notification.sender.gender == 'Male' ? 'assets/images/user/avatar-2.jpg' : 'assets/images/user/avatar-1.jpg';

@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Supplier } from 'src/app/interfaces/Supplier';
+import { HelpersService } from 'src/app/services/helpers/helpers.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -24,7 +25,7 @@ export class NewSupplierComponent implements OnInit {
 
   supplierForm: FormGroup;
 
-  constructor(private supplierService: SupplierService, private router: Router, private swalFireService: SwalFireService) { }
+  constructor(private supplierService: SupplierService, private router: Router, private swalFireService: SwalFireService, private helpersService: HelpersService) { }
 
   ngOnInit(): void {
     this.supplierForm = new FormGroup({
@@ -32,7 +33,7 @@ export class NewSupplierComponent implements OnInit {
       openDate: new FormControl('', Validators.required),
       cnpj: new FormControl('', [Validators.required, Validators.minLength(14)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required, Validators.minLength(11)]),
       homeNumber: new FormControl('', [Validators.required]),
       logradouro: new FormControl('', [Validators.required]),
       complementResidential: new FormControl('', [Validators.required]),
@@ -55,6 +56,35 @@ export class NewSupplierComponent implements OnInit {
       next: () => {
         this.swalFireService.SwalSuccess('Fornecedor cadastrado com sucesso!', () => {
           this.router.navigate(['/suppliers']);
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        this.swalFireService.SwalError(error.error.detail);
+      }
+    });
+  }
+
+  handlerSupplierDetails() {
+    const cnpj = this.supplierForm.get('cnpj').value;
+    if(cnpj.length < 14){
+      this.swalFireService.SwalInfo('Informe um CNPJ válido para buscarmos os dados da empresa.');
+      return;
+    }
+
+    this.swalFireService.SwalLoading('Por favor, aguarde enquanto buscamos as informações da entidade jurídica....');
+
+    this.helpersService.GetDetailsLegalEntity(cnpj).subscribe({
+      next: (response) => {
+        this.swalFireService.SwalSuccess('Dados do fornecedor retornados com sucesso!', () => {
+          this.supplierForm.get('name').setValue(response.razaoSocial);
+          this.supplierForm.get('email').setValue(response.email);
+          this.supplierForm.get('phoneNumber').setValue(response.phoneNumber);
+          this.supplierForm.get('homeNumber').setValue(response.number);
+          this.supplierForm.get('complementResidential').setValue(response.complement);
+          this.supplierForm.get('logradouro').setValue(response.logradouro);
+          this.supplierForm.get('neighborhood').setValue(response.neighborhood);
+          this.supplierForm.get('city').setValue(response.city);
+          this.supplierForm.get('state').setValue(response.uf);
         });
       },
       error: (error: HttpErrorResponse) => {

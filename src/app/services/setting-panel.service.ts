@@ -22,6 +22,10 @@ export class SettingPanelService {
     return this.httpClient.get<any>(`${this.baseUrl}?page=${pagination.page}&pageSize=${pagination.pageSize}`);
   }
 
+  FindByParent(parent: string): Observable<SettingPanel[]>{
+    return this.httpClient.get<SettingPanel[]>(`${this.baseUrl}/parent/${parent}`);
+  }
+
   Create(settingPanel: SettingPanel): Observable<any> {
     return this.httpClient.post<any>(this.baseUrl, settingPanel);
   }

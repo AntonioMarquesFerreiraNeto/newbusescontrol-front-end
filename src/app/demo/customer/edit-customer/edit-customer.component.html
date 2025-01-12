@@ -95,6 +95,7 @@
                   placeholder="Digite o telefone" maxlength="15" mask="(00) 00000-0000">
                 <div class="attribute-container" *ngIf="formDir.submitted">
                   <small class="attribute-error" *ngIf="customerForm.get('phoneNumber')?.hasError('required')">Telefone é um campo obrigatório</small>
+                  <small class="attribute-error" *ngIf="customerForm.get('phoneNumber')?.hasError('minlength')">Telefone deve ter no mínimo 11 caracteres</small>
                 </div>
               </div>
             </div>

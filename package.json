@@ -36,6 +36,8 @@
     "ngx-mask": "^17.1.2",
     "ngx-scrollbar": "^15.0.1",
     "perfect-scrollbar": "^1.5.5",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.12",
     "rxjs": "~7.8.1",
     "screenfull": "^6.0.2",
     "sweetalert2": "^11.14.0",

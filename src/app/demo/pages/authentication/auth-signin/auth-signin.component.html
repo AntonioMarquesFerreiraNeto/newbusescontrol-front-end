@@ -7,16 +7,22 @@
       <span class="r"></span>
     </div>
     <div class="card rounded">
-      <form class="card-body text-center" (ngSubmit)="submit()" [formGroup]="loginForm" #formDir="ngForm">
+      <form autocomplete="off" class="card-body text-center" (ngSubmit)="submit()" [formGroup]="loginForm" #formDir="ngForm">
         <div class="mb-4">
           <i class="feather icon-unlock auth-icon"></i>
         </div>
         <h5 class="mb-4">Buses Control - Login</h5>
-        <div class="input-group mb-3">
+        <div class="input-group mb-4">
           <input type="email" class="form-control" placeholder="Email" formControlName="username" required/>
+          <div class="container-error" *ngIf="formDir.submitted">
+            <small class="error-message" *ngIf="loginForm.get('username')?.hasError('required')">E-mail é um campo obrigatório</small>
+          </div>
         </div>
         <div class="input-group mb-4">
           <input type="{{type}}" class="form-control" placeholder="Senha" formControlName="password"/>
+          <div class="container-error" *ngIf="formDir.submitted">
+            <small class="error-message" *ngIf="loginForm.get('password')?.hasError('required')">Senha é um campo obrigatório</small>
+          </div>
         </div>
         <div class="display-check">
           <input type="checkbox" class="check-password form-check-input" (click)="CheckPassword()"/>

@@ -29,6 +29,8 @@ import { EditSupplierComponent } from './demo/supplier/pages/edit-supplier/edit-
 import { ContractDescriptionComponent } from './demo/contract-description/contract-description.component';
 import { NewContractDescriptionComponent } from './demo/contract-description/pages/new-contract-description/new-contract-description.component';
 import { EditContractDescriptionComponent } from './demo/contract-description/pages/edit-contract-description/edit-contract-description.component';
+import { ContractComponent } from './demo/contract/contract.component';
+import { NewContractComponent } from './demo/contract/pages/new-contract/new-contract.component';
 
 const routes: Routes = [
   {
@@ -139,6 +141,14 @@ const routes: Routes = [
       {
         path: 'suppliers/edit/:id',
         component: EditSupplierComponent
+      },
+      {
+        path: 'contracts',
+        component: ContractComponent
+      },
+      {
+        path: 'contract/new',
+        component: NewContractComponent
       },
       {
         path: 'contract/descriptions',

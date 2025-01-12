@@ -1,0 +1,59 @@
+<div [@fadeInOnEnter]>
+    <div cardTitle="Contratos" class="search-form-container rounded">
+        <div class="container-fluid">
+            <div>
+                <form class="input-group">
+                    <span class="span-custom">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control rounded" placeholder="Pesquisar por...">
+                </form>
+            </div>
+            <div>
+                <a class="custom-button rounded shadow-2" [routerLink]="['/contract/new']">
+                    <i class="bi bi-plus"></i>
+                    Contrato
+                </a>
+            </div>
+        </div>
+    </div>
+    <app-card cardTitle="Contratos" cardClass="bus" blockClass="p-0">
+        <div class="fleet-container">
+            <div *ngFor="let contract of contracts; let i = index">
+                <!-- Cabeçalho da linha com ícone de collapse -->
+                <div class="fleet-row" title="Detalhes" (click)="toggleCollapse(i)">
+                    <div class="fleet-cell">
+                        <p><span class="reference">{{ contract.reference }}</span></p>
+                    </div>
+                    <div class="fleet-cell">
+                        <p>{{ contract.value }}</p>
+                    </div>
+                    <div class="fleet-cell">
+                        <p>{{ contract.status }}</p>
+                    </div>
+                    <div class="fleet-cell">
+                        <p>{{ contract.createdAt }}</p>
+                    </div>
+                    <div class="fleet-cell actions">
+                        <div class="action-menu">
+                            <span class="action-item" title="Expandir/Retrair">
+                                <i [ngClass]="isCollapsed[i] ? 'feather icon-chevron-down' : 'feather icon-chevron-up'"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!isCollapsed[i]" class="collapse-content">
+                    <p><strong>Descrição:</strong> {{ contract.description }}</p>
+                    <p><strong>Cliente:</strong> {{ contract.client }}</p>
+                </div>
+            </div>
+            <!-- Paginação -->
+            <div class="fleet-row pagination">
+                <mat-paginator (page)="10" [length]="1000" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </app-card>
+    
+</div>

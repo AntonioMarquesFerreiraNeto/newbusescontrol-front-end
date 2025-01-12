@@ -112,7 +112,7 @@ const NavigationItems = [
         id: 'contract',
         title: 'Contratos',
         type: 'item',
-        url: '/tables/bootstrap',
+        url: '/contracts',
         icon: 'feather icon-file',
         classes: 'nav-item'
       },

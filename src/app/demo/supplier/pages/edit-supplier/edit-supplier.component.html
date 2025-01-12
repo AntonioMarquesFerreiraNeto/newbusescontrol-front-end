@@ -28,7 +28,7 @@
                 <div class="form-group">
                   <label for="cnpj">CNPJ</label>
                   <input type="text" class="form-control" id="cnpj" formControlName="cnpj" placeholder="Digite o CNPJ"
-                    maxlength="18" mask="00.000.000/0000-00">
+                    maxlength="18" mask="00.000.000/0000-00" (change)="handlerSupplierDetails()">
                     <div class="attribute-container" *ngIf="formDir.submitted">
                       <small class="attribute-error" *ngIf="supplierForm.get('cnpj')?.hasError('required')">CNPJ é um campo obrigatório</small>
                       <small class="attribute-error" *ngIf="supplierForm.get('cnpj')?.hasError('minlength')">CNPJ deve ter no mínimo 14 caracteres</small>
@@ -42,6 +42,7 @@
                     placeholder="Digite o telefone" maxlength="15" mask="(00) 00000-0000">
                   <div class="attribute-container" *ngIf="formDir.submitted">
                     <small class="attribute-error" *ngIf="supplierForm.get('phoneNumber')?.hasError('required')">Telefone é um campo obrigatório</small>
+                    <small class="attribute-error" *ngIf="supplierForm.get('phoneNumber')?.hasError('minlength')">Telefone deve ter no mínimo 11 caracteres</small>
                   </div>
                 </div>
             </div>

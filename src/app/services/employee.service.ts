@@ -23,6 +23,10 @@ export class EmployeeService {
     return this.httpClient.get<any>(url);
   }
 
+  FindByType(type: string): Observable<Employee[]>{
+    return this.httpClient.get<Employee[]>(`${this.baseUrl}/type/${type}`);
+  }
+
   GetById(id: string): Observable<Employee> {
     return this.httpClient.get<Employee>(`${this.baseUrl}/${id}`);
   }
