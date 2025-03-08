@@ -31,6 +31,8 @@ import { NewContractDescriptionComponent } from './demo/contract-description/pag
 import { EditContractDescriptionComponent } from './demo/contract-description/pages/edit-contract-description/edit-contract-description.component';
 import { ContractComponent } from './demo/contract/contract.component';
 import { NewContractComponent } from './demo/contract/pages/new-contract/new-contract.component';
+import { DetailsContractComponent } from './demo/contract/pages/details-contract/details-contract.component';
+import { EditContractComponent } from './demo/contract/pages/edit-contract/edit-contract.component';
 
 const routes: Routes = [
   {
@@ -52,11 +54,13 @@ const routes: Routes = [
       },
       {
         path: 'bus/new',
-        component: NewBusComponent
+        component: NewBusComponent,
+        title: 'Buses Control | Novo Ônibus'
       },
       {
         path: 'bus/edit/:id',
-        component: EditBusComponent
+        component: EditBusComponent,
+        title: 'Buses Control | Editar Ônibus'
       },
       {
         path: 'customer',
@@ -64,47 +68,58 @@ const routes: Routes = [
       },
       {
         path: 'customer/new',
-        component: NewCustomerComponent
+        component: NewCustomerComponent,
+        title: 'Buses Control | Novo Cliente'
       },
       {
         path: 'customer/edit/:id',
-        component: EditCustomerComponent
+        component: EditCustomerComponent,
+        title: 'Buses Control | Editar Cliente'
       },
       {
         path: 'system/automated',
-        component: SystemAutomatedComponent
+        component: SystemAutomatedComponent,
+        title: 'Buses Control | Rotinas'
       },
       {
         path: 'system/automated/run/:id',
-        component: RunPageComponent
+        component: RunPageComponent,
+        title: 'Buses Control | Executar rotina'
       },
       {
         path: 'webhooks',
-        component: WebhooksComponent
+        component: WebhooksComponent,
+        title: 'Buses Control | Webhooks'
       },
       {
         path: 'webhooks/new',
-        component: NewWebhookComponent
+        component: NewWebhookComponent,
+        title: 'Buses Control | Novo Webhook'
       },
       {
         path: 'notifications',
-        component: NotificationComponent
+        component: NotificationComponent,
+        title: 'Buses Control | Notificações'
       },
       {
         path: 'notifications/new',
-        component: NewNotificationComponent
+        component: NewNotificationComponent,
+        title: 'Buses Control | Nova Notificação'
       },
       {
         path: 'setting-panel',
-        component: SettingPanelComponent
+        component: SettingPanelComponent,
+        title: 'Buses Control | Painéis'
       },
       {
         path: 'setting-panel/new',
-        component: NewSettingPanelComponent
+        component: NewSettingPanelComponent,
+        title: 'Buses Control | Novo Painel'
       },
       {
         path: 'setting-panel/edit/:id',
-        component: EditSettingPanelComponent
+        component: EditSettingPanelComponent,
+        title: 'Buses Control | Editar Painel'
       },
       {
         path: 'employee',
@@ -112,23 +127,28 @@ const routes: Routes = [
       },
       {
         path: 'employee/new',
-        component: NewEmployeeComponent
+        component: NewEmployeeComponent,
+        title: 'Buses Control | Novo Funcionário'
       },
       {
         path: 'employee/edit/:id',
-        component: EditEmployeeComponent
+        component: EditEmployeeComponent,
+        title: 'Buses Control | Editar Funcionário'
       },
       {
         path: 'users-registration-queue',
-        component: UsersRegistrationQueueComponent
+        component: UsersRegistrationQueueComponent,
+        title: 'Buses Control | Registro de Usuários'
       },
       {
         path: 'users-registration-queue/new',
-        component: NewUsersRegistrationQueueComponent
+        component: NewUsersRegistrationQueueComponent,
+        title: 'Buses Control | Novo Usuário'
       },
       {
         path: 'access-manager',
-        component: AccessManagerComponent
+        component: AccessManagerComponent,
+        title: 'Buses Control | Acessos'
       },
       {
         path: 'suppliers',
@@ -136,19 +156,32 @@ const routes: Routes = [
       },
       {
         path: 'suppliers/new',
-        component: NewSupplierComponent
+        component: NewSupplierComponent,
+        title: 'Buses Control | Novo Fornecedor'
       },
       {
         path: 'suppliers/edit/:id',
-        component: EditSupplierComponent
+        component: EditSupplierComponent,
+        title: 'Buses Control | Editar Fornecedor'
       },
       {
         path: 'contracts',
         component: ContractComponent
       },
       {
-        path: 'contract/new',
-        component: NewContractComponent
+        path: 'contracts/new',
+        component: NewContractComponent,
+        title: 'Buses Control | Novo Contrato'
+      },
+      {
+        path: 'contracts/edit/:id',
+        component: EditContractComponent,
+        title: 'Buses Control | Editar Contrato'
+      },
+      {
+        path: 'contracts/details/:id',
+        component: DetailsContractComponent,
+        title: 'Buses Control | Visualizar Contrato'
       },
       {
         path: 'contract/descriptions',
@@ -156,11 +189,13 @@ const routes: Routes = [
       },
       {
         path: 'contract/descriptions/new',
-        component: NewContractDescriptionComponent
+        component: NewContractDescriptionComponent,
+        title: 'Buses Control | Nova Descrição'
       },
       {
         path: 'contract/descriptions/edit/:id',
-        component: EditContractDescriptionComponent
+        component: EditContractDescriptionComponent,
+        title: 'Buses Control | Editar Descrição'
       },
       {
         path: 'basic',

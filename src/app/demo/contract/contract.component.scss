@@ -23,7 +23,7 @@
         border-top-left-radius: 0px !important;
         border-bottom-left-radius: 0px !important;
         font-size: 0.875rem;
-        height: 38px;
+        height: 40px !important;
         flex: 1;
       }
 
@@ -35,8 +35,8 @@
         border-radius: 0px;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
-        width: 38px;
-        height: 38px;
+        width: 40px !important;
+        height: 40px !important;
         color: white;
         background-color: #415d8e;
         margin-left: -1px;
@@ -319,4 +319,16 @@
 .reference {
   font-weight: 450;
   color: #415d8e;
+}
+
+.form-control {
+  background-color: #ffff;
+}
+
+.feather {
+  font-size: 13pt !important;
+}
+
+strong {
+  font-weight: 401 !important;
 }

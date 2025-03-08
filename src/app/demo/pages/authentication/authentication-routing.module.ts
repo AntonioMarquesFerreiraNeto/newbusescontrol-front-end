@@ -9,19 +9,23 @@ const routes: Routes = [
     children: [
       {
         path: 'signin',
-        loadComponent: () => import('./auth-signin/auth-signin.component')
+        loadComponent: () => import('./auth-signin/auth-signin.component'),
+        title: 'Buses Control | Login'
       },
       {
         path: 'reset',
-        loadComponent: () => import('./auth-reset/auth-reset.component')
+        loadComponent: () => import('./auth-reset/auth-reset.component'),
+        title: 'Buses Control | Redefinir'
       },
       {
         path: 'reset/code',
-        component: AuthResetCodeComponent
+        component: AuthResetCodeComponent,
+        title: 'Buses Control | Código de Redefinição'
       },
       {
         path: 'reset/password',
-        component: AuthResetPasswordComponent
+        component: AuthResetPasswordComponent,
+        title: 'Buses Control | Redefinir Senha'
       }
     ]
   }

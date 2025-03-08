@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <div class="modal-title">Gerenciar</div>
+    <div class="closed"><a class="link-closed" href="javascript:(void);" (click)="modal.close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body">
+    <div class="col-md-12 mb-2">
+        <div class="form-group">
+            <label class="text-dark">Status</label>
+            <ng-select class="d-flex flex-grow-1 custom" [placeholder]="'Selecione o status'" [notFoundText]="'Nenhum status encontrado'">
+                <ng-option *ngFor="let item of contractStatus" [value]="item.value">{{item.description}}</ng-option>
+            </ng-select>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <button type="button" class="custom-button rounded shadow-3 submit w-100 mb-2" (click)="changeStatus()" [disabled]="disabledButton">
+            <div *ngIf="!disabledButton else spinnerContract">Salvar</div>
+            <ng-template #spinnerContract class="d-flex align-items-center gap-1"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Aguarde...</ng-template>
+        </button>
+        <button type="button" class="custom-button-light rounded shadow-3 submit w-100 mb-2" (click)="modal.close()">
+            Fechar
+        </button>       
+    </div>
+</div>

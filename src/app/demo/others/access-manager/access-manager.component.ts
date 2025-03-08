@@ -72,6 +72,7 @@ export class AccessManagerComponent {
   search(event: Event) {
     const input = event.target as HTMLInputElement;
     this.pagination.search = input.value;
+    this.pagination.page = 1;
 
     this.refreshUsers();
   }

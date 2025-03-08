@@ -28,6 +28,7 @@ export interface Contract
     status: string;
     isApproved: boolean;
     approverId: string;
+    approver: Employee;
     customersCount: number;
     customersContract: CustomerContract[];
     terminations: Termination[];

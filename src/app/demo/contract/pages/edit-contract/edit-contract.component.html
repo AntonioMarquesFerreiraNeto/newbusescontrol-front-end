@@ -1,12 +1,12 @@
-<app-card cardTitle="Novo contrato" cardClass="Frota cadastrada" blockClass="p-0" [@fadeInOnEnter]>
-    <form class="card-body" (ngSubmit)="submit()" [formGroup]="contractForm" #formDir="ngForm">
+<app-card cardTitle="Editar contrato" cardClass="Frota cadastrada" blockClass="p-0" [@fadeInOnEnter]>
+    <form class="card-body" (ngSubmit)="submit()" [formGroup]="contractForm" #formDir="ngForm" *ngIf="contractForm">
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
             <label for="busId">Ônibus</label>
             <ng-select class="d-flex flex-grow-1 custom" id="busId" [placeholder]="'Selecione o ônibus'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="busId">
                 <ng-option *ngFor="let item of busList" [value]="item.id">
-                  {{item.name}}
+                    <strong>modelo:</strong> {{item.name}}
                 </ng-option>
             </ng-select>
             <div class="attribute-container" *ngIf="formDir.submitted">
@@ -19,7 +19,7 @@
               <label for="driverId">Motorista</label>
               <ng-select class="d-flex flex-grow-1 custom" id="driverId" [placeholder]="'Selecione o motorista'" [notFoundText]="'Nenhum resultado encontrado'" formControlName="driverId" [bindLabel]="'name'">
                 <ng-option *ngFor="let item of driverList" [value]="item.id">
-                  {{item.name}} 
+                    {{item.name}} 
                 </ng-option>
               </ng-select>
               <div class="attribute-container" *ngIf="formDir.submitted">
@@ -112,5 +112,4 @@
         <button type="button" class="custom-button-light rounded shadow-3 submit" [routerLink]="['/contracts']">Voltar</button>
       </div>
     </form>
-  </app-card>
-  
+</app-card>

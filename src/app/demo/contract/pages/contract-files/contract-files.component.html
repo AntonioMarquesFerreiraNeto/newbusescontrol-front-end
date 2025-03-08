@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <div class="modal-title">Download de Documentos</div>
+    <div class="closed"><a class="link-closed" href="javascript:(void);" (click)="activeModal.close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12 mb-2" *ngIf="customersList">
+            <div class="form-group">
+                <label class="text-dark" for="customer">Cliente</label>
+                <ng-select id="customer" class="d-flex flex-grow-1 custom" [(ngModel)]="customerId" [placeholder]="'Selecione o cliente'" [notFoundText]="'Nenhum registro encontrado'">
+                    <ng-option *ngFor="let item of customersList" [value]="item.id">{{item.name}} - {{commonService.getDocumentFormatted(item.cpf ?? item.cnpj)}}</ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-md-12 mb-2">
+            <button type="button" class="custom-button rounded shadow-3 submit w-100 mb-2" (click)="getPdfContract()" [disabled]="disabledContract">
+                <div *ngIf="!disabledContract else spinnerContract">Contrato</div>
+                <ng-template #spinnerContract class="d-flex align-items-center gap-1"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Aguarde...</ng-template>
+            </button>
+            <button type="button" class="custom-button-light rounded shadow-3 submit w-100 mb-2" (click)="StartProcessTermination()" [disabled]="disabledTermination">
+                <div *ngIf="!disabledTermination else spinnerTermination">Rescisão</div>
+                <ng-template #spinnerTermination class="d-flex align-items-center gap-1"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Aguarde...</ng-template>
+            </button>         
+        </div>
+    </div>
+</div>

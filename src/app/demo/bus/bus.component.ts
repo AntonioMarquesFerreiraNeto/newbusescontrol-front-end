@@ -45,7 +45,8 @@ export class BusComponent implements OnInit {
   search(event: Event) {
     const input = event.target as HTMLInputElement;
     this.pagination.search = input.value;
-
+    this.pagination.page = 1;
+    
     this.refreshFrota();
   }
 
@@ -80,8 +81,10 @@ export class BusComponent implements OnInit {
   openAvailability(event: MouseEvent, id: string) {
     event.stopImmediatePropagation();
     const style = { size: 'lg' };
+
     var modal = this.modal.open(BusAvailabilityComponent, style);
     modal.componentInstance.busId = id;
+    
     modal.componentInstance.onSubmitted.subscribe(() => {
       this.refreshFrota();
     });

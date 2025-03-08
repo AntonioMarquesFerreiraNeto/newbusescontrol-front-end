@@ -1,0 +1,111 @@
+<div [@fadeInOnEnter]>
+    <div class="row">
+      <div class="col-md-12">
+        <app-card cardTitle="Informações Gerais" blockClass="p-0">
+            <div class="card-body">
+              <div class="d-flex justify-content-between w-100">
+                <div>
+                  <p><strong>Status: </strong><span class="reference">{{getStatusDescription(contract.status)}}</span></p>
+                  <p><strong>Aprovado: </strong>{{contract.isApproved ? "sim" : "não"}}</p>
+                  <p *ngIf="contract.approver"><strong>Aprovador: </strong>{{contract.approver.name}}</p>
+                  <p><strong>Tipo de pagamento: </strong>{{getPaymentTypeDescription(contract.paymentType )}}</p>
+                  <p><strong>Valor: </strong>{{commonService.getValueFormatted(contract.totalPrice)}}</p>
+                </div>
+                <div>
+                  <p><strong>Criado em: </strong><span class="reference">{{commonService.getDateFormatted(contract.createdAt)}}</span></p>
+                  <p><strong>Última atualização: </strong>{{contract.updatedAt ? commonService.getDateFormatted(contract.updatedAt) : "Não possui"}}</p>
+                  <p><strong>Data de término: </strong>{{commonService.getDateFormatted(contract.terminateDate)}}</p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <hr>
+              </div>
+              <div class="col-md-6">
+                <p style="text-align: justify;"><strong>Detalhes: </strong>{{contract.details}}</p>
+              </div>
+            </div>
+        </app-card>
+      </div>
+        <div class="col-md-4">
+            <app-card cardTitle="Motorista do Contrato" blockClass="p-0">
+                <div class="card-body">
+                  <p><strong>Nome: </strong><span class="reference">{{contract.driver.name}}</span></p>
+                  <p><strong>CPF: </strong>{{commonService.getDocumentFormatted(contract.driver.cpf)}}</p>
+                  <p><strong>Telefone: </strong>{{commonService.getPhoneNumberFormatted(contract.driver.phoneNumber)}}</p>
+                  <p><strong>Data de nascimento: </strong>{{commonService.getDateFormatted(contract.driver.birthDate)}}</p>
+                </div>
+            </app-card>
+        </div>
+        <div class="col-md-4">
+            <app-card cardTitle="Ônibus do Contrato" blockClass="p-0">
+                <div class="card-body">
+                  <p><strong>Marca: </strong><span class="reference">{{contract.bus.brand}}</span></p>
+                  <p><strong>Modelo: </strong>{{contract.bus.name}}</p>
+                  <p><strong>Placa: </strong>{{contract.bus.licensePlate}}</p>
+                  <p><strong>Quantidade de Assentos: </strong>{{contract.bus.seatingCapacity}}</p>
+                </div>
+            </app-card>
+        </div>
+        <div class="col-md-4">
+            <app-card cardTitle="Painel de Configuração" blockClass="p-0">
+                <div class="card-body">
+                  <p><strong>Referência: </strong><span class="reference">{{contract.settingPanel.reference}}</span></p>
+                  <p><strong>Criador: </strong>{{contract.settingPanel.requester.name}}</p>
+                  <p><strong>Criado em: </strong>{{commonService.getDateFormatted(contract.settingPanel.createdAt)}}</p>
+                  <p><strong>Mais detalhes: </strong><a class="link-opacity-100" target="_blank" href="/setting-panel/edit/{{contract.settingPanelId}}">link de detalhes</a></p>
+                </div>
+            </app-card>
+        </div>
+        <div class="col-md-12">
+            <app-card cardTitle="Template de Descrição" blockClass="p-0">
+                <div class="card-body">
+                  <p><strong>Referência: </strong><span class="reference">{{contract.contractDescription.reference}}</span></p>
+                  <p><strong>Título: </strong>{{contract.contractDescription.title}}</p>
+                  <p><strong>Subtítulo: </strong>{{contract.contractDescription.subTitle}}</p>
+                  <p><strong>Mais detalhes: </strong><a class="link-opacity-100" target="_blank" href="/contract/descriptions/edit/{{contract.contractDescription.id}}">link de detalhes</a></p>
+                </div>
+            </app-card>
+        </div>
+        <div class="col-md-12">
+          <app-card cardTitle="Clientes" blockClass="p-0">
+            <div class="card-body">
+              <div class="table-responsive">
+                  <table class="table mb-0">
+                    <tbody>
+                      <tr class="unread" *ngFor="let customerContract of contract.customersContract">
+                          <td>
+                            <img class="rounded-circle" style="width: 40px" src="{{getAvatar(customerContract.customer.gender)}}" alt="activity-user" />
+                          </td>
+                          <td>
+                            <p><a target="_blank" href="/customer/edit/{{customerContract.customerId}}" class="link">{{customerContract.customer.name}}</a></p>
+                          </td>
+                          <td>
+                            <p>{{customerContract.customer.email}}</p>
+                          </td>
+                          <td>
+                            <p>{{commonService.getPhoneNumberFormatted(customerContract.customer.phoneNumber)}}</p>
+                          </td>
+                          <td>
+                           <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-icon btn-rounded btn-template shadow-sm" title="PDF do contrato" (click)="getPdfContract(customerContract.customerId)">
+                              <i class="feather icon-printer"></i>
+                            </button>
+                            <button type="button" class="btn btn-icon btn-rounded btn-template btn-template-danger shadow-sm" title="Rescisão do contrato" (click)="StartProcessTermination(customerContract.customerId)">
+                              <i class="feather icon-printer"></i>
+                            </button>
+                           </div>
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </app-card>
+        </div>
+        <div class="col-md-12 d-flex justify-content-end">
+            <button class="custom-button-light rounded shadow-2" [routerLink]="['/contracts']">
+                Voltar
+            </button>
+        </div>
+    </div>
+</div>

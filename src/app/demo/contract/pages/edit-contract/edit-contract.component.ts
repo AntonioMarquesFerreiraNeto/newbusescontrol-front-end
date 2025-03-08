@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { fadeInOnEnterAnimation } from 'angular-animations';
@@ -21,19 +21,22 @@ import { ContractService } from 'src/app/services/contract.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Contract } from 'src/app/interfaces/Contract';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
+import { SnackbarService } from 'src/app/services/helpers/snackbar.service';
 
 @Component({
-  selector: 'app-new-contract',
+  selector: 'app-edit-contract',
   standalone: true,
   imports: [SharedModule, RouterModule, NgSelectModule, NgxMaskDirective, CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './new-contract.component.html',
-  styleUrl: './new-contract.component.scss',
+  templateUrl: './edit-contract.component.html',
+  styleUrl: './edit-contract.component.scss',
   providers: [
     provideNgxMask()
   ],
   animations: [fadeInOnEnterAnimation()]
 })
-export class NewContractComponent implements OnInit {
+export class EditContractComponent implements OnInit {
+  contract: Contract;
+  contractId: string;
   busList: Bus[];
   driverList: Employee[];
   settingPanelList: SettingPanel[];
@@ -46,55 +49,70 @@ export class NewContractComponent implements OnInit {
     { description: 'Fatura múltipla', value: 'Multiple' }
   ];
 
-  constructor(
-    private router: Router,
-    private busService: BusService, 
-    private employeeService: EmployeeService, 
-    private settingPanelService: SettingPanelService, 
-    private contractDescriptionService: ContractDescriptionService, 
-    private customerService: CustomerService,
-    private swalFireService: SwalFireService,
-    private contractService: ContractService) {}
-
   ngOnInit(): void {
     this.pagination.page = 1,
     this.pagination.pageSize = 100;
-    
+
     this.busService.GetPaginated(this.pagination).subscribe(data => this.busList = data.response);
     this.employeeService.FindByType('driver').subscribe(response => this.driverList = response);
     this.settingPanelService.FindByParent('contract').subscribe(response => this.settingPanelList = response);
     this.contractDescriptionService.GetPaginated(this.pagination).subscribe(data => this.contractDescriptionList = data.response);
     this.customerService.GetPaginated(this.pagination).subscribe(data => this.customerList = data.response);
 
-    this.contractForm = new FormGroup({
-      busId: new FormControl(null, [Validators.required]),
-      driverId: new FormControl(null, [Validators.required]),
-      settingPanelId: new FormControl(null, [Validators.required]),
-      contractDescriptionId: new FormControl(null, [Validators.required]),
-      terminateDate: new FormControl('', [Validators.required]),
-      paymentType: new FormControl(null, [Validators.required]),
-      totalPrice: new FormControl(null, [Validators.required]),
-      customersId: new FormControl(null, [Validators.required]),
-      details: new FormControl('', [Validators.required, Validators.minLength(20)]),
-    });
-  }
+    this.contractId = this.route.snapshot.paramMap.get('id');
 
-  submit(){
-    if(this.contractForm.invalid){
-      return;
-    }
+    this.contractService.GetById(this.contractId).subscribe({
+      next: (response) => {
+        this.contract = response;
 
-    const data : Contract = this.contractForm.value;
-
-    this.swalFireService.SwalLoading();
-
-    this.contractService.Create(data).subscribe({
-      next: () =>{
-        this.swalFireService.SwalSuccess('Contrato criado com sucesso!', () => {
-          this.router.navigate(['/contracts']);
+        this.contractForm = new FormGroup({
+          busId: new FormControl(this.contract.busId, [Validators.required]),
+          driverId: new FormControl(this.contract.driverId, [Validators.required]),
+          settingPanelId: new FormControl(this.contract.settingPanelId, [Validators.required]),
+          contractDescriptionId: new FormControl(this.contract.contractDescription.id, [Validators.required]),
+          terminateDate: new FormControl(this.contract.terminateDate, [Validators.required]),
+          paymentType: new FormControl(this.contract.paymentType, [Validators.required]),
+          totalPrice: new FormControl(this.contract.totalPrice, [Validators.required]),
+          customersId: new FormControl(this.contract.customersContract.map(x => x.customerId), [Validators.required]),
+          details: new FormControl(this.contract.details, [Validators.required, Validators.minLength(20)])
         });
       },
       error: (error: HttpErrorResponse) =>{
+        this.snackbarService.Open(error.error.detail);
+        this.router.navigate(['/contracts']);
+      }
+    });
+  }
+
+  constructor(
+    private router: Router,
+    private busService: BusService,
+    private employeeService: EmployeeService,
+    private settingPanelService: SettingPanelService,
+    private contractDescriptionService: ContractDescriptionService,
+    private customerService: CustomerService,
+    private swalFireService: SwalFireService,
+    private contractService: ContractService,
+    private snackbarService: SnackbarService,
+    private route: ActivatedRoute
+  ) { }
+
+  submit() {
+    if (this.contractForm.invalid) {
+      return;
+    }
+
+    const data: Contract = this.contractForm.value;
+
+    this.swalFireService.SwalLoading();
+
+    this.contractService.Update(this.contractId, data).subscribe({
+      next: () => {
+        this.swalFireService.SwalSuccess('Contrato atualizado com sucesso!', () => {
+          this.router.navigate(['/contracts']);
+        });
+      },
+      error: (error: HttpErrorResponse) => {
         this.swalFireService.SwalError(error.error.detail);
       }
     });

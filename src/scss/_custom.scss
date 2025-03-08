@@ -8,8 +8,18 @@ body {
     font-family: 'Open Sans', sans-serif;
   }
 }
+
 .attribute-container {
   position: relative;
+}
+
+.display-31 {
+  font-size: 0.9em;
+}
+
+.p-style {
+  color: black;
+  text-align: justify;
 }
 
 .attribute-error {
@@ -19,8 +29,8 @@ body {
   color: #f33131;
 }
 
-.cdk-overlay-container { 
-  z-index: 100000; 
+.cdk-overlay-container {
+  z-index: 100000;
 }
 
 .modal-header {
@@ -79,7 +89,9 @@ header {
 .disabled {
   color: gray;
 }
+
 .form-control {
+  background-color: #ffff;
   height: auto;
 }
 
@@ -95,7 +107,7 @@ header {
 }
 
 ng-select .ng-option {
-  z-index: 100000; 
+  z-index: 100000;
 }
 
 .custom-button-swal {
@@ -114,7 +126,7 @@ ng-select .ng-option {
   transition: background-color 0.3s !important;
 
   &:hover {
-      background-color: #374761 !important;
+    background-color: #374761 !important;
   }
 }
 
@@ -124,7 +136,7 @@ ng-select .ng-option {
     flex-wrap: nowrap;
     flex-direction: column;
   }
-  
+
   .submit {
     width: 100% !important;
   }
@@ -180,4 +192,17 @@ pre code {
 .fixed-button.active {
   bottom: 50px;
   opacity: 1;
+}
+
+.bg-template {
+  background-color: #4f6da1 !important;
+}
+
+.btn-template {
+  background-color: #4c6ba1 !important;
+  color: white !important;
+
+  &:hover {
+    background-color: #293548 !important;
+  }
 }
