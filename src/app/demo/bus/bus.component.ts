@@ -99,7 +99,7 @@ export class BusComponent implements OnInit {
   }
 
   getDetailStatus(status: string) {
-    return status == 'Active' ? 'Ônibus Ativo' : 'Ônibus Inativo';
+    return status == 'Active' ? 'Ativo' : 'Inativo';
   }
 
   getLabelAvailability(availability: string) {

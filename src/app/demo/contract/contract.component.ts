@@ -16,6 +16,9 @@ import { CommonService } from 'src/app/services/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractFilesComponent } from './pages/contract-files/contract-files.component';
 import { ManageContractComponent } from './pages/manage-contract/manage-contract.component';
+import { DeleteContractComponent } from './pages/delete-contract/delete-contract.component';
+import { ApproveContractComponent } from './pages/approve-contract/approve-contract.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-contract',
@@ -29,6 +32,7 @@ export class ContractComponent implements OnInit {
   pagination = new Pagination;
   contracts: Contract[];
   isCollapsed: boolean[];
+  enabledApprove = false;
 
   ngOnInit(): void {
     this.contractService.GetPaginated(this.pagination).subscribe(response => {
@@ -36,9 +40,13 @@ export class ContractComponent implements OnInit {
       this.isCollapsed = this.contracts.map(() => true);
       this.pagination.totalSize = response.totalSize;
     });
+
+    this.userService.getMyProfile().subscribe((response) => {
+      if(response.role == 'Admin') this.enabledApprove = true;
+    });
   }
 
-  constructor(private contractService: ContractService, public commonService: CommonService, private modal: NgbModal) { }
+  constructor(private contractService: ContractService, public commonService: CommonService, private modal: NgbModal, private userService: UserService) { }
 
   contractsStatus = [
     { value: 'WaitingReview', description: 'Aguardando Revisão' },
@@ -51,6 +59,8 @@ export class ContractComponent implements OnInit {
   toggleCollapse(index: number): void {
     this.isCollapsed[index] = !this.isCollapsed[index];
   }
+
+  
 
   getStatusDescription(status: string): string {
     switch (status) {
@@ -66,6 +76,23 @@ export class ContractComponent implements OnInit {
         return 'Concluído';
       default:
         return 'Status desconhecido';
+    }
+  }
+
+  getStatusLabel(status: string) : string {
+    switch (status) {
+      case 'WaitingReview':
+        return 'label label-blue';
+      case 'Denied':
+        return 'label label-orange';
+      case 'WaitingSignature':
+        return 'label label-red';
+      case 'InProgress':
+        return 'label label-green';
+      case 'Completed':
+        return 'label label-pink';
+      default:
+        return 'label label-white';
     }
   }
 
@@ -100,13 +127,38 @@ export class ContractComponent implements OnInit {
 
     const modal = this.modal.open(ManageContractComponent, style);
     modal.componentInstance.contractId = id;
+    modal.componentInstance.onSubmitted.subscribe(() =>{
+      this.refreshContracts();
+    });
   }
-
+  
   openDocumentFile(id: string) {
     const style = { size: 'md' };
 
     const modal = this.modal.open(ContractFilesComponent, style);
     modal.componentInstance.contractId = id;
+  }
+
+  openApprove(id: string, reference: string) {
+    const style = { size: 'md' };
+
+    const modal = this.modal.open(ApproveContractComponent, style);
+    modal.componentInstance.contractId = id;
+    modal.componentInstance.contractReference = reference;
+    modal.componentInstance.onSubmitted.subscribe(() => {
+      this.refreshContracts();
+    });
+  }
+
+  openDelete(id: string, reference: string) {
+    const style = { size: 'md' };
+
+    const modal = this.modal.open(DeleteContractComponent, style);
+    modal.componentInstance.contractId = id;
+    modal.componentInstance.contractReference = reference;
+    modal.componentInstance.onSubmitted.subscribe(() => {
+      this.refreshContracts();
+    });
   }
 
   getPaymentTypeDescription(paymetType: string): string {

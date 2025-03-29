@@ -1,0 +1,99 @@
+<div @fadeInOnEnter>
+    <div cardTitle="Contratos" class="search-form-container rounded">
+        <div class="container-fluid">
+            <div class="d-flex bg-white gap-2 justify-content-center align-items-center flex-wrap">
+                <form class="input-group">
+                    <ng-select class="d-flex flex-grow-1 custom" [placeholder]="'Filtrar por status...'"
+                        [notFoundText]="'Nenhum registro encontrado'" (change)="filter($event)">
+                        <ng-option *ngFor="let item of ticketStatus" [value]="item.value">
+                            {{item.description}}
+                        </ng-option>
+                    </ng-select>
+                </form>
+            </div>
+            <div>
+                <a class="custom-button rounded shadow-2" [routerLink]="['/support/tickets/new']">
+                    <i class="bi bi-plus"></i>
+                    Chamado
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-9">
+            <div class="row custom-scroll-cards" *ngIf="tickets.length != 0 else notFound">
+                <div class="col-md-12" *ngFor="let item of tickets">
+                    <div class="card border-radius-default">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">{{item.title}}</h5>
+                            <div class="mb-0">
+                                <div><span class="{{getStatusLabel(item.status)}}">{{getStatusDescription(item.status)}}</span></div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-end">
+                                <div class="d-flex flex-column gap-0">
+                                    <p class="reference mb-0">{{item.reference}}</p>
+                                    <small class="text-muted mt-0" style="font-size: 10pt; color: black !important;">Aberto em {{commonService.getDateTimeFormatted(item.createdAt)}}</small>
+                                </div>
+                                <div class="text-end mb-0">
+                                    <a [routerLink]="'/support/tickets/messages/' + item.id" class="btn btn-icon btn-rounded btn-template shadow-sm" title="Chat do suporte">
+                                        <i class="feather icon-message-circle"></i>
+                                    </a>
+                                </div>                       
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center p-0" *ngIf="displaySeeMore" style="margin-top: -10px;">
+                    <a class="link-default" href="javascript:void(0)" (click)="seeMoreTickets()">ver mais</a>
+                </div>
+            </div>
+            <ng-template #notFound>
+                <div class="col-md-12">
+                    <div class="card border-radius-default">
+                        <div class="card-header">
+                            <h5>Meus chamados</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 d-flex gap-2 justify-content-center">
+                                    <p>Nenhum chamado encontrado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <app-card cardTitle="Categorias de tickets" cardClass="bus" blockClass="p-0">
+                        <div class="row p-4">
+                            <div class="col-md-12 d-flex gap-2">
+                                <span class="label label-blue w-50">Técnico</span>
+                                <span class="label label-pink w-50">Negócio</span>
+                                <span class="label label-green w-50">Financeiro</span>
+                                <span class="label label-black w-50">Outros</span>
+                            </div>
+                        </div>
+                    </app-card>
+                </div>
+                <div class="col-md-12">
+                    <app-card cardTitle="Nosso suporte" cardClass="bus" blockClass="p-0">
+                        <div class="d-flex flex-column gap-2 p-4">
+                            <span class="label label-pink">label label-pink</span>
+                            <span class="label label-green">label label-green</span>
+                            <span class="label label-black">label label-black</span>
+                            <span class="label label-orange">label label-orange</span>
+                            <span class="label label-red">label label-red</span>
+                            <span class="label label-blue">label label-blue</span>
+                            <span class="label label-white">label label-white</span>
+                        </div>
+                    </app-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -30,10 +30,10 @@
                         <p>{{commonService.getValueFormatted(contract.totalPrice) }}</p>
                     </div>
                     <div class="fleet-cell">
-                        <p><span class="reference">{{ getStatusDescription(contract.status) }}</span></p>
+                        <span class="label {{getStatusLabel(contract.status)}} rounded">{{ getStatusDescription(contract.status) }}</span>
                     </div>
                     <div class="fleet-cell">
-                        <p><span class="reference">{{ contract.isApproved ? 'Aprovado' : 'Não Aprovado' }}</span></p>
+                        <p><span class="label {{ contract.isApproved ? 'label-green' : 'label-orange'}}">{{ contract.isApproved ? 'Aprovado' : 'Não Aprovado' }}</span></p>
                     </div>
                     <div class="fleet-cell">
                         <p>{{ commonService.getDateFormatted(contract.createdAt) }}</p>
@@ -55,8 +55,7 @@
                                 <div>
                                     <p><strong>Contrato ID:</strong> {{ contract.id }}</p>
                                     <p><strong>Referência:</strong> {{ contract.reference }}</p>
-                                    <p><strong>Tipo de pagamento: </strong><span class="reference">{{
-                                            getPaymentTypeDescription(contract.paymentType) }}</span></p>
+                                    <p><strong>Tipo de pagamento: </strong><span class="reference">{{ getPaymentTypeDescription(contract.paymentType) }}</span></p>
                                     <p><strong>Valor:</strong> {{ commonService.getValueFormatted(contract.totalPrice) }}</p>
                                 </div>
                             </div>
@@ -64,8 +63,7 @@
                         <div class="col-md-4">
                             <div class="h-100">
                                 <div>
-                                    <p><strong>Status: </strong><span class="reference">{{
-                                            getStatusDescription(contract.status) }}</span></p>
+                                    <p><strong>Status: </strong><span class="reference">{{ getStatusDescription(contract.status) }}</span></p>
                                     <p><strong>Aprovado:</strong> {{ contract.isApproved ? 'Sim' : 'Não' }}</p>
                                     <p><strong>Data de Criação:</strong> {{ commonService.getDateFormatted(contract.createdAt) }}</p>
                                     <p><strong>Data de Término:</strong> {{ commonService.getDateFormatted(contract.terminateDate) }}</p>
@@ -82,18 +80,27 @@
                             </div>
                         </div>
                         <div class="col-12 text-end m-0 p-0">
-                            <button type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" title="Gerenciar Contrato" (click)="openManageContract(contract.id)">
+                            <button *ngIf="enabledApprove" type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" title="Aprovar Contrato" (click)="openApprove(contract.id, contract.reference)">
                                 <i class="feather icon-check-square"></i>
+                            </button>
+                            <button type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" title="Gerenciar Contrato" (click)="openManageContract(contract.id)">
+                                <i class="feather icon-sliders"></i>
                             </button>
                             <button type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" title="Download do contrato" (click)="openDocumentFile(contract.id)">
                                 <i class="feather icon-printer"></i>
                             </button>
+                            <a type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" [routerLink]="['/contracts/details/' + contract.id]" title="Substituições">
+                                <i class="feather icon-settings"></i>
+                            </a>
                             <a type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" [routerLink]="['/contracts/details/' + contract.id]" title="Visualizar Contrato">
                                 <i class="feather icon-eye"></i>
                             </a>
                             <a class="btn btn-icon btn-rounded btn-template shadow-sm" [routerLink]="['/contracts/edit/' + contract.id]" title="Editar Contrato">
                                 <i class="feather icon-edit"></i>
                             </a>
+                            <button type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" title="Deletar contrato" (click)="openDelete(contract.id, contract.reference)">
+                                <i class="feather icon-trash-2"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

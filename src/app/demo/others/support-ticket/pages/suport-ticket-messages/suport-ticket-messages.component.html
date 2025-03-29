@@ -1,0 +1,44 @@
+<div @fadeInOnEnter>
+    <div class="card border-radius-default">
+        <div class="card-header d-flex justify-content-between align-items-center gap-2">
+            <div class="d-flex flex-column">
+                <h5 class="mb-2">Mensagens</h5>
+                <div class="d-flex flex-column gap-0">
+                    <div class="d-flex">
+                        <span class="m-0 p-0" style="font-size: 9pt;"><strong class="strong">Título</strong>: {{supportTicket.title}}</span> 
+                    </div>
+                    <div class="d-flex">
+                        <span class="m-0 p-0" style="font-size: 9pt;"><strong class="strong">Referência</strong>: {{supportTicket.reference}}</span>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <span class="m-0 p-0" style="font-size: 9pt;"><strong class="strong">Aberto:</strong> {{commomService.getDateFormatted(supportTicket.createdAt)}}</span>
+                        <span class="m-0 p-0" style="font-size: 9pt;"><strong class="strong">Situação:</strong> {{getStatusDescription(supportTicket.status)}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header-rigth">
+                <button class="custom-button-light rounded shadow-2" [routerLink]="['/support/tickets']">
+                    Voltar
+                </button>
+            </div>
+        </div>
+        <div class="card-body body-message-scrool" #scrollContainer>
+            <div class="message-container">
+                <div class="message {{message.isSupportAgent ? 'other-message' : 'user-message'}}" *ngFor="let message of messages">
+                    <div class="message-content">
+                        {{message.message}}
+                    </div>
+                    <span class="message-time">{{commomService.getDateTimeFormatted(message.createdAt)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <form class="col-md-12 d-flex gap-2" (ngSubmit)="submit()" [formGroup]="formMessage" #formDir="ngForm">
+                <textarea type="text" class="form-control custom-input-message" formControlName="message" rows="1" maxlength="600" (keydown.enter)="submit()"></textarea>
+                <button type="button" class="custom-button-send rounded shadow-2" title="Chat do suporte" (click)="submit()">
+                    <i class="bi bi-send"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

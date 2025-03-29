@@ -243,22 +243,6 @@
     }
   }
 
-  .actions .label {
-    padding: 0.4rem 1rem;
-    text-decoration: none;
-    color: white;
-    font-size: 0.675rem;
-    text-align: center;
-
-    &.label-blue {
-      background-color: #6bc8dd;
-    }
-
-    &.label-pink {
-      background-color: #f392de;;
-    }
-  }
-
   .action-menu {
     display: flex;
     gap: 20px;

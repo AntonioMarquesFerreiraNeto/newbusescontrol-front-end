@@ -33,6 +33,9 @@ import { ContractComponent } from './demo/contract/contract.component';
 import { NewContractComponent } from './demo/contract/pages/new-contract/new-contract.component';
 import { DetailsContractComponent } from './demo/contract/pages/details-contract/details-contract.component';
 import { EditContractComponent } from './demo/contract/pages/edit-contract/edit-contract.component';
+import { SupportTicketComponent } from './demo/others/support-ticket/support-ticket.component';
+import { NewSupportTicketComponent } from './demo/others/support-ticket/pages/new-support-ticket/new-support-ticket.component';
+import { SuportTicketMessagesComponent } from './demo/others/support-ticket/pages/suport-ticket-messages/suport-ticket-messages.component';
 
 const routes: Routes = [
   {
@@ -196,6 +199,21 @@ const routes: Routes = [
         path: 'contract/descriptions/edit/:id',
         component: EditContractDescriptionComponent,
         title: 'Buses Control | Editar Descrição'
+      },
+      {
+        path: 'support/tickets',
+        component: SupportTicketComponent,
+        title: 'Buses Control | Meus Chamados'
+      },
+      {
+        path: 'support/tickets/new',
+        component: NewSupportTicketComponent,
+        title: 'Buses Control | Abrir chamado'
+      },
+      {
+        path: 'support/tickets/messages/:id',
+        component: SuportTicketMessagesComponent,
+        title: 'Buses Control | Mensagens'
       },
       {
         path: 'basic',

@@ -55,6 +55,23 @@ export class DetailsContractComponent implements OnInit {
     }
   }
 
+  getStatusLabel(status: string) : string {
+    switch (status) {
+      case 'WaitingReview':
+        return 'label label-blue';
+      case 'Denied':
+        return 'label label-orange';
+      case 'WaitingSignature':
+        return 'label label-red';
+      case 'InProgress':
+        return 'label label-green';
+      case 'Completed':
+        return 'label label-pink';
+      default:
+        return 'label label-white';
+    }
+  }
+
   getPaymentTypeDescription(paymetType: string): string {
     switch (paymetType) {
       case 'Single':

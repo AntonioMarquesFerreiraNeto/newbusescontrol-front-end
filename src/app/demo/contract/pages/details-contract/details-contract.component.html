@@ -5,7 +5,7 @@
             <div class="card-body">
               <div class="d-flex justify-content-between w-100">
                 <div>
-                  <p><strong>Status: </strong><span class="reference">{{getStatusDescription(contract.status)}}</span></p>
+                  <p><strong>Status: </strong><span class="{{getStatusLabel(contract.status)}}">{{getStatusDescription(contract.status)}}</span></p>
                   <p><strong>Aprovado: </strong>{{contract.isApproved ? "sim" : "não"}}</p>
                   <p *ngIf="contract.approver"><strong>Aprovador: </strong>{{contract.approver.name}}</p>
                   <p><strong>Tipo de pagamento: </strong>{{getPaymentTypeDescription(contract.paymentType )}}</p>
@@ -99,13 +99,13 @@
                     </tbody>
                   </table>
                 </div>
+                <div class="col-md-12 d-flex justify-content-end mt-4">
+                  <button class="custom-button-light rounded shadow-2" [routerLink]="['/contracts']">
+                      Voltar
+                  </button>
+                </div>
             </div>
           </app-card>
-        </div>
-        <div class="col-md-12 d-flex justify-content-end">
-            <button class="custom-button-light rounded shadow-2" [routerLink]="['/contracts']">
-                Voltar
-            </button>
         </div>
     </div>
 </div>

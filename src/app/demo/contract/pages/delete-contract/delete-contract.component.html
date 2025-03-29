@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <div class="modal-title">Deletar Contrato</div>
+    <div class="closed"><a class="link-closed" href="javascript:(void);" (click)="modal.close()"><i class="bi bi-x-lg"></i></a></div>
+</div>
+<div class="modal-body">
+    <p style="text-align: justify;" class="text-dark">
+        Deseja realmente excluir o contrato <span class="reference">{{contractReference}}</span>? 
+        A exclusão será permitida somente para contratos aguardando revisão ou negados. Ou seja, contratos que ainda são rascunhos.
+    </p>
+</div>
+<div class="modal-footer d-flex justify-content-between">
+    <button type="button" class="custom-button rounded shadow-3 submit mb-2" (click)="deleteContract()">Confirmar</button>  
+    <button type="button" class="custom-button-light rounded shadow-3 submit mb-2" (click)="modal.close()">Fechar</button>  
+</div>

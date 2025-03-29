@@ -31,7 +31,7 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
     this.customerService.GetPaginated(this.pagination).subscribe(response => {
       this.customers = response.response,
-        this.pagination.totalSize = response.totalSize
+      this.pagination.totalSize = response.totalSize
     });
 
     this.tableMsg = this.customers?.length == 0 ? 'Nenhum registro encontrado' : '';
@@ -72,7 +72,7 @@ export class CustomerComponent implements OnInit {
   }
 
   getDetailActive(status: boolean) {
-    return status ? 'Cliente Ativo' : 'Cliente Inativo';
+    return status ? 'Ativo' : 'Inativo';
   }
 
   getLabelType(type: string) {
@@ -80,7 +80,7 @@ export class CustomerComponent implements OnInit {
   }
 
   getDetailType(type: string) {
-    return type == 'NaturalPerson' ? 'Pessoa Física' : 'Pessoa Jurídica';
+    return type == 'NaturalPerson' ? 'Física' : 'Jurídica';
   }
 
   dateFormatted(date: string) {

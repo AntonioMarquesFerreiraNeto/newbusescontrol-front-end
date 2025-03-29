@@ -38,6 +38,7 @@ export class ContractFilesComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) =>{
         this.snackbarService.Open(error.error.detail);
+        this.activeModal.close();
       }
     });
   }

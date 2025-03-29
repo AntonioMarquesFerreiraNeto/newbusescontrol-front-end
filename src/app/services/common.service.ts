@@ -9,7 +9,17 @@ export class CommonService {
   constructor(private datePipe: DatePipe) { }
 
   getDateFormatted(date: string) {
-    return this.datePipe.transform(date, "dd/MM/yyyy");
+    const dateObj = new Date(date);
+    dateObj.setHours(dateObj.getHours() - 3);
+    
+    return this.datePipe.transform(dateObj, 'dd/MM/yyyy');
+  }
+  
+  getDateTimeFormatted(date: string) {
+    const dateObj = new Date(date);
+    dateObj.setHours(dateObj.getHours() - 3);
+    
+    return this.datePipe.transform(dateObj, 'dd/MM/yyyy \'às\' HH:mm');
   }
 
   getDocumentFormatted(document: string) {

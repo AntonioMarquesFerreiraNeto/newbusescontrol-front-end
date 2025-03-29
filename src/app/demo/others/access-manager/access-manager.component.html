@@ -29,7 +29,7 @@
                     <p>{{getDateFormatted(item.employee?.birthDate)}}</p>
                 </div>
                 <div class="fleet-cell actions rounded">
-                    <a href="javascript:" class="label {{getLabelStatus(item.status)}} rounded shadow-1">{{getDetailStatus(item.status)}}</a>
+                    <a href="javascript:" class="label {{getLabelStatus(item.status)}} rounded">{{getDetailStatus(item.status)}}</a>
                 </div>
                 <div class="fleet-cell actions">
                     <div class="action-menu" *ngIf="item.status == 'Active' else notFound">
