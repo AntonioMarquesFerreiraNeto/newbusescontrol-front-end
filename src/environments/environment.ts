@@ -7,7 +7,8 @@ import packageInfo from '../../package.json';
 export const environment = {
   appVersion: packageInfo.version,
   production: true,
-  apiBaseUrl: 'http://localhost:5265/api/v1'
+  apiBaseUrl: 'https://localhost:5265/api/v1',
+  baseUrlWebSocket: 'https://localhost:5265/ws'
 };
 /*
  * For easier debugging in development mode, you can import the following file

@@ -36,6 +36,8 @@ import { EditContractComponent } from './demo/contract/pages/edit-contract/edit-
 import { SupportTicketComponent } from './demo/others/support-ticket/support-ticket.component';
 import { NewSupportTicketComponent } from './demo/others/support-ticket/pages/new-support-ticket/new-support-ticket.component';
 import { SuportTicketMessagesComponent } from './demo/others/support-ticket/pages/suport-ticket-messages/suport-ticket-messages.component';
+import { TicketsComponent } from './demo/others/tickets/tickets.component';
+import { LandingpageComponent } from './theme/layout/landingpage/landingpage.component';
 
 const routes: Routes = [
   {
@@ -201,6 +203,11 @@ const routes: Routes = [
         title: 'Buses Control | Editar Descrição'
       },
       {
+        path: 'tickets',
+        component: TicketsComponent,
+        title: 'Buses Control | Chamados'
+      },
+      {
         path: 'support/tickets',
         component: SupportTicketComponent,
         title: 'Buses Control | Meus Chamados'
@@ -236,6 +243,11 @@ const routes: Routes = [
         loadComponent: () => import('./demo/extra/sample-page/sample-page.component')
       }
     ]
+  },
+  {
+    path: 'home',
+    component: LandingpageComponent,
+    title: 'Home'
   },
   {
     path: '',

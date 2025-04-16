@@ -1,0 +1,167 @@
+::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #d4d4d4;
+    border-radius: 10px;
+    margin: 0 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #585858;
+    border-radius: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.board {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 10px;
+    color: #383838;
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.list {
+    min-width: 350px;
+    max-width: 350px;
+}
+
+.list .list-title {
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 18px;
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-cyan .list-title {
+    border-bottom: 3px solid #2856b2;
+}
+
+.list-orange .list-title {
+    border-bottom: 3px solid #f07706;
+}
+
+.list-green .list-title {
+    border-bottom: 3px solid #277844;
+}
+
+.list-red .list-title {
+    border-bottom: 3px solid #b62a2a;
+}
+
+.list .list-content {
+    margin-top: 15px;
+    padding-right: 5px;
+    overflow-y: auto;
+    max-height: 75vh;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 16px 24px;
+    position: relative;
+}
+
+.card .card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card .card-content .title {
+    margin-bottom: 10px;
+}
+
+.card .card-content .description {
+    color: #999;
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.card .card-content .label {
+    font-size: 13px;
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 5px;
+    border: 1px solid #e4e4e4;
+    padding: 3px 12px;
+    border-radius: 25px;
+    color: #777;
+}
+
+.card .card-content .label i {
+    margin-right: 4px;
+}
+
+.card .card-content .due-date {
+    font-size: 11px;
+    display: inline-block;
+    align-self: flex-start;
+    padding: 3px 12px;
+    border-radius: 25px;
+    color: #fff;
+    background-color: #ff4949;
+    margin-top: 10px;
+}
+
+.card .card-content .due-date.green {
+    background-color: #69e89c;
+}
+
+.add-card {
+    width: 100%;
+    background-color: #e5e5e5;
+    color: #737373;
+    padding: 13px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.add-card i {
+    font-size: 12px;
+    margin-right: 1px;
+}
+
+.add-card:hover {
+    background-color: #d3d3d3;
+    text-decoration: underline;
+}
+
+.custom-button {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 75px;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    background-color: #415d8e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #293548;
+    }
+  }

@@ -36,6 +36,8 @@ export class SuportTicketMessagesComponent implements OnInit {
         this.supportTicketMessageService.FindByTicket(this.supportTicket.id).subscribe((response) => {
           this.messages = response;
           this.scrollToBottom();
+
+          this.receiveNewMessages();
         });
       },
       error: (error: HttpErrorResponse) => {
@@ -46,6 +48,22 @@ export class SuportTicketMessagesComponent implements OnInit {
 
     this.formMessage = new FormGroup({
       message: new FormControl('', Validators.required)
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.supportTicketMessageService.DisconnectHub();
+  }
+
+  receiveNewMessages() {
+    this.supportTicketMessageService.ConnectToHub(this.supportTicket.id);
+
+    this.supportTicketMessageService.OnMessageReceived().subscribe({
+      next: (response) => {
+        this.messages.push(response);
+        this.scrollToBottom();
+        this.snackbarService.Open('Nova mensagem recebida');
+      }
     });
   }
 

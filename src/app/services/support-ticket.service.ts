@@ -14,8 +14,13 @@ export class SupportTicketService {
 
   constructor(private httpClient: HttpClient) { }
 
-  FindByPagination(request: Pagination): Observable <any> {
-    return this.httpClient.get<any>(`${this.urlBase}?page=${request.page}&pageSize=${request.pageSize}`);
+  FindByPagination(pagination: Pagination): Observable <any> {
+    var url = this.urlBase + `?page=${pagination.page}&pageSize=${pagination.pageSize}`;
+    if (pagination.filter?.length != 0) {
+      url += `&status=${pagination.filter}`;
+    }
+
+    return this.httpClient.get<any>(url);
   }
 
   GetById(id: string) {

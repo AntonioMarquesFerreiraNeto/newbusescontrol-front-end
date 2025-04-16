@@ -82,4 +82,11 @@ export class NavRightComponent {
   getCreatedAtFormatted(createdAt: string) {
     return this.notificationService.FormatedCreatedAt(createdAt);
   }
+
+  getSupportLink() {
+    switch(this.loggedUser?.role){
+      case 'SupportAgent': return ['/tickets'];
+      default: return ['/support/tickets']
+    }
+  }
 }

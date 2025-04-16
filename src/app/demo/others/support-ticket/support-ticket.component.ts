@@ -56,7 +56,18 @@ export class SupportTicketComponent implements OnInit {
   }
 
   filter(event: Event) {
+    this.pagination.filter = event ? String(event) : '';
 
+    this.pagination.page = 1;
+    this.pagination.pageSize = Pagination.DEFAULT_PAGE_SIZE_TICKETS;
+
+    this.supportTicketService.FindByPagination(this.pagination).subscribe((data) => {
+      this.tickets = data.response;
+      this.pagination.pageSize = data.pageSize;
+
+      this.displaySeeMore = this.tickets.length != 0 ? true : false;
+      this.displaySeeMore = this.tickets.length < data.totalSize;
+    });
   }
 
   getStatusDescription(status: string) {
