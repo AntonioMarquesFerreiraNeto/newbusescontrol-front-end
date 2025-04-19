@@ -5,17 +5,9 @@
 }
 
 p {
-    font-size: 14pt;
+    font-size: 13pt;
     text-align: justify;
     color: #4b5563;
-}
-
-.img-fluid {
-    max-height: 400px;
-    border-radius: 15px;
-    background-size: cover;
-    background-position: center;
-    transition: 2s;
 }
 
 //HEADER
@@ -107,10 +99,11 @@ p {
 }
 
 .card-img {
-    min-height: 300px;
+    min-height: 380px;
+    max-width: 720px;
     height: 100%;
     border-radius: 15px;
-    background-image: url(https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2115&q=80);
+    background-image: url(https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2115&q=80);
     background-size: cover;
     background-position: center;
     transition: 2s;
@@ -147,7 +140,7 @@ p {
     gap: 15px;
     border-radius: 10px;
     box-shadow: var(--bs-box-shadow) !important;
-    transition: border 0.3s ease;
+    transition: 1s;
     border: 1px solid transparent;
 }
 
@@ -185,28 +178,6 @@ p {
     color: #ffffffc0;
     text-align: center;
     font-size: 13pt;
-}
-
-//FUNCTIONS
-.functions {
-    width: 100%;
-    padding: 80px 220px;
-    background-color: #FFFF;
-}
-
-.title-functions {
-    font-size: 24pt;
-    font-weight: 560;
-    line-height: 1.1;
-    text-align: center !important;
-    color: #242424;
-}
-
-.subtitle-functions {
-    font-size: 19pt;
-    font-weight: 560;
-    line-height: 1.1;
-    color: #242424;
 }
 
 //TESTIMONIALS
@@ -259,6 +230,14 @@ p {
     width: 100%;
     padding: 80px 220px;
     background-color: #ffff;
+}
+
+.title-plans {
+    font-size: 24pt;
+    font-weight: 560;
+    text-align: center !important;
+    line-height: 1.1;
+    color: #242424;
 }
 
 .pricing-card {
@@ -457,7 +436,6 @@ p {
     .sub-header,
     .resource,
     .dividers,
-    .functions,
     .testimonials,
     .plans,
     .question,
@@ -473,7 +451,6 @@ p {
     .sub-header,
     .resource,
     .dividers,
-    .functions,
     .testimonials,
     .plans,
     .question,
@@ -489,7 +466,6 @@ p {
     .sub-header,
     .resource,
     .dividers,
-    .functions,
     .testimonials,
     .plans,
     .question,
@@ -532,7 +508,6 @@ p {
     .sub-header,
     .resource,
     .dividers,
-    .functions,
     .testimonials,
     .plans,
     .question,
