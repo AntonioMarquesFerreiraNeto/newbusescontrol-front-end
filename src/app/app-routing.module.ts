@@ -247,7 +247,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: LandingpageComponent,
-    title: 'Home'
+    title: 'Buses Control | Principal'
   },
   {
     path: '',
