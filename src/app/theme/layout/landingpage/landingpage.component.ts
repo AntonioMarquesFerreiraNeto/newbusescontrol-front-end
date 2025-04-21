@@ -4,11 +4,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { MatMenuModule } from '@angular/material/menu';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContactComponent } from './pages/contact/contact.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-landingpage',
   standalone: true,
-  imports: [RouterModule, CommonModule, MatMenuModule, MatButtonModule],
+  imports: [RouterModule, CommonModule, MatMenuModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.scss',
   animations: [fadeInOnEnterAnimation()]
@@ -16,7 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 export class LandingpageComponent {
   minimumWidth = true;
 
-  constructor(){
+  constructor(private modal: NgbModal){
     this.validaResolucaoBolean();
   }
 
@@ -34,5 +37,13 @@ export class LandingpageComponent {
     } else {
       this.minimumWidth = false;
     }
+  }
+
+  openContact() {
+    const style = {
+      size: 'lg'
+    };
+
+    this.modal.open(ContactComponent, style);
   }
 }

@@ -1,0 +1,53 @@
+<form (ngSubmit)="submit()" [formGroup]="contactForm" #formDir="ngForm">
+    <div class="modal-header">
+        <div class="modal-title">Contato</div>
+        <div class="closed-badge"><a class="link-close" href="javascript:" (click)="close()"><i class="feather icon-x"></i></a></div>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" class="form-control" id="name" placeholder="Informe seu nome" maxlength="150" formControlName="name">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="contactForm.get('name')?.hasError('required')">Campo obrigatório!</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="phoneNumber">Telefone</label>
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Informe seu telefone" formControlName="phoneNumber" mask="(00) 00000-0000">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="contactForm.get('phoneNumber')?.hasError('required')">Campo obrigatório!</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" placeholder="Informe seu e-mail" maxlength="150" formControlName="email">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="contactForm.get('email')?.hasError('required')">Campo obrigatório!</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" class="form-control" rows="6" formControlName="message" maxlength="2000"></textarea>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="contactForm.get('message')?.hasError('required')">Campo obrigatório!</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-primary-outline" (click)="close()">Cancelar</button>
+        <button type="submit" [disabled]="disabledContact" class="btn btn-primary">
+            <div *ngIf="!disabledContact else spinnerContract">Enviar</div>
+            <ng-template #spinnerContract class="d-flex align-items-center gap-2"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde</ng-template>
+        </button>
+    </div>
+</form>

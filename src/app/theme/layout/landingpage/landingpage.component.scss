@@ -10,11 +10,23 @@ p {
     color: #4b5563;
 }
 
+.pre-header {
+    height: 33px;
+    padding-left: 220px;
+    padding-right: 220px;
+}
+
+.pre-header-content {
+    font-size: 10pt;
+    font-weight: normal;
+    color: #525252ee;
+}
+
 //HEADER
 .header {
     position: sticky;
     top: 0;
-    min-height: 80px;
+    min-height: 70px;
     min-width: 100%;
     padding-left: 220px;
     padding-right: 220px;
@@ -54,40 +66,41 @@ p {
     font-weight: 430;
 }
 
+.btn-white-outline {
+    color: #FFFF !important;
+    border: 1px solid #FFFF !important;
+}
+
 .btn-primary-outline {
     color: #0273C6;
     border: 1px solid #0273C6;
     transition: 0.6s;
 }
 
-.btn-white-outline {
-    color: #FFFF;
-    border: 1px solid #FFFF;
-}
-
 .btn-primary-outline:hover {
-    color: rgba(255, 255, 255, 0.856);
-    background-color: #0273C6;
-    border: 1px solid #0273C6;
+    color: #ffffff !important;
+    background-color: #0273C6 !important;
+    border: 1px solid #0273C6 !important;
 }
 
 .btn-primary {
     color: white !important;
-    background-color: #0273C6;
+    background-color: #0273C6 !important;
     border: 1px solid #0273C6;
-    transition: 0.6s !important;
+    transition: 0.6s;
 }
 
 .btn-primary:hover {
-    color: white;
-    background-color: #025ea0;
+    color: white !important;
+    background-color: #025ea0 !important;
+    border: 1px solid #025ea0;
 }
 
 //SUB-HEADER
 .sub-header {
     width: 100%;
     padding: 140px 220px;
-    background-color: #111827;
+    background: linear-gradient(to bottom, #1f3157, #111827);
 }
 
 .title {
@@ -164,7 +177,7 @@ p {
 .dividers {
     width: 100%;
     padding: 80px 220px;
-    background-color: #111827;
+    background: linear-gradient(to bottom, #1f3157, #111827);
 }
 
 .percentage {
@@ -432,6 +445,7 @@ p {
 
 @media (max-width: 1600px) {
 
+    .pre-header,
     .header,
     .sub-header,
     .resource,
@@ -447,6 +461,7 @@ p {
 
 @media (max-width: 1200px) {
 
+    .pre-header,
     .header,
     .sub-header,
     .resource,
@@ -462,6 +477,7 @@ p {
 
 @media (max-width: 992px) {
 
+    .pre-header,
     .header,
     .sub-header,
     .resource,
@@ -500,7 +516,9 @@ p {
 }
 
 @media (max-width: 768px) {
-    .header {
+
+    .header,
+    .pre-header {
         padding-left: 24px;
         padding-right: 24px;
     }
