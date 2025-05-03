@@ -1,0 +1,111 @@
+<div [@fadeInOnEnter]>
+    <div cardTitle="Financeiro" class="search-form-container rounded mb-4">
+        <div class="container-fluid">
+            <div class="d-flex bg-white gap-2 justify-content-center align-items-center flex-wrap">
+                <form class="input-group">
+                    <span class="span-custom">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control rounded" placeholder="Pesquisar por nome..." (input)="search($event)"/>
+                </form>
+            </div>
+            <div>
+                <a class="custom-button rounded shadow-2" [routerLink]="['/financials/new']">
+                    <i class="bi bi-plus"></i>
+                    Lançamento
+                </a>
+            </div>
+        </div>
+    </div>
+    <app-card cardTitle="Lançamentos" cardClass="financial" blockClass="p-0">
+        <div class="fleet-container" *ngIf="financials?.length != 0 else notFound">
+            <div *ngFor="let financial of financials; let i = index">
+                <div class="fleet-row" title="Detalhes" (click)="toggleCollapse(i)">
+                    <div class="fleet-cell">
+                        <p><span class="reference">{{ financial.reference }}</span></p>
+                    </div>
+                    <div class="fleet-cell">
+                        <p>{{commonService.getValueFormatted(financial.totalPrice)}}</p>
+                    </div>
+                    <div class="fleet-cell">
+                        <p>{{financial.customer.name}}</p>
+                    </div>
+                    <div class="fleet-cell">
+                        <span class="label {{getTypeLabel(financial.type)}}">{{getTypeDescription(financial.type)}}</span>
+                    </div>
+                    <div class="fleet-cell">
+                        <p><span class="label {{financial.active ? 'label-blue' : 'label-red'}}">{{financial.active ? 'Ativo' : 'Inativo'}}</span></p>
+                    </div>
+                    <div class="fleet-cell">
+                        <p>{{commonService.getDateFormatted(financial.createdAt)}}</p>
+                    </div>
+                    <div class="fleet-cell actions">
+                        <div class="action-menu text-end">
+                            <a class="action-item bg-light shadow" title="Expandir/Retrair">
+                                <i [ngClass]="isCollapsed[i] ? 'feather icon-plus' : 'feather icon-minus'"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!isCollapsed[i]" class="collapse-content bg-light" style="padding: 15px 25px;">
+                    <div class="row d-flex justify-content-between" style="padding: 15px 30px; border-radius: 8px;">
+                        <div class="col-md-3">
+                            <div class="h-100">
+                                <p><strong>Referência:</strong> {{ financial.reference }}</p>
+                                <p><strong>Título:</strong> {{ financial.title }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end">
+                            <div class="h-100">
+                                <p><strong>Tipo: </strong> <span class="reference">{{ getTypeDescription(financial.type) }}</span></p>
+                                <p><strong>Tipo de pagamento: </strong> <span class="reference">{{ getPaymentTypeDescription(financial.paymentType) }}</span></p>
+                                <p><strong>Parcelas:</strong> {{ financial.installmentsCount }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end">
+                            <div class="h-100">
+                                <p><strong>Valor:</strong> {{ commonService.getValueFormatted(financial.price) }}</p>
+                                <p><strong>Total em taxas:</strong> {{ commonService.getValueFormatted(financial.totalInterestRate) }}</p>
+                                <p><strong>Valor total:</strong> {{ commonService.getValueFormatted(financial.totalPrice) }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end">
+                            <div class="h-100">
+                                <p><strong>Criado em:</strong> {{ commonService.getDateFormatted(financial.createdAt) }}</p>
+                                <p><strong>Iniciado em:</strong> {{ commonService.getDateFormatted(financial.startDate) }}</p>
+                                <p><strong>Término em:</strong> {{ commonService.getDateFormatted(financial.terminateDate) }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-end m-0 p-0">
+                            <a type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" [routerLink]="['/financials/invoices' + financial.id]" title="Faturas">
+                                <i class="feather icon-file-text"></i>
+                            </a>
+                            <a type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" [routerLink]="['/financials/details/' + financial.id]" title="Detalhes">
+                                <i class="feather icon-eye"></i>
+                            </a>
+                            <a class="btn btn-icon btn-rounded btn-template shadow-sm" [routerLink]="['/financials/edit/' + financial.id]" title="Editar">
+                                <i class="feather icon-edit"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Paginação -->
+            <div class="fleet-row pagination">
+                <mat-paginator (page)="handlePageEvent($event)" [length]="pagination.totalSize"
+                    [pageSize]="pagination.pageSize" [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Select page"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+        <ng-template #notFound>
+            <div class="fleet-container">
+                <div class="fleet-row">
+                    <div class="fleet-cell">
+                        <p>Nenhum registro foi encontrado</p>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </app-card>
+</div>

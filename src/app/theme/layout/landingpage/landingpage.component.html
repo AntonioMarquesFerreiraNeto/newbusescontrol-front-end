@@ -4,7 +4,7 @@
         <div class="d-flex gap-3 p-0">
             <a href="mailto:contato@busescontrol.com" class="pre-header-content"><i class="feather icon-mail"></i>
                 contato&#64;busescontrol.com</a>
-            <a href="javascript:void(0)" class="pre-header-content"><i class="feather icon-phone"></i> (62)
+            <a href="https://wa.me/5562985730236?text=Olá,%20gostaria%20de%20falar%20com%20você!" class="pre-header-content"><i class="feather icon-phone"></i> (62)
                 98573-0236</a>
         </div>
         <div class="d-flex gap-3 p-0">
@@ -17,16 +17,15 @@
         </div>
     </div>
     <nav class="header d-flex justify-content-between align-items-center" *ngIf="!minimumWidth else menuMobile">
-        <a [routerLink]="['/home']"><span class="title-logo">Buses<span
-                    style="color: #0F81E8;">Control</span></span></a>
+        <a [routerLink]="['/home']"><span class="title-logo">Buses<span style="color: #0F81E8;">Control</span></span></a>
         <div class="d-flex gap-4 align-items-center">
             <a [routerLink]="['/home']" fragment="resourceid" class="link-menu">Recursos</a>
             <a [routerLink]="['/home']" fragment="testimonialsid" class="link-menu">Depoimentos</a>
             <a [routerLink]="['/home']" fragment="plansid" class="link-menu">Planos</a>
             <a [routerLink]="['/home']" fragment="questionsid" class="link-menu">Dúvidas</a>
             <div class="d-flex gap-2">
-                <a [routerLink]="['/auth/signin']" class="btn btn-outline btn-primary-outline">Login</a>
-                <button class="btn btn-primary" (click)="openContact()">Fale Conosco</button>
+                <a [routerLink]="['/auth/signin']" class="btn btn-outline btn-primary-outline shadow-sm">Login</a>
+                <button class="btn btn-primary shadow-2" (click)="openContact()">Fale Conosco</button>
             </div>
         </div>
     </nav>
@@ -44,7 +43,7 @@
             <a [routerLink]="['/home']" fragment="questionsid" class="link-menu" mat-menu-item>Dúvidas</a>
             <hr />
             <div class="d-flex justify-content-center">
-                <a [routerLink]="['/auth/signin']" class="btn btn-outline btn-primary-outline">Login</a>
+                <a [routerLink]="['/auth/signin']" class="btn btn-outline btn-primary-outline shadow-sm">Login</a>
             </div>
         </mat-menu>
     </ng-template>
@@ -52,11 +51,11 @@
         <div class="col-md-5">
             <h1 class="title mb-4">Gestão de Frota <br><span style="color: #0d78d6;">Simplificada</span> e Eficiente
             </h1>
-            <p class="mb-4" style="color: #ffffffd8;">Transformando a gestão de frotas com tecnologia e inovação para
+            <p class="mb-4" style="color: #fffffffa;">Transformando a gestão de frotas com tecnologia e inovação para
                 empresas de todos os tamanhos.</p>
             <div class="d-flex flex-wrap gap-2">
-                <button class="btn btn-primary">Demonstração</button>
-                <button class="btn btn-outline btn-primary-outline btn-white-outline">Saber Mais</button>
+                <a target="_blank" href="https://wa.me/5562985730236?text=Ol%C3%A1,%20tudo%20bem?%20Gostaria%20de%20solicitar%20uma%20demonstra%C3%A7%C3%A3o%20do%20buses%20control!" class="btn btn-primary shadow">Demonstração</a>
+                <a target="_blank" href="https://wa.me/5562985730236?text=Ol%C3%A1,%20tudo%20bem?%20Gostaria%20de%20saber%20mais%20sobre%20o%20buses%20control!" class="btn btn-outline btn-primary-outline btn-white-outline shadow">Saber Mais</a>
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
@@ -343,7 +342,7 @@
                             <li><span class="pricing-feature-icon">✓</span> Suporte por e-mail</li>
                             <li><span class="pricing-feature-icon">✓</span> Até 5 usuários</li>
                         </ul>
-                        <button class="btn btn-primary-outline w-100">Comece Agora</button>
+                        <button class="btn btn-primary-outline w-100 shadow-sm">Comece Agora</button>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -364,7 +363,7 @@
                             <li><span class="pricing-feature-icon">✓</span> Automações de rotinas</li>
                             <li><span class="pricing-feature-icon">✓</span> Suporte prioritário</li>
                         </ul>
-                        <button class="btn btn-primary w-100">Comece Agora</button>
+                        <button class="btn btn-primary w-100 shadow-2">Comece Agora</button>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -383,7 +382,7 @@
                             <li><span class="pricing-feature-icon">✓</span> Onboarding dedicado</li>
                             <li><span class="pricing-feature-icon">✓</span> Gerente de contas exclusivo</li>
                         </ul>
-                        <button class="btn btn-primary-outline w-100">Fale Conosco</button>
+                        <button class="btn btn-primary-outline w-100 shadow-sm">Fale Conosco</button>
                     </div>
                 </div>
             </div>
@@ -396,7 +395,17 @@
                     <span class="subtitle-question">Possui alguma dúvida?</span>
                     <p style="font-size: 12pt;">Nossa equipe está pronta para ajudar você com qualquer dúvida ou
                         necessidade específica.</p>
-                    <button class="btn btn-primary btn-lg" (click)="openContact()">Fale Conosco</button>
+                    <button class="btn btn-primary btn-lg shadow" (click)="openContact()">Fale Conosco</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="asked-questions" style="display: none;">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="bg-question d-flex gap-3 align-items-center flex-column">
+                    <span class="subtitle-question">Perguntas Frequentes</span>
+                    <p style="font-size: 12pt; text-align: center;">Nosso time Comercial e de Suporte realizou uma análise das perguntas mais <br> frequentes sobre o Buses Control, visando um melhor esclarecimento.</p>
                 </div>
             </div>
         </div>
@@ -440,10 +449,10 @@
             <div>
                 <h3 class="footer-heading">Recursos</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Documentação</a></li>
+                    <li><a href="https://localhost:5265/swagger/index.html">Documentação</a></li>
                     <li><a href="#">Central de Ajuda</a></li>
                     <li><a href="#">Guias de Uso</a></li>
-                    <li><a href="#">API</a></li>
+                    <li><a href="https://localhost:5265/swagger/index.html">API</a></li>
                     <li><a href="#">Status do Sistema</a></li>
                 </ul>
             </div>
@@ -456,10 +465,10 @@
                     </li>
                     <li class="footer-contact-item">
                         <i class="fas fa-phone footer-contact-icon"></i>
-                        <span>+55 (11) 4321-1234</span>
+                        <a href="https://wa.me/5562985730236?text=Olá,%20gostaria%20de%20falar%20com%20você!">(62) 98573-0236</a>
                     </li>
                     <li class="mt-4">
-                        <a href="#" class="btn btn-primary">
+                        <a target="_blank" href="https://wa.me/5562985730236?text=Ol%C3%A1,%20tudo%20bem?%20Gostaria%20de%20solicitar%20uma%20demonstra%C3%A7%C3%A3o%20do%20buses%20control!" class="btn btn-primary" style="transition: 0.3s;">
                             Solicite uma Demo
                         </a>
                     </li>
@@ -474,4 +483,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container-whatsapp">
+    <button class="btn-whatsapp shadow" (click)="redirectToWhats()">
+        <i class="bi bi-whatsapp" style="font-size: 16pt;"></i>
+    </button>
 </div>

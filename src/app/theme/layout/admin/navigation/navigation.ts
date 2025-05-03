@@ -93,10 +93,10 @@ const NavigationItems = [
     icon: 'icon-ui',
     children: [
       {
-        id: 'financial',
+        id: 'financials',
         title: 'Financeiro',
         type: 'item',
-        url: '/forms/basic',
+        url: '/financials',
         icon: 'bi bi-piggy-bank',
         classes: 'nav-item'
       }

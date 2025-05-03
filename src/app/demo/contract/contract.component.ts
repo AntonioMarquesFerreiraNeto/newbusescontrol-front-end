@@ -60,8 +60,6 @@ export class ContractComponent implements OnInit {
     this.isCollapsed[index] = !this.isCollapsed[index];
   }
 
-  
-
   getStatusDescription(status: string): string {
     switch (status) {
       case 'WaitingReview':

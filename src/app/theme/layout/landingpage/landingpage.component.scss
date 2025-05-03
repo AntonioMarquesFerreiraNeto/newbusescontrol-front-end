@@ -60,7 +60,7 @@ p {
 
 .btn {
     margin: 0;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 16px;
     font-size: 11pt;
     font-weight: 430;
@@ -197,6 +197,7 @@ p {
 .testimonials {
     width: 100%;
     padding: 80px 220px;
+    background-color: #FFFF;
 }
 
 .title-testimonials {
@@ -242,7 +243,11 @@ p {
 .plans {
     width: 100%;
     padding: 80px 220px;
-    background-color: #ffff;
+}
+
+.asked-questions {
+    width: 100%;
+    padding: 80px 220px;
 }
 
 .title-plans {
@@ -326,6 +331,7 @@ p {
 .question {
     width: 100%;
     padding: 100px 220px;
+    background-color: #FFFF;
 }
 
 .subtitle-question {
@@ -443,6 +449,28 @@ p {
     color: white;
 }
 
+.container-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+.btn-whatsapp {
+    color: white;
+    background-color: #25D366;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    align-items: center;
+    border: none;
+    transition: 1s;
+}
+
+.btn-whatsapp:hover {
+    scale: 1.1;
+    background-color: #1fb355;
+}
+
 @media (max-width: 1600px) {
 
     .pre-header,
@@ -453,6 +481,7 @@ p {
     .testimonials,
     .plans,
     .question,
+    .asked-questions,
     .footer {
         padding-left: 100px;
         padding-right: 100px;
@@ -469,6 +498,7 @@ p {
     .testimonials,
     .plans,
     .question,
+    .asked-questions,
     .footer {
         padding-left: 80px;
         padding-right: 80px;
@@ -529,6 +559,7 @@ p {
     .testimonials,
     .plans,
     .question,
+    .asked-questions,
     .footer {
         padding: 60px 24px;
     }

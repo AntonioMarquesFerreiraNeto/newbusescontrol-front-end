@@ -1,5 +1,5 @@
 <div [@fadeInOnEnter]>
-    <div cardTitle="Contratos" class="search-form-container rounded">
+    <div cardTitle="Contratos" class="search-form-container rounded mb-4">
         <div class="container-fluid">
             <div class="d-flex bg-white gap-2 justify-content-center align-items-center flex-wrap">
                 <form class="input-group">
@@ -40,11 +40,9 @@
                     </div>
                     <div class="fleet-cell actions">
                         <div class="action-menu text-end">
-                            <p>{{isCollapsed[i] ? "Expandir" : "Ocultar"}}</p>
-                            <span class="action-item" title="Expandir/Retrair">
-                                <i
-                                    [ngClass]="isCollapsed[i] ? 'feather icon-chevron-down' : 'feather icon-chevron-up'"></i>
-                            </span>
+                            <a class="action-item bg-light shadow" title="Expandir/Retrair">
+                                <i [ngClass]="isCollapsed[i] ? 'feather icon-plus' : 'feather icon-minus'"></i>
+                            </a>
                         </div>
                     </div>
                 </div>

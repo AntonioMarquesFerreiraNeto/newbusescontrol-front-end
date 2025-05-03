@@ -46,4 +46,8 @@ export class LandingpageComponent {
 
     this.modal.open(ContactComponent, style);
   }
+
+  redirectToWhats() {
+    window.open('https://wa.me/5562985730236?text=Olá,%20gostaria%20de%20falar%20com%20você!', '_blank');
+  }  
 }

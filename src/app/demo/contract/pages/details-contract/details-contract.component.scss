@@ -56,3 +56,13 @@
   strong {
     font-weight: 401 !important;
   }
+
+.btn-red {
+    color: white !important;
+    background-color: #c15050 !important; 
+
+    &:hover {
+        color: white !important;
+        background-color: #832c2c !important;
+    }
+}

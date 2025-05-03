@@ -38,6 +38,8 @@ import { NewSupportTicketComponent } from './demo/others/support-ticket/pages/ne
 import { SuportTicketMessagesComponent } from './demo/others/support-ticket/pages/suport-ticket-messages/suport-ticket-messages.component';
 import { TicketsComponent } from './demo/others/tickets/tickets.component';
 import { LandingpageComponent } from './theme/layout/landingpage/landingpage.component';
+import { FinancialComponent } from './demo/financial/financial.component';
+import { NotfoundComponent } from './theme/layout/notfound/notfound.component';
 
 const routes: Routes = [
   {
@@ -46,7 +48,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/auth/signin',
+        redirectTo: '/home',
         pathMatch: 'full'
       },
       {
@@ -223,6 +225,11 @@ const routes: Routes = [
         title: 'Buses Control | Mensagens'
       },
       {
+        path: 'financials',
+        component: FinancialComponent,
+        title: 'Buses Control | Financeiro'
+      },
+      {
         path: 'basic',
         loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then((m) => m.UiBasicModule)
       },
@@ -250,6 +257,11 @@ const routes: Routes = [
     title: 'Buses Control | Principal'
   },
   {
+    path: 'not-found',
+    component: NotfoundComponent,
+    title: 'Buses Control | Não encontrada'
+  },
+  {
     path: '',
     component: GuestComponent,
     children: [
@@ -258,6 +270,10 @@ const routes: Routes = [
         loadChildren: () => import('./demo/pages/authentication/authentication.module').then((m) => m.AuthenticationModule)
       }
     ]
+  },
+  { 
+    path: '**', 
+    component: NotfoundComponent 
   }
 ];
 

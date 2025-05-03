@@ -43,9 +43,9 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer d-flex justify-content-end gap-2">
-        <button type="button" class="btn btn-primary-outline" (click)="close()">Cancelar</button>
-        <button type="submit" [disabled]="disabledContact" class="btn btn-primary">
+    <div class="modal-footer d-flex justify-content-end gap-2 p-3">
+        <button type="button" class="btn btn-primary-outline shadow-sm" (click)="close()">Cancelar</button>
+        <button type="submit" [disabled]="disabledContact" class="btn btn-primary shadow">
             <div *ngIf="!disabledContact else spinnerContract">Enviar</div>
             <ng-template #spinnerContract class="d-flex align-items-center gap-2"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde</ng-template>
         </button>

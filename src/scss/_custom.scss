@@ -143,25 +143,6 @@ body {
   justify-content: space-between;
 }
 
-/* Barra de rolagem */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #ffffff;
-}
-
-::-webkit-scrollbar-thumb {
-  gap: 2px;
-  background-color: #bbcbe8;
-  border-radius: 80px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(68, 68, 168, 0.479);
-}
-
 header {
   width: 100%;
 }

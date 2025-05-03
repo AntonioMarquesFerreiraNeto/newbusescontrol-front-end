@@ -1,0 +1,26 @@
+b {
+    font-weight: 450;
+    color: rgb(17, 17, 17);
+    font-size: 30pt;
+}
+
+p {
+    color: rgb(61, 61, 61);
+}
+
+.container-not-found {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 160px;
+    height: 100vh;
+    align-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+img {
+    max-width: 943px;
+    width: 100%;
+    height: auto;
+}

@@ -26,6 +26,11 @@ export default class AuthSigninComponent implements OnInit {
   constructor(private authService: AuthService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
+    var logged = localStorage.getItem('logged');
+    if(Boolean(logged)) {
+      window.location.href = '/dashboard';
+    }
+
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)

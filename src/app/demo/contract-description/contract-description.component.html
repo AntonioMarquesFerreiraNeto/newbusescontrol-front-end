@@ -1,5 +1,5 @@
 <div [@fadeInOnEnter]>
-    <div cardTitle="Frota" class="search-form-container rounded">
+    <div cardTitle="Frota" class="search-form-container rounded mb-4">
         <div class="container-fluid">
             <div class="sub-header">
                 <i class="feather icon-file-text"></i>
@@ -12,7 +12,6 @@
             </div>
         </div>
     </div>
-    <br>
     <app-card cardTitle="Descrição de contratos" cardClass="bus" blockClass="p-0">
         <div class="fleet-container" *ngIf="contractDescriptions && contractDescriptions.length != 0 else notFound">
             <div class="fleet-row" title="Detalhes" *ngFor="let item of contractDescriptions">

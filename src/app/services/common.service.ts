@@ -15,7 +15,11 @@ export class CommonService {
     return this.datePipe.transform(dateObj, 'dd/MM/yyyy');
   }
   
-  getDateTimeFormatted(date: string) {
+  getDateTimeFormatted(date?: string) {
+    if(date == null) {
+      return 'Não possui';
+    }
+
     const dateObj = new Date(date);
     dateObj.setHours(dateObj.getHours() - 3);
     

@@ -1,5 +1,5 @@
 <div [@fadeInOnEnter]>
-    <div cardTitle="Frota" class="search-form-container rounded">
+    <div cardTitle="Frota" class="search-form-container rounded mb-4">
         <div class="container-fluid">
             <div class="sub-header">
                 <i class="bi bi-ui-checks-grid"></i>
@@ -12,7 +12,6 @@
             </div>
         </div>
     </div>
-    <br>
     <app-card cardTitle="Painel de configuração" cardClass="bus" blockClass="p-0">
         <div class="fleet-container" *ngIf="settingsPanel && settingsPanel.length != 0 else notFound">
             <div class="fleet-row" title="Detalhes" *ngFor="let item of settingsPanel" (click)="openDetails(item.id)">
