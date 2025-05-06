@@ -19,4 +19,8 @@ export class FinancialService {
 
     return this.httpClient.get<any>(url);
   }
+
+  GetById(id: string) : Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/${id}`);
+  }
 }

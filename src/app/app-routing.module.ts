@@ -40,6 +40,8 @@ import { TicketsComponent } from './demo/others/tickets/tickets.component';
 import { LandingpageComponent } from './theme/layout/landingpage/landingpage.component';
 import { FinancialComponent } from './demo/financial/financial.component';
 import { NotfoundComponent } from './theme/layout/notfound/notfound.component';
+import { InvoicesComponent } from './demo/financial/pages/invoices/invoices.component';
+import { InvoicePaymentComponent } from './demo/financial/pages/invoice-payment/invoice-payment.component';
 
 const routes: Routes = [
   {
@@ -228,6 +230,16 @@ const routes: Routes = [
         path: 'financials',
         component: FinancialComponent,
         title: 'Buses Control | Financeiro'
+      },
+      {
+        path: 'financials/:financialid/invoices',
+        component: InvoicesComponent,
+        title: 'Buses Control | Faturas'
+      },
+      {
+        path: 'financials/:financialid/invoices/:invoiceid/payment',
+        component: InvoicePaymentComponent,
+        title: 'Buses Control | Pagamento da fatura'
       },
       {
         path: 'basic',

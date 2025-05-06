@@ -1,0 +1,143 @@
+<div [@fadeInOnEnter]>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card border-radius-default" blockClass="p-0">
+                <div class="card-header d-flex justify-content-between align-items-center gap-2">
+                    <div class="d-flex flex-column">
+                        <h5 class="mb-2">Resumo da Fatura</h5>
+                        <p style="margin-top: -3px !important; color: rgb(75, 75, 75); font-size: 10pt;">
+                            {{invoice.title}}
+                        </p>
+                    </div>
+                    <div class="card-header-rigth">
+                        <span class="{{getStatusLabel(invoice.status)}}">{{getStatusDescription(invoice.status)}}</span>
+                    </div>
+                </div>
+                <div class="row" style="padding: 20px 30px;">
+                    <div class="col-md-12 d-flex flex-column gap-2">
+                        <h5 class="sub-title">Pagamento da {{invoice.title}}</h5>
+                        <span style="margin-top: -3px !important; color: rgb(75, 75, 75); font-size: 10pt;">
+                            {{invoice.description}}
+                        </span>
+                        <span class="pricing-price ">{{commonService.getValueFormatted(invoice.totalPrice)}}</span>
+                    </div>
+                    <div class="col-md-12" style="color: rgb(75, 75, 75);">
+                        <hr>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-between">
+                        <div class="d-flex gap-2 flex-column">
+                            <span style="color: rgb(32, 32, 32); font-size: 10pt;">Valor:</span>
+                            <span style="color: rgb(32, 32, 32); font-size: 10pt;">Juros:</span>
+                            <span style="color: rgb(32, 32, 32); font-size: 10pt; font-weight: 450;">Total:</span>
+                        </div>
+                        <div class="d-flex gap-2 flex-column">
+                            <span style="color: rgb(32, 32, 32); font-size: 10pt;">{{commonService.getValueFormatted(invoice.price)}}</span>
+                            <span style="color: rgb(32, 32, 32); font-size: 10pt;">{{commonService.getValueFormatted(invoice.interestRate)}}</span>
+                            <span style="color: rgb(32, 32, 32); font-size: 10pt; font-weight: 450;">{{commonService.getValueFormatted(invoice.totalPrice)}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card border-radius-default" blockClass="p-0">
+                <div class="card-header d-flex justify-content-between align-items-center gap-2">
+                    <div class="d-flex flex-column">
+                        <h5 class="mb-2">Informações de Pagamento</h5>
+                        <p style="margin-top: -3px !important; color: rgb(75, 75, 75); font-size: 10pt;">
+                            Escolha o método de pagamento e preencha os dados necessários.
+                        </p>
+                    </div>
+                </div>
+                <form class="row" style="padding: 20px 30px;">
+                    <div class="col-md-12">
+                        <h5 class="sub-title mb-3">Dados Pessoais</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name">Nome</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Digite a marca" maxlength="60">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" class="form-control" id="email" placeholder="Digite a marca" maxlength="60">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="phoneNumber">Telefone</label>
+                                    <input type="text" class="form-control" id="phoneNumber" placeholder="Digite a marca" maxlength="60">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="document">CPF/CNPJ</label>
+                                    <input type="text" class="form-control" id="document" placeholder="Digite a marca" maxlength="60">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="holderPostalCode">CEP</label>
+                                    <input type="text" class="form-control" id="holderPostalCode"
+                                        placeholder="Digite o CEP" mask="00000-000">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="holderAddressNumber">Número do Endereço</label>
+                                    <input type="text" class="form-control" id="holderAddressNumber"
+                                        placeholder="Digite o número do endereço" maxlength="60">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h5 class="sub-title mb-3 mt-3">Método de Pagamento</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="number">Número do Cartão</label>
+                                    <input type="text" class="form-control" id="number"
+                                        placeholder="Digite o número do cartão" mask="0000 0000 0000 0000">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="expiryMonth">Mês de Validade</label>
+                                    <input type="text" class="form-control" id="expiryMonth" placeholder="MM" mask="00">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="expiryYear">Ano de Validade</label>
+                                    <input type="text" class="form-control" id="expiryYear" placeholder="AA" mask="0000">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="securityCode">Código de Segurança</label>
+                                    <input type="text" class="form-control" id="securityCode"
+                                        placeholder="Digite o código de segurança"  mask="000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-end gap-2">
+                        <a class="custom-button rounded shadow-2" [routerLink]="['/financials/' + financialId + '/invoices']">
+                            Finalizar
+                        </a>
+                        <a class="custom-button-light rounded shadow-2" [routerLink]="['/financials/' + financialId + '/invoices']">
+                            Voltar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

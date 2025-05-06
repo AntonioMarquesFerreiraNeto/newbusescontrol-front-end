@@ -1,0 +1,62 @@
+<div [@fadeInOnEnter]>
+    <div cardTitle="Contratos" class="search-form-container rounded mb-4">
+        <div class="container-fluid">
+            <div class="d-flex bg-white gap-2 justify-content-center align-items-center flex-wrap">
+                <form class="input-group gap-2">
+                    <ng-select class="d-flex flex-grow-1 custom" [placeholder]="'Filtrar por...'"
+                        [notFoundText]="'Nenhum registro encontrado'" (change)="filter($event)">
+                        <ng-option *ngFor="let item of invoiceStatus" [value]="item.value">
+                            {{item.description}}
+                        </ng-option>
+                    </ng-select>
+                </form>
+            </div>
+            <div>
+                <a class="custom-button rounded shadow-2" [routerLink]="['/financials']">
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+    <app-card cardTitle="Faturas" cardClass="bus" blockClass="p-0" *ngIf="financial">
+        <div class="fleet-container" *ngIf="financial.invoices && financial.invoices.length != 0 else notFound">
+            <div class="fleet-row" title="Detalhes" *ngFor="let item of financial.invoices">
+                <div class="fleet-cell">
+                    <p>{{item.title}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p><span class="reference">{{item.reference}}</span></p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{commmonService.getValueFormatted(item.totalPrice)}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{commmonService.getValueFormatted(item.interestRate)}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <p>{{commmonService.getDateFormatted(item.dueDate)}}</p>
+                </div>
+                <div class="fleet-cell">
+                    <span class="label {{getStatusLabel(item.status)}}">{{getStatusDescription(item.status)}}</span>
+                </div>
+                <div class="fleet-cell actions">
+                    <div class="action-menu text-end">
+                        <a href="javascript:void(0)" (click)="redirectToInvoicePayment(item.id)" class="action-item bg-light shadow-2" title="Realizar Pagamento">
+                            <i class="feather icon-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="min-height: 30px;"></div>
+        </div>
+        <ng-template #notFound>
+            <div class="fleet-container">
+              <div class="fleet-row">
+                <div class="fleet-cell">
+                  <p>Nenhum registro foi encontrado</p>
+                </div>
+              </div>
+            </div>
+        </ng-template>
+    </app-card>
+</div>

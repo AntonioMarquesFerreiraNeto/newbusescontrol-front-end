@@ -1,4 +1,5 @@
 import { Customer } from "./Customer";
+import { Invoice } from "./Invoice";
 
 export interface Financial {
     id: string;
@@ -19,4 +20,5 @@ export interface Financial {
     createdAt: string;
     customerId: string;
     customer: Customer;
+    invoices: Invoice[];
 }
