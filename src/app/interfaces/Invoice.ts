@@ -10,5 +10,7 @@ export interface Invoice {
     status: string;
     dueDate: string;    
     externalId: string;
+    paymentMethod: string;
+    paymentDate: string;
     createdAt: string;   
 }  
