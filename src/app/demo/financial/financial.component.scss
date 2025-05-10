@@ -261,10 +261,10 @@
   
       .action-item {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-content: center;
         text-align: center;
-        display: block;
         color: #ffff;
         background-color: #415d8e !important;
         text-decoration: none;

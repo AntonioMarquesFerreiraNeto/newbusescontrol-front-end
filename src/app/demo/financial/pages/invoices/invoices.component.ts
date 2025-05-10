@@ -59,7 +59,16 @@ export class InvoicesComponent implements OnInit {
 
   redirectToInvoicePayment(invoiceId: string) {
     const invoice = this.financial.invoices.find(x => x.id == invoiceId);
-    sessionStorage.setItem(invoiceId, JSON.stringify(invoice));
+    const data: any = {
+      ...invoice,
+      customerName: this.financial.customer.name,
+      customerEmail: this.financial.customer.email,
+      customerPhoneNumber: this.financial.customer.phoneNumber,
+      customerHomeNumber: this.financial.customer.homeNumber,
+      customerDocument: this.financial.customer.cpf ?? this.financial.customer.cnpj
+    };
+
+    sessionStorage.setItem(invoiceId, JSON.stringify(data));
 
     this.router.navigate(['/financials/' + this.financial.id + '/invoices/' + invoiceId + '/payment']);
   }

@@ -1,4 +1,4 @@
-<div [@fadeInOnEnter]>
+<div [@fadeInOnEnter] *ngIf="invoice">
     <div class="row">
         <div class="col-md-4">
             <div class="card border-radius-default" blockClass="p-0">
@@ -49,7 +49,7 @@
                         </p>
                     </div>
                 </div>
-                <form class="row" style="padding: 20px 30px;">
+                <form (ngSubmit)="submit()" [formGroup]="invoicePayment" #formDir="ngForm" class="row" style="padding: 20px 30px;">
                     <div class="col-md-12">
                         <h5 class="sub-title mb-3">Dados Pessoais</h5>
                     </div>
@@ -58,39 +58,39 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="name">Nome</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Digite a marca" maxlength="60">
+                                    <input type="text" class="form-control" id="name" placeholder="Digite a marca" maxlength="60" formControlName="holderName">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Digite a marca" maxlength="60">
+                                    <input type="text" class="form-control" id="email" placeholder="Digite a marca" maxlength="60" formControlName="holderEmail">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="phoneNumber">Telefone</label>
-                                    <input type="text" class="form-control" id="phoneNumber" placeholder="Digite a marca" maxlength="60">
+                                    <input type="text" class="form-control" id="phoneNumber" placeholder="Digite a marca" maxlength="60" formControlName="holderMobilePhone" mask="(00) 00000-0000">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="document">CPF/CNPJ</label>
-                                    <input type="text" class="form-control" id="document" placeholder="Digite a marca" maxlength="60">
+                                    <input type="text" class="form-control" id="document" placeholder="Digite o CPF ou CNPJ" [mask]="cpfCnpjMask" (input)="onDocumentInput()" formControlName="holderCpfCnpj">
                                 </div>
-                            </div>
+                              </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="holderPostalCode">CEP</label>
                                     <input type="text" class="form-control" id="holderPostalCode"
-                                        placeholder="Digite o CEP" mask="00000-000">
+                                        placeholder="Digite o CEP" mask="00000-000" formControlName="holderPostalCode">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="holderAddressNumber">Número do Endereço</label>
                                     <input type="text" class="form-control" id="holderAddressNumber"
-                                        placeholder="Digite o número do endereço" maxlength="60">
+                                        placeholder="Digite o número do endereço" maxlength="60" formControlName="holderAddressNumber">
                                 </div>
                             </div>
                         </div>
@@ -104,34 +104,34 @@
                                 <div class="form-group">
                                     <label for="number">Número do Cartão</label>
                                     <input type="text" class="form-control" id="number"
-                                        placeholder="Digite o número do cartão" mask="0000 0000 0000 0000">
+                                        placeholder="Digite o número do cartão" mask="0000 0000 0000 0000" formControlName="number">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="expiryMonth">Mês de Validade</label>
-                                    <input type="text" class="form-control" id="expiryMonth" placeholder="MM" mask="00">
+                                    <input type="text" class="form-control" id="expiryMonth" placeholder="MM" mask="00" formControlName="expiryMonth">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="expiryYear">Ano de Validade</label>
-                                    <input type="text" class="form-control" id="expiryYear" placeholder="AA" mask="0000">
+                                    <input type="text" class="form-control" id="expiryYear" placeholder="AA" mask="0000" formControlName="expiryYear">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="securityCode">Código de Segurança</label>
                                     <input type="text" class="form-control" id="securityCode"
-                                        placeholder="Digite o código de segurança"  mask="000">
+                                        placeholder="Digite o código de segurança"  mask="000" formControlName="securityCode">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 d-flex justify-content-end gap-2">
-                        <a class="custom-button rounded shadow-2" [routerLink]="['/financials/' + financialId + '/invoices']">
+                        <button class="custom-button rounded shadow-2" type="button">
                             Finalizar
-                        </a>
+                        </button>
                         <a class="custom-button-light rounded shadow-2" [routerLink]="['/financials/' + financialId + '/invoices']">
                             Voltar
                         </a>
