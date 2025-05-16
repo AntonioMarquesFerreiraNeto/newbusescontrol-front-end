@@ -14,6 +14,7 @@ import { map } from 'rxjs';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentPixComponent } from './pages/payment-pix/payment-pix.component';
+import { InvoicePix } from 'src/app/interfaces/InvoicePix';
 
 @Component({
   selector: 'app-invoice-payment',
@@ -80,7 +81,7 @@ export class InvoicePaymentComponent implements OnInit {
     }
   }
 
-   getPaymentMethod(paymentMethod) {
+  getPaymentMethod(paymentMethod) {
     switch (paymentMethod) {
       case 'CreditCard': return "Cartão de crédito";
       case 'PIX': return "Transação PIX";
@@ -126,9 +127,18 @@ export class InvoicePaymentComponent implements OnInit {
             return;
           }
 
-          //TODO: tratar o response do payment pix.
-          const style = { size: 'lg' };
-          this.modal.open(PaymentPixComponent, style);
+          const invoicePix : InvoicePix = {
+            message: response.message,
+            encodedImage: response.pix.encodedImage,
+            payload: response.pix.payload,
+            expirationDate: response.pix.expirationDate
+          };
+
+          const modalPix = this.modal.open(PaymentPixComponent, {
+            backdrop: 'static',
+            size: 'md'
+          });
+          modalPix.componentInstance.invoicePix = invoicePix;
         });
       },
       error: (error: HttpErrorResponse) => {

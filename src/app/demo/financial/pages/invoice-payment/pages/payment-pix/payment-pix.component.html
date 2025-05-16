@@ -1,14 +1,32 @@
 <div class="modal-header">
-    <div class="modal-title">Pagamento Pix</div>
-    <div class="closed"><a class="link-closed" href="javascript:(void);" (click)="modal.close()"><i class="bi bi-x-lg"></i></a></div>
+    <div class="modal-title">Realize o Pagamento</div>
+    <div class="closed">
+        <a class="link-closed" href="javascript:(void);" (click)="modal.close()">
+            <i class="bi bi-x-lg"></i>
+        </a>
+    </div>
 </div>
 <div class="modal-body">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow-sm" style="border-radius: 5px;"></div>
+        <div class="col-md-12 d-flex align-content-center align-items-center mt-2 flex-column gap-1">
+            <img id="qrImage" [src]="'data:image/png;base64,' + invoicePix.encodedImage" alt="QR Code" style="max-width: 200px;" onload="
+                const canvas = document.getElementById('qrCanvas');
+                const img = this;
+                const ctx = canvas.getContext('2d');
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+                ctx.drawImage(img, 0, 0);
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const result = jsQR(imageData.data, imageData.width, imageData.height);
+                document.getElementById('qrResult').textContent = result ? result.data : 'QR Code não detectado.';"/>
+            <p>{{ invoicePix.message }}</p>
+            <p style="font-weight: 450;">O qr-code expira em {{getDateFormatted(invoicePix.expirationDate)}}</p>
         </div>
-        <div class="col-md-12 d-flex justify-content-between">
-            <button class="btn custom-button"><i class="feather icon-share-2"></i> Compartilhar Fatura</button>
+        <canvas id="qrCanvas" style="display: none;"></canvas>
+        <div class="col-md-12 d-flex justify-content-center mt-2">
+            <button type="button" class="btn custom-button" (click)="copyQrCode()">
+                Copiar qr-code
+            </button>
         </div>
     </div>
 </div>
