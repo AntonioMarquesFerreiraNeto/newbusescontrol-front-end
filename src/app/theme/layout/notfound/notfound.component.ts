@@ -10,5 +10,8 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
   animations: [fadeInOnEnterAnimation()]
 })
 export class NotfoundComponent {
-
+  gotToHome() {
+    var logged = Boolean(localStorage.getItem('logged'));
+    window.location.href = logged ? '/dashboard' : '/home';
+  }
 }
