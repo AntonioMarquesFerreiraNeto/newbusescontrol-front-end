@@ -8,11 +8,12 @@ import { PanelModule } from 'primeng/panel';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { Pagination } from 'src/app/class/Pagination';
 import { Financial } from 'src/app/interfaces/Financial';
 import { FinancialService } from 'src/app/services/financial.service';
 import { CommonService } from 'src/app/services/common.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OptionsFinancialComponent } from './pages/options-financial/options-financial.component';
 
 @Component({
   selector: 'app-financial',
@@ -31,7 +32,7 @@ export class FinancialComponent implements OnInit {
     this.buildFinancial();
   }
 
-  constructor(private financialService: FinancialService, public commonService: CommonService) { }
+  constructor(private financialService: FinancialService, public commonService: CommonService, private modal: NgbModal) { }
 
   search(event: Event) {
     const element = event.target as HTMLInputElement;
@@ -94,5 +95,12 @@ export class FinancialComponent implements OnInit {
       case 'Multiple': return 'label label-pink';
       default: return 'label label-white';
     }
+  }
+
+  optionsFinancial() {
+    this.modal.open(OptionsFinancialComponent, {
+      backdrop: 'static',
+      size: 'md'
+    });
   }
 }

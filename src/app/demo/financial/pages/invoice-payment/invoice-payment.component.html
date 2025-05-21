@@ -62,55 +62,73 @@
                     </div>
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-2">
                                 <div class="form-group">
                                     <label for="name">Nome</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Digite a marca"
+                                    <input type="text" class="form-control" id="name" placeholder="Informe o nome"
                                         maxlength="60" formControlName="holderName"
                                         [readOnly]="invoicePayment.get('paymentMethod')?.value != 'CreditCard'">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('holderName')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-2">
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Digite a marca"
+                                    <input type="text" class="form-control" id="email" placeholder="Informe o e-mail"
                                         maxlength="60" formControlName="holderEmail"
                                         [readOnly]="invoicePayment.get('paymentMethod')?.value != 'CreditCard'">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('holderEmail')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-2">
                                 <div class="form-group">
                                     <label for="phoneNumber">Telefone</label>
                                     <input type="text" class="form-control" id="phoneNumber"
-                                        placeholder="Digite a marca" maxlength="60" formControlName="holderMobilePhone"
+                                        placeholder="Informe o telefone" maxlength="60" formControlName="holderMobilePhone"
                                         mask="(00) 00000-0000"
                                         [readOnly]="invoicePayment.get('paymentMethod')?.value != 'CreditCard'">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('holderMobilePhone')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-2">
                                 <div class="form-group">
                                     <label for="document">CPF/CNPJ</label>
-                                    <input (input)="handleMaskDocument()" type="text" class="form-control" id="document"
-                                        placeholder="Digite o CPF ou CNPJ" [mask]="cpfCnpjMask"
+                                    <input type="text" class="form-control" id="document"
+                                        placeholder="Digite o CPF ou CNPJ" mask="000.000.000-00||00.000.000/0000-00"
                                         formControlName="holderCpfCnpj"
                                         [readOnly]="invoicePayment.get('paymentMethod')?.value != 'CreditCard'">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('holderCpfCnpj')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-2">
                                 <div class="form-group">
                                     <label for="holderPostalCode">CEP</label>
                                     <input type="text" class="form-control" id="holderPostalCode"
                                         placeholder="Digite o CEP" mask="00000-000" formControlName="holderPostalCode"
                                         [readOnly]="invoicePayment.get('paymentMethod')?.value != 'CreditCard'">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('holderPostalCode')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-2">
                                 <div class="form-group">
                                     <label for="holderAddressNumber">Número do Endereço</label>
                                     <input type="text" class="form-control" id="holderAddressNumber"
                                         placeholder="Digite o número do endereço" maxlength="60"
                                         formControlName="holderAddressNumber"
                                         [readOnly]="invoicePayment.get('paymentMethod')?.value != 'CreditCard'">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('holderAddressNumber')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -136,34 +154,46 @@
                     </div>
                     <div class="col-md-12" *ngIf="invoicePayment.get('paymentMethod')?.value == 'CreditCard'" [@fadeInOnEnter]>
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                     <label for="number">Número do Cartão</label>
                                     <input type="text" class="form-control" id="number"
                                         placeholder="Digite o número do cartão" mask="0000 0000 0000 0000"
                                         formControlName="number">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('number')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <div class="form-group">
                                     <label for="expiryMonth">Mês de Validade</label>
                                     <input type="text" class="form-control" id="expiryMonth" placeholder="MM" mask="00"
                                         formControlName="expiryMonth">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('expiryMonth')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <div class="form-group">
                                     <label for="expiryYear">Ano de Validade</label>
                                     <input type="text" class="form-control" id="expiryYear" placeholder="AA" mask="0000"
                                         formControlName="expiryYear">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('expiryYear')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                     <label for="securityCode">Código de Segurança</label>
                                     <input type="text" class="form-control" id="securityCode"
                                         placeholder="Digite o código de segurança" mask="000"
                                         formControlName="securityCode">
+                                    <div class="attribute-container" *ngIf="formDir.submitted">
+                                        <small class="attribute-error" *ngIf="invoicePayment.get('securityCode')?.hasError('required')">Campo obrigatório</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>

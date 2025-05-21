@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <div class="modal-title">Realize o Pagamento</div>
+    <div class="modal-title">Realizar Pagamento</div>
     <div class="closed">
         <a class="link-closed" href="javascript:(void);" (click)="modal.close()">
             <i class="bi bi-x-lg"></i>
@@ -8,7 +8,7 @@
 </div>
 <div class="modal-body">
     <div class="row">
-        <div class="col-md-12 d-flex align-content-center align-items-center mt-2 flex-column gap-1">
+        <div class="col-md-12 d-flex align-content-center align-items-center mt-2 flex-column gap-2">
             <img id="qrImage" [src]="'data:image/png;base64,' + invoicePix.encodedImage" alt="QR Code" style="max-width: 200px;" onload="
                 const canvas = document.getElementById('qrCanvas');
                 const img = this;

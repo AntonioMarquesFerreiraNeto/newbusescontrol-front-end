@@ -32,7 +32,6 @@ export class InvoicePaymentComponent implements OnInit {
   invoiceId: string;
   invoice: any;
   invoicePayment: FormGroup;
-  cpfCnpjMask: string = '000.000.000-00';
 
   ngOnInit(): void {
     this.financialId = this.route.snapshot.paramMap.get('financialid');
@@ -46,20 +45,56 @@ export class InvoicePaymentComponent implements OnInit {
 
     this.invoicePayment = new FormGroup({
       paymentMethod: new FormControl('CreditCard', Validators.required),
-      holderName: new FormControl(this.invoice.customerName ?? ''),
-      holderCpfCnpj: new FormControl(this.invoice.customerDocument ?? ''),
-      holderEmail: new FormControl(this.invoice.customerEmail ?? ''),
-      holderMobilePhone: new FormControl(this.invoice.customerPhoneNumber ?? ''),
-      holderPostalCode: new FormControl(''),
-      holderAddressNumber: new FormControl(this.invoice.customerHomeNumber ?? ''),
-      number: new FormControl(''),
-      expiryMonth: new FormControl(''),
-      expiryYear: new FormControl(''),
-      securityCode: new FormControl('')
+      holderName: new FormControl(this.invoice.customerName ?? '', Validators.required),
+      holderCpfCnpj: new FormControl(this.invoice.customerDocument ?? '', Validators.required),
+      holderEmail: new FormControl(this.invoice.customerEmail ?? '', Validators.required),
+      holderMobilePhone: new FormControl(this.invoice.customerPhoneNumber ?? '', Validators.required),
+      holderPostalCode: new FormControl('', Validators.required),
+      holderAddressNumber: new FormControl(this.invoice.customerHomeNumber ?? '', Validators.required),
+      number: new FormControl('', Validators.required),
+      expiryMonth: new FormControl('', Validators.required),
+      expiryYear: new FormControl('', Validators.required),
+      securityCode: new FormControl('', Validators.required)
     });
+
+    this.invoicePayment.get('paymentMethod')?.valueChanges.subscribe(value => {
+      this.updateValidators(value);
+    });
+
+    this.updateValidators(this.invoicePayment.get('paymentMethod')?.value);
   }
 
   constructor(private route: ActivatedRoute, private router: Router, private snackbarService: SnackbarService, public commonService: CommonService, private invoiceService: InvoiceService, private swalFireService: SwalFireService, private modal: NgbModal) { }
+
+  private updateValidators(paymentMethod: string): void {
+    const isCreditCard = paymentMethod === 'CreditCard';
+
+    const controlsToValidate = [
+      'holderName',
+      'holderCpfCnpj',
+      'holderEmail',
+      'holderMobilePhone',
+      'holderPostalCode',
+      'holderAddressNumber',
+      'number',
+      'expiryMonth',
+      'expiryYear',
+      'securityCode'
+    ];
+
+    controlsToValidate.forEach(controlName => {
+      const control = this.invoicePayment.get(controlName);
+      if (!control) return;
+
+      if (isCreditCard) {
+        control.setValidators(Validators.required);
+      } else {
+        control.clearValidators();
+      }
+
+      control.updateValueAndValidity();
+    });
+  }
 
   getStatusDescription(status) {
     switch (status) {
@@ -84,22 +119,10 @@ export class InvoicePaymentComponent implements OnInit {
   getPaymentMethod(paymentMethod) {
     switch (paymentMethod) {
       case 'CreditCard': return "Cartão de crédito";
-      case 'PIX': return "Transação PIX";
+      case 'Pix': return "PIX";
       case 'JustCount': return "Apenas Contabilizado";
       default: return "Não encontrado";
     }
-  }
-
-  handleMaskDocument() {
-    setTimeout(() => {
-      this.invoicePayment.get('holderCpfCnpj')?.valueChanges.pipe(map(value => value.length)).subscribe(length => {
-        if (length <= 11) {
-          this.cpfCnpjMask = '000.000.000-00'
-        } else {
-          this.cpfCnpjMask = '00.000.000/0000-00'
-        }
-      });
-    }, 300);
   }
 
   setPaymentMethod(paymentMethod: string) {
@@ -127,7 +150,7 @@ export class InvoicePaymentComponent implements OnInit {
             return;
           }
 
-          const invoicePix : InvoicePix = {
+          const invoicePix: InvoicePix = {
             message: response.message,
             encodedImage: response.pix.encodedImage,
             payload: response.pix.payload,

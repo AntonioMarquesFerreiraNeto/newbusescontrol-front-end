@@ -42,6 +42,7 @@ import { FinancialComponent } from './demo/financial/financial.component';
 import { NotfoundComponent } from './theme/layout/notfound/notfound.component';
 import { InvoicesComponent } from './demo/financial/pages/invoices/invoices.component';
 import { InvoicePaymentComponent } from './demo/financial/pages/invoice-payment/invoice-payment.component';
+import { NewFinancialComponent } from './demo/financial/pages/new-financial/new-financial.component';
 
 const routes: Routes = [
   {
@@ -240,6 +241,11 @@ const routes: Routes = [
         path: 'financials/:financialid/invoices/:invoiceid/payment',
         component: InvoicePaymentComponent,
         title: 'Buses Control | Pagamento da fatura'
+      },
+      {
+        path: 'financials/new/:type',
+        component: NewFinancialComponent,
+        title: 'Buses Control | Lançamento'
       },
       {
         path: 'basic',
