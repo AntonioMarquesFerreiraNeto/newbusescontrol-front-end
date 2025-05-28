@@ -9,25 +9,22 @@ export class CommonService {
   constructor(private datePipe: DatePipe) { }
 
   getDateFormatted(date: string) {
-    const dateObj = new Date(date);
-    dateObj.setHours(dateObj.getHours() - 3);
-    
-    return this.datePipe.transform(dateObj, 'dd/MM/yyyy');
+    return this.datePipe.transform(date, 'dd/MM/yyyy');
   }
-  
+
   getDateTimeFormatted(date?: string) {
-    if(date == null) {
+    if (date == null) {
       return 'Não possui';
     }
 
     const dateObj = new Date(date);
     dateObj.setHours(dateObj.getHours() - 3);
-    
+
     return this.datePipe.transform(dateObj, 'dd/MM/yyyy \'às\' HH:mm');
   }
 
   getDocumentFormatted(document: string) {
-    if (document.length === 11) return document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'); 
+    if (document.length === 11) return document.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     return document.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
   }
 
