@@ -1,13 +1,13 @@
 <div class="modal-header">
-    <div class="modal-title">Gerenciar</div>
+    <div class="modal-title">Lançamento</div>
     <div class="closed"><a class="link-closed" href="javascript:(void);" (click)="modal.close()"><i class="bi bi-x-lg"></i></a></div>
 </div>
 <div class="modal-body">
     <div class="col-md-12 mb-3">
-        <p style="text-align: justify;">Para facilitar para você, por favor, informe se planeja realizar um lançamento financeiro de despesa ou receita?</p>
+        <p style="text-align: justify;">Para facilitar, informe se planeja realizar um lançamento financeiro de despesa ou receita.</p>
     </div>
-    <div class="col-md-12">
-        <a [routerLink]="'/financials/new/revenue'" class="custom-button rounded shadow-3 submit w-100 mb-2" (click)="modal.close()">Receita</a> 
-        <a [routerLink]="'/financials/new/expense'" class="custom-button-light rounded shadow-3 submit w-100 mb-2" (click)="modal.close()">Despesa</a>       
+    <div class="col-md-12 d-flex gap-2 justify-content-between">
+        <a [routerLink]="'/financials/new/revenue'" class="custom-button rounded shadow-3 submit mb-2" (click)="modal.close()">Receita</a> 
+        <a [routerLink]="'/financials/new/expense'" class="custom-button-light rounded shadow-3 submit mb-2" (click)="modal.close()">Despesa</a>       
     </div>
 </div>
