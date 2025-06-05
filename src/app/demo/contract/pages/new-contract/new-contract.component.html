@@ -87,7 +87,7 @@
               <label for="customersId">Clientes</label>
               <ng-select class="d-flex flex-grow-1 custom" id="customersId" [placeholder]="'Selecione os clientes'" [notFoundText]="'Nenhum registro encontrado'" [multiple]="true" formControlName="customersId">
                 <ng-option *ngFor="let item of customerList" [value]="item.id">
-                  [cliente]: {{item.name}}; [cpf/cnpj]: {{item.cpf ?? item.cnpj}}
+                  [nome]: {{item.name}}; [doc]: {{commonService.getDocumentFormatted(item.cpf ?? item.cnpj)}}
                 </ng-option>
               </ng-select>
               <div class="attribute-container" *ngIf="formDir.submitted">
