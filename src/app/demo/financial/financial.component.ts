@@ -76,7 +76,7 @@ export class FinancialComponent implements OnInit {
   getTypeLabel(type: string) {
     switch(type) {
       case 'Revenue': return 'label label-green';
-      case 'Expense': return 'label label-blue';
+      case 'Expense': return 'label label-red';
       default: return 'label label-white';
     }
   }

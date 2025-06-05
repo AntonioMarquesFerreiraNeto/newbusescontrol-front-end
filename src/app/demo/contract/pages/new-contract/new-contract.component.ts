@@ -21,6 +21,7 @@ import { ContractService } from 'src/app/services/contract.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Contract } from 'src/app/interfaces/Contract';
 import { SwalFireService } from 'src/app/services/swal-fire.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-new-contract',
@@ -28,9 +29,7 @@ import { SwalFireService } from 'src/app/services/swal-fire.service';
   imports: [SharedModule, RouterModule, NgSelectModule, NgxMaskDirective, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './new-contract.component.html',
   styleUrl: './new-contract.component.scss',
-  providers: [
-    provideNgxMask()
-  ],
+  providers: [provideNgxMask()],
   animations: [fadeInOnEnterAnimation()]
 })
 export class NewContractComponent implements OnInit {
@@ -54,7 +53,9 @@ export class NewContractComponent implements OnInit {
     private contractDescriptionService: ContractDescriptionService, 
     private customerService: CustomerService,
     private swalFireService: SwalFireService,
-    private contractService: ContractService) {}
+    private contractService: ContractService,
+    public commonService: CommonService
+  ) {}
 
   ngOnInit(): void {
     this.pagination.page = 1,

@@ -25,13 +25,13 @@
                         <p><span class="reference">{{ financial.reference }}</span></p>
                     </div>
                     <div class="fleet-cell">
-                        <p>{{commonService.getValueFormatted(financial.totalPrice)}}</p>
-                    </div>
-                    <div class="fleet-cell">
-                        <p>{{financial.customer.name}}</p>
+                        <p>{{financial.customer?.name ?? financial.supplier.name}}</p>
                     </div>
                     <div class="fleet-cell">
                         <span class="label {{getTypeLabel(financial.type)}}">{{getTypeDescription(financial.type)}}</span>
+                    </div>
+                    <div class="fleet-cell">
+                        <p>{{commonService.getValueFormatted(financial.totalPrice)}}</p>
                     </div>
                     <div class="fleet-cell">
                         <p><span class="label {{financial.active ? 'label-blue' : 'label-red'}}">{{financial.active ? 'Ativo' : 'Inativo'}}</span></p>
