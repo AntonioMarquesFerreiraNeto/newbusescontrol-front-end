@@ -1,0 +1,32 @@
+<form (ngSubmit)="submit()" [formGroup]="financialForm" #formDir="ngForm" *ngIf="financial">
+    <div class="modal-header">
+        <div class="modal-title">Editar {{financial.type == 'Revenue' ? 'receita' : 'despesa'}}</div>
+        <div class="closed"><a class="link-closed" href="javascript:(void);" (click)="modal.close()"><i class="bi bi-x-lg"></i></a></div>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input type="text" class="form-control" id="title" formControlName="title" placeholder="Informe o valor total do contrato" maxlength="120">
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="financialForm.get('title')?.hasError('required')">Campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="description">Descrição</label>
+                    <textarea class="form-control" rows="6" id="description" maxlength="500" formControlName="description"></textarea>
+                    <div class="attribute-container" *ngIf="formDir.submitted">
+                        <small class="attribute-error" *ngIf="financialForm.get('description')?.hasError('required')">Campo obrigatório</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="custom-button rounded shadow-3" (click)="submit()">Salvar</button>
+        <button type="button" class="custom-button-light rounded shadow-3" (click)="modal.close()">Fechar</button>
+    </div>
+</form>

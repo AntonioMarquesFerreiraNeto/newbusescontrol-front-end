@@ -14,6 +14,7 @@ import { FinancialService } from 'src/app/services/financial.service';
 import { CommonService } from 'src/app/services/common.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OptionsFinancialComponent } from './pages/options-financial/options-financial.component';
+import { EditFinancialComponent } from './pages/edit-financial/edit-financial.component';
 
 @Component({
   selector: 'app-financial',
@@ -66,7 +67,7 @@ export class FinancialComponent implements OnInit {
   }
 
   getTypeDescription(type: string) {
-    switch(type) {
+    switch (type) {
       case 'Revenue': return 'Receita';
       case 'Expense': return 'Despesa';
       default: return 'Não encontrado';
@@ -74,7 +75,7 @@ export class FinancialComponent implements OnInit {
   }
 
   getTypeLabel(type: string) {
-    switch(type) {
+    switch (type) {
       case 'Revenue': return 'label label-green';
       case 'Expense': return 'label label-red';
       default: return 'label label-white';
@@ -82,7 +83,7 @@ export class FinancialComponent implements OnInit {
   }
 
   getPaymentTypeDescription(paymentType: string) {
-    switch(paymentType) {
+    switch (paymentType) {
       case 'Single': return 'Fatura Única';
       case 'Multiple': return 'Parcelada';
       default: return 'Não encontrado';
@@ -90,7 +91,7 @@ export class FinancialComponent implements OnInit {
   }
 
   getPaymentTypeLabel(type: string) {
-    switch(type) {
+    switch (type) {
       case 'Single': return 'label label-blue';
       case 'Multiple': return 'label label-pink';
       default: return 'label label-white';
@@ -101,6 +102,17 @@ export class FinancialComponent implements OnInit {
     this.modal.open(OptionsFinancialComponent, {
       backdrop: 'static',
       size: 'md'
+    });
+  }
+
+  openEditFinancial(id: string) {
+    const modal = this.modal.open(EditFinancialComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+    modal.componentInstance.id = id;
+    modal.componentInstance.onSubmitted.subscribe(() => {
+      this.buildFinancial();
     });
   }
 }

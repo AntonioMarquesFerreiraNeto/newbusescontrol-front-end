@@ -32,4 +32,8 @@ export class FinancialService {
   CreateRevenue(financial: Financial) : Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}/revenue`, financial);
   }
+
+  UpdateDetails(id: string, financial: Financial) : Observable<any> {
+    return this.httpClient.patch<any>(`${this.baseUrl}/${id}/details`, financial);
+  }
 }

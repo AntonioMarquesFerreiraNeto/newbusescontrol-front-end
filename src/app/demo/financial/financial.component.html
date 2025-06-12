@@ -83,8 +83,11 @@
                             <a type="button" class="btn btn-icon btn-rounded btn-template shadow-sm me-2" [routerLink]="['/financials/details/' + financial.id]" title="Detalhes">
                                 <i class="feather icon-eye"></i>
                             </a>
-                            <a class="btn btn-icon btn-rounded btn-template shadow-sm" [routerLink]="['/financials/edit/' + financial.id]" title="Editar">
+                            <a class="btn btn-icon btn-rounded btn-template shadow-sm" href="javascript:void(0)" title="Editar Detalhes" (click)="openEditFinancial(financial.id)">
                                 <i class="feather icon-edit"></i>
+                            </a>
+                            <a class="btn btn-icon btn-rounded btn-template shadow-sm" href="javascript:void(0)" title="Inativar" (click)="openEditFinancial(financial.id)">
+                                <i class="feather icon-lock"></i>
                             </a>
                         </div>
                     </div>
